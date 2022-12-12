@@ -1,0 +1,77 @@
+site_name: The Py Lama Notes
+
+theme:
+  logo : icons/logo.png  
+  favicon : icons/logo.png  
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - toc.follow
+    - content.code.annotate 
+  palette:
+
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme: dark)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+nav:
+  - Home: index.md
+  - Python: 
+    - Strings: python/strings.md
+    - Complex Numbers: python/complex.md
+ 
+  # - NumPy:
+  #   - Page 2: page-1.md
+  # - PyTorch:
+  #   - Page 2: page-1.md
+  # - Linear Algebra with NumPy:
+  #   - Page 2: page-1.md
+  # - Machine Learning:
+  #   - Page 2: page-1.md
+  # - Deep Learning:
+  #   - Page 2: page-1.md
+  # - Pandas:
+  #   - Page 2: page-1.md
+  # - Calculus:
+  #   - Page 2: page-1.md
+  # - Vector Calculus:
+  #   - Page 2: page-1.md
+
+
+plugins:
+  - search
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

@@ -30,24 +30,32 @@ nav:
   - Home: index.md
   - Python: 
     - Strings: python/strings.md
-    - Complex Numbers: python/complex.md
+    - Complex Numbers & class: python/complex.md
+  - Data Structures:
+    - Arrays: data structures/arrays.md
+  #   - Linked List: data structures/ll.md
+  #   - Stack: data structures/stack.md
+  #   - Queues: data structures/q.md
+  #   - Doubly Linked List: data structures/dll.md
+  #   - Trees: data structures/trees.md
+  #   - Binary Search Trees: data structures/bst.md
  
   # - NumPy:
-  #   - Page 2: page-1.md
-  # - PyTorch:
-  #   - Page 2: page-1.md
+  #   - Page 2: complex.md
+  - PyTorch:
+    - Tensors : pytorch/tensor.md
   # - Linear Algebra with NumPy:
-  #   - Page 2: page-1.md
+  #   - Page 2: complex.md
   # - Machine Learning:
-  #   - Page 2: page-1.md
+  #   - Page 2: complex.md
   # - Deep Learning:
-  #   - Page 2: page-1.md
+  #   - Page 2: complex.md
   # - Pandas:
-  #   - Page 2: page-1.md
+  #   - Page 2: complex.md
   # - Calculus:
-  #   - Page 2: page-1.md
+  #   - Page 2: complex.md
   # - Vector Calculus:
-  #   - Page 2: page-1.md
+  #   - Page 2: complex.md
 
 
 plugins:
@@ -56,6 +64,7 @@ plugins:
 markdown_extensions:
   - attr_list
   - md_in_html
+  - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
@@ -71,7 +80,13 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
 
+  - pymdownx.tabbed:
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
 extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+

@@ -1,5 +1,6 @@
 # Welcome to The Py Lama
 
-This site consist of everything I have learnt so far. 
+This site consist of everything I have learnt so far, still continues. 
 
-...to be continued
+This is basically a kinda my notebook you know. 
+

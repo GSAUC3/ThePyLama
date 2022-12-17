@@ -10,7 +10,7 @@ class LengthExceeded(Exception):
 
 class arrays:
     def __init__(self,*args,length:int) -> None:
-        assert (type(length)==int) and length>0, "length must be a positive interger!!!"
+        assert (type(length)==int) and length>0, "length must be a positive interger???"
         if length < len(list(args)):
             raise LengthExceeded
 
@@ -97,7 +97,7 @@ a
 
 
 
-!!! output
+??? success "output"
 
     StaticArray([1, 2, 4, 6, 'str', 56, None, None, None, None])
 
@@ -114,7 +114,7 @@ a[1],a[3]
 
 
 
-!!! output
+??? success "output"
 
     (2, 6)
 
@@ -127,7 +127,7 @@ a
 ```
 
 
-!!! output
+??? success "output"
 
     StaticArray([1, 2, 4, 6, 90, 56, None, None, None, None])
 
@@ -143,7 +143,7 @@ a.insert(0,'first')
 a
 ```
 
-!!! output
+??? success "output"
 
 
     StaticArray(['first', 1, 2, 4, 6, 90, 56, None, None, None])
@@ -160,7 +160,7 @@ a.pop(6)
 a
 ```
 
-!!! output
+??? success "output"
 
 
     StaticArray(['first', 1, 2, 4, 6, 90, None, None, None, None])
@@ -176,14 +176,14 @@ a
 for i in a:
     print(i,end=' | ')
 ```
-!!! output
+??? success "output"
     first | 1 | 2 | 4 | 6 | 90 | None | None | None | None | 
 
 
 ```python
 print(a)
 ```
-!!! output
+??? success "output"
     ['first', 1, 2, 4, 6, 90]
     
 
@@ -191,7 +191,7 @@ print(a)
 ```python
 b = arrays(1,23,4,5,6,7,length=4)
 ```
-!!! output
+??? bug "output"
 
         ```    ---------------------------------------------------------------------------
 
@@ -202,7 +202,7 @@ b = arrays(1,23,4,5,6,7,length=4)
         
 
         Cell In[1], line 8, in arrays.__init__(self, length, *args)
-            6 assert (type(length)==int) and length>0, "length must be a positive interger!!!"
+            6 assert (type(length)==int) and length>0, "length must be a positive interger???"
             7 if length < len(list(args)):
         ----> 8     raise LengthExceeded
             10 self.__data = list(args) + [None]*(length-len(args)) 
@@ -216,7 +216,7 @@ b = arrays(1,23,4,5,6,7,length=4)
 ```python
 b = arrays(1,23,4,5,6,7,length=-1)
 ```
-!!! output
+??? bug "output"
 
     ```    ---------------------------------------------------------------------------
 
@@ -228,15 +228,11 @@ b = arrays(1,23,4,5,6,7,length=-1)
 
     Cell In[2], line 6, in arrays.__init__(self, length, *args)
           5 def __init__(self,*args,length:int) -> None:
-    ----> 6     assert (type(length)==int) and length>=0, "length must be a positive interger!!!"
+    ----> 6     assert (type(length)==int) and length>=0, "length must be a positive interger???"
           7     if length < len(list(args)):
           8         raise LengthExceeded
     
 
-    AssertionError: length must be a positive interger!!!
+    AssertionError: length must be a positive interger???
     ``` 
 
-
-```python
-
-```

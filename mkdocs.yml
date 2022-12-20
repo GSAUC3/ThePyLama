@@ -31,11 +31,11 @@ nav:
   - Python: 
     - Strings: python/strings.md
     - Complex Numbers & class: python/complex.md
+    - Decorators: python/q.md
   - Data Structures:
     - Arrays: data structures/arrays.md
-  #   - Linked List: data structures/ll.md
+    - Linked List: data structures/ll.md
   #   - Stack: data structures/stack.md
-  #   - Queues: data structures/q.md
   #   - Doubly Linked List: data structures/dll.md
   #   - Trees: data structures/trees.md
   #   - Binary Search Trees: data structures/bst.md

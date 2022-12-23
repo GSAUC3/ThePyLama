@@ -33,7 +33,7 @@ print(s,s1,s2,s3,sep='\n')
     - this entire lame poem is also a string, quite long, but a string!
     ```
 ## String Indexing and Slicing
-![Alt text](imgs/string.png)
+![Alt text](../imgs/string.png)
 You can access the characters of the string using `+ve` or `-ve` indices.
 
 <span style="color:skyblue">Example</span>:

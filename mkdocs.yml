@@ -1,8 +1,8 @@
 site_name: The Py Lama Notes
 
 theme:
-  logo : icons/logo.png  
-  favicon : icons/logo.png  
+  logo : imgs/logo.png  
+  favicon : imgs/logo.png  
   name: material
   features:
     - navigation.instant
@@ -32,10 +32,10 @@ nav:
     - Strings: python/strings.md
     - Complex Numbers & class: python/complex.md
     - Decorators: python/q.md
-  - Data Structures:
+  - DSA:
     - Arrays: data structures/arrays.md
     - Linked List: data structures/ll.md
-  #   - Stack: data structures/stack.md
+    - Stack: data structures/stack.md
   #   - Doubly Linked List: data structures/dll.md
   #   - Trees: data structures/trees.md
   #   - Binary Search Trees: data structures/bst.md

@@ -44,10 +44,10 @@ nav:
   #   - Page 2: complex.md
   - PyTorch:
     - Tensors : pytorch/tensor.md
+    - Autograd: pytorch/grad.md
+    - Tensor operations: pytorch/tensor1.md
   # - Linear Algebra with NumPy:
-  #   - Page 2: complex.md
   # - Machine Learning:
-  #   - Page 2: complex.md
   # - Deep Learning:
   #   - Page 2: complex.md
   # - Pandas:

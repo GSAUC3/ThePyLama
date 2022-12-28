@@ -235,3 +235,31 @@ print(' '.join(l))
 !!! output
     name age sex roll num
 
+## REGEX
+ Used to search for a specific pattern in a text. 
+
+`[]{}()\^$|?*+` are few characters which we need to expace using a `\` as a prefix before search for these. 
+
+`.` matches all characters except newline
+
+`\d` matches all the digits whereas `\D` matches everthing but digits. 
+
+`\w` = word | `\W` = Not a word
+
+`\s` = space | `\S` = not a space
+
+`\b` = word boundary | `\B` = Not a word boundary
+
+`^` = Start of a string
+
+`$` = end of a string
+
+`*` = 0 or more
+
+`+` = 1 or more 
+
+`?` = 0 or one match 
+
+`{5}` = exact number of match 
+
+`{min,max}` = range of numbers 

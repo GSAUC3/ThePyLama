@@ -100,28 +100,25 @@ plots1 = animate(fig, gradsgd, frames=500, interval=10, repeat=False)
 plt.show()
 ```
 
-# Problem with gradient descent 
+## Problem with gradient descent 
 
-1. Gradient Descent diverges if $\alpha > 1 $. It also diverges for large learning rate. For small learing rate the learing will be very slow. 
+1. It diverges if $lr > 1 $.
 
-2. GD may not always converges to a global minimum and may stuck to a local minimum.
+2. It may stuck to a local minimum, instead of global minimum. 
     
-3. It is difficult to determine whether GD has already converged (local/global minimum) or updating very slowly(near a saddle point).
+3. It is difficult to interpret whether it is increasing or decreasing near a saddle point. It does overcome it but it might take a long time.
 
-4. GD always escapes saddle point , though may take exponential time.
+4. For small gradient the learning becomes slow.
 
-5. Learning becomes slow if gradient becomes small.
+5. The hyper parameter in this case, the learning rate has to be determined beforehand, which is often difficult to choose if dimension increases. 
 
-6. Since typically in machine learning we work with enormous amount of data, the cost of a single update is very high. Because we estimate the gradient as an average over all the training points. 
 
-7.  The hyper parameters like learning rate has to be chosen beforehand. It is often difficult to choose the hyper parameters . In very high dimensions it is also better if we can choose different learning rate for different dimensions.
+##  How to improve GD ? 
 
-#  How to improve GD ? 
+1. Add a momentum term, in other words, Nesterov's Accelerated Gradient descent.
 
-1. Modifying the direction of update by adding a momentum term : Nesterov's Accelerated Gradient descent.
+2. AdaGrad
 
-2. Modifying the step size by adaptively choose learning rate for each dimension : AdaGrad
+3. Higher order derivate, like hessian : Newton's method, Quasi Newton's methods like BFGS
 
-3. By incorporating higher order derivate, like hessian : Newton's method, Quasi Newton's methods like BFGS
-
-4. Estimating the gradient by taking a sample from the data set  : Stochastic Gradient Descent. 
+4. Stochastic Gradient Descent. 

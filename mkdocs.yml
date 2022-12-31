@@ -47,13 +47,13 @@ nav:
     - Autograd: pytorch/grad.md
     - Tensor operations: pytorch/tensor1.md
   # - Linear Algebra with NumPy:
-  # - Machine Learning:
+  - Machine Learning:
+    - Introduction: ML/intro.md
+    - K-Means: ML/kmeans.md
+    - Gradient Descent: ML/sgd.md
   # - Deep Learning:
-  #   - Page 2: complex.md
   # - Pandas:
-  #   - Page 2: complex.md
   # - Calculus:
-  #   - Page 2: complex.md
   # - Vector Calculus:
   #   - Page 2: complex.md
 

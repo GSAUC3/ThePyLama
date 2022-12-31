@@ -28,3 +28,37 @@ print(x.grad)
     
 
 
+***
+??? hidden
+    ```python
+    import torch 
+    from torch import optim 
+    from matplotlib import pyplot as plt 
+
+    def derivative_viz(plot:bool=False):
+        def middle(fun):
+            def inner(*a,**k):
+                start = k.get('start',-13)
+                end = k.get('end',17)
+                spacing = k.get('steps',100)
+                if plot:
+                    x = torch.linspace(start,end,spacing,requires_grad=True)
+                    print(f'Graph of ({fun.__name__})')
+                    y = fun(x)
+                    plt.plot(x.detach().numpy(),y.detach().numpy())
+                    plt.show()
+                    print(f'Graph of d/dx({fun.__name__})')
+                    y = y.sum()
+                    y.backward()
+                    plt.plot(x.detach().numpy(),x.grad.detach().numpy())
+                return fun(*a)
+            return inner 
+        return middle
+
+    @derivative_viz()
+    def sin(x):
+        return torch.sin(x)
+
+    xa = torch.tensor([45])
+    print(sin(xa,start=0,stop=20))
+    ```

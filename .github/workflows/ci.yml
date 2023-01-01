@@ -16,9 +16,5 @@ jobs:
           python-version: 3.x
       - name : Build the docs
         run: |
-          pwd
-          cd docs
-          pwd
-          ls
           pip install mkdocs-material 
           mkdocs gh-deploy --force

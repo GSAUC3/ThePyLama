@@ -1,3 +1,6 @@
-# Welcome to The Py Lama
 
-The site is my notebook. Feel free to explore. 
+---
+template: home.html
+title: Material for MkDocs
+---
+

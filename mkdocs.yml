@@ -4,6 +4,7 @@ theme:
   logo : imgs/logo.png  
   favicon : imgs/logo.png  
   name: material
+  custom_dir: overrides
   features:
     - navigation.instant
     - navigation.tracking
@@ -26,6 +27,9 @@ theme:
     #   toggle:
     #     icon: material/brightness-4
     #     name: Switch to system preference
+
+  extra:
+    homepage: https://gsauc3.github.io/personal-portfolio/
 nav:
   - Home: index.md
   - Python: 
@@ -87,8 +91,17 @@ markdown_extensions:
 
 extra_javascript:
   - javascripts/mathjax.js
+  - javascripts/app.js
+  - javascripts/mdb.min.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-
+  
+  
 extra_css:
   - stylesheets/extra.css
+  # - stylesheets/extra.css
+  # - stylesheets/extra.css
+  # - stylesheets/extra.css
+  # - stylesheets/extra.css
+  
+   

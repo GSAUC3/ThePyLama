@@ -1,0 +1,514 @@
+{% extends "base.html" %}
+
+
+
+
+
+
+{% block content %}
+{% if page.title.lower()=='home' %}
+<main>
+
+    <header>
+        <link rel="stylesheet" href="stylesheets/mdb.min.css" />
+        
+    </header>
+    <div>
+        
+        
+        
+        <div id='stars' class="baal" ></div>
+        <div id='stars2' class="baal"></div>
+        <div id='stars3' class="baal"></div>
+        <div id='title' class="baal"></div>
+        
+        
+        <div id="intro-example" class="p-5 text-center bg-image parallax"
+    style="background-image: url('https://images.hdqwalls.com/wallpapers/aurora-sky-morning-4k-sv.jpg');">
+    <!-- style="background-image: url('https://images.hdqwalls.com/wallpapers/aurora-sky-morning-4k-sv.jpg');"> -->
+    <!-- style="background-image: url('https://wallpaperaccess.com/full/17515.jpg');"> -->
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);" id="home">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white" id="chompa">
+                <h3>I am</h3>
+                
+                <h1 class="mb-3">RAJARSHI <span id='ban'> BANERJEE</span></h1>
+                <h5 class="mb-4">Optoelectronics Engineer |<span id="univ"> University of Calcutta</span>.</h5>
+                <p class="mb-3 fw-bold"> Computer Vision Enthusiast</p>
+                <a class="btn btn-outline-primary" href="./docs/RajarshiBanerjee_resume.pdf" target="_blank" role="button">
+                    Download
+                    CV</a>
+                    <!--                         <a class="btn btn-outline-primary" href="" target="_blank" role="button"> Download CV
+                        (Europass)</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <div class="shadow-2-strong my-5 p-5 text-white bg-matte" id="about">
+            <div class="about-section">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="row mt-2">
+                            <h3 class="h3 fw-light mb-4"><i class="fas fa-handshake" style="user-select: auto;"></i> Connect
+                            </h3>
+                    <table id="bio-text">
+                        <caption>Do connect on LinkedIn</caption>
+                        <th id="th-about-me"></th>
+                        <tr>
+                            <td>
+                                <i class="fab fa-linkedin"></i>
+                            </td>
+                            <td>
+                                <a class="text-white" href="https://www.linkedin.com/in/rajarshi-banerz/">
+                                    LinkedIn
+                                </a>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fab fa-github pe-2 text-white"></i>
+                            </td>
+                            
+                            <td>
+                                <a class="text-white" href="https://github.com/GSAUC3/" title="Github">
+                                    Github
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-envelope-open-text"></i></td>
+                            
+                            <td>
+                                <a class="text-white" href="mailto:bsuvraneel@gmail.com" title="Email">
+                                    Gmail
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <i class="fas fa-map-marked-alt pe-2 text-white"></i>
+                            </td>
+                            <td>
+                                Kolkata, India
+                            </td>
+                            
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+            <!-- bio ends here
+                -----about me starts from here -->
+                
+                <div class="col-md-6">
+                    <h2 class="h2 fw-dark mb-4"><i class="fas fa-user"></i> About Me</h2>
+                    <table id="about-text">
+                        <caption></caption>
+                        <th id="th-about-me"></th>
+                        <tr>
+                            <td>
+                                <br />
+                                <i class="fas fa-user-graduate"></i>
+                            </td>
+                            <td>
+                                <br />
+                                I’m completed my B.Tech in Optics and Optoelectronics Engineering from University of
+                                Calcutta
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            <i class="fas fa-laptop-code text-white"> </i>
+                        </td>
+                        <td>
+                            <br />
+                            Keen interest in image processing, computer vision, extended reality, deep learnig, and <i
+                            class="fab fa-python"></i> python
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            <i class="fas fa-scroll"></i>
+                        </td>
+                        <td>
+                            <br />
+                            Feel free to check my articles on GeeksforGeeks <a
+                            href="https://auth.geeksforgeeks.org/user/rajarshiban13/articles">here</a>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            <i class="fab fa-xbox"> </i>
+                        </td>
+                        <td>
+                            <br />
+                            My hobbies are <i class="fas fa-chess"></i> Chess, <i class="fas fa-music"></i> Music,
+                            Playing
+                            <i class="fas fa-guitar"></i> guitar, <i class="fas fa-palette"></i> Drawing, <i
+                            class="fas fa-gamepad"></i> Creating video games.
+                        </td>
+                    </tr>
+                    <br />
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- about me ends here -->
+<div class="parallax p-5 text-center bg-image">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+    </div>
+</div>
+
+<!-- WORK EXPERIENCE STARTS -->
+
+<div class="shadow-1-strong bg-purple my-5 p-5 text-white" id="experience">
+    <div class="work-experience-section">
+        <h2 class="h2 fw-light mb-4"><i class="fas fa-briefcase"></i> Work Experience</h2>
+        <div class="timeline">
+            <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
+                <div class="timeline-head px-4 pt-3">
+                    <div class="h5">Research Intern <br /><span class="h6" style="color:rgb(11, 130, 248);"> Centre
+                        for Development of Advanced Computing (CDAC)</span></div>
+                        
+                    </div>
+                    <div class="timeline-body px-4 pb-4">
+                        <div class="text-white text-small mb-3"> June 2022 - December 2022</div>
+                        <div>
+                            <ul>
+                                
+                                <li> Team lead </li>
+                                <li>Working on Human-Computer Interactive systems</li>
+                                <li>Building an application using image processing and computer vision to control the
+                                    cursor using hand gestures and facilitate air writing.</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="timeline">
+                        <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
+                            <div class="timeline-head px-4 pt-3">
+                                <div class="h5">Project Intern <br /><span class="h6" style="color:rgb(11, 130, 248);"> Indian
+                                    Statistical Institute (ISI)</span></div>
+                                    
+                                </div>
+                <div class="timeline-body px-4 pb-4">
+                    <div class="text-white text-small mb-3"> Sept 2021 - June 2022</div>
+                    <div>
+                        <ul>
+                            
+                            
+                            <li>Worked on Medical Imaging</li>
+                            <li>Completed my final year B.Tech project on classification of retinal fundus images for diabetic retinopathy (DR) using  deep learning. </li>
+                            <li>Under supervision of <i>Dr. Uma Shankar </i> | Machine Intelligence Unit, ISI
+                                Calcutta </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="200">
+                    <div class="timeline-head px-4 pt-3">
+                        <div class="h5">Technical Content Writer <br /><span class="h6"
+                            style="color:rgb(11, 130, 248);">GeeksforGeeks</span></div>
+                        </div>
+                        <div class="timeline-body px-4 pb-4">
+                            <div class="text-white text-small mb-3">Sept 2021 - Feb 2022</div>
+                            <ul>
+                                
+                                <li>Published more than 10 articles</li>
+                                <li> Wrote about mathematics, OpenCV (image processing), computer vision, GUI application,
+                                    python programming, and MATLAB</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- WORK EXPERIENCE ends -->
+            
+            <div class="parallax p-5 text-center bg-image" id="bugsbunny">
+                <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+                </div>
+            </div>
+            
+            
+            
+            <!-- EDUCATION STARTS -->
+            <div class="shadow-1-strong bg-purple my-5 p-5 text-white" id="education">
+                <div class="work-experience-section">
+                    <h2 class="h2 fw-light mb-4"><i class="fas fa-university"></i> Education</h2>
+                    <div class="timeline row">
+                        <div class="col-lg-4 timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
+                            <div class="timeline-head px-4 pt-3">
+                                <div class="h5">Bachelor's of Technology<br />
+                                    <span class="h6"> in Optics and Optoelectronics Engineering </span><br>
+                                    <span class="h6" style="color:rgb(11, 130, 248);">University of Calcutta</span>
+                                </div>
+                            </div>
+                            <div class="timeline-body px-4 pb-4">
+                                <div class="text-white text-small mb-3"> 2018 - 2022</div>
+                                <div>
+                                    <ul>
+                                        
+                                        <li> Overall Percentage: 75.11%</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="200">
+                            <div class="timeline-head px-4 pt-3">
+                                <div class="h5">Higher Secondary<br /><span class="h6" style="color:rgb(11, 130, 248);">Aditya
+                                    Academy Secondary</span></div>
+                                </div>
+                                <div class="timeline-body px-4 pb-4">
+                                    <div class="text-white text-small mb-3">2015 - 2017</div>
+                                    <ul>
+                                        
+                                        <li>Stream : Science</li>
+                        <!-- <li> Overall percentage: 78%</li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="200">
+                <div class="timeline-head px-4 pt-3">
+                    <div class="h5"> Secondary<br /><span class="h6" style="color:rgb(11, 130, 248);">Aditya Academy
+                        Secondary</span></div>
+                    </div>
+                    <div class="timeline-body px-4 pb-4">
+                        <div class="text-white text-small mb-3">2004 - 2015</div>
+                        <ul>
+                            
+                            
+                            <!-- <li> Overall CGPA: 7.4 (Class X C.B.S.E Boards)</li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- EDUCATION ends -->
+
+<div class="parallax p-5 text-center bg-image">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+    </div>
+</div>
+
+
+
+<!-- PROJECTS GOES HERE -->
+<div class="shadow-1-strong bg-matte my-5 p-5 d-print-none " id="projects">
+    
+
+</div>
+
+</div>
+
+<div class="parallax p-5 text-center bg-image" id="last">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+    </div>
+</div>
+
+
+
+<div id='stars' class="tara"></div>
+<div id='stars2' class="tara"></div>
+<div id='stars3'  class="tara"></div>
+<!-- <div id='title'></div> -->
+
+<div class="shadow-1-strong bg-matte my-5 p-5 d-print-none " id="skills">
+
+    <h2 class="h2 fw-light mb-4 text-white"><i class="fas fa-laptop-code"></i> Skills</h2>
+    <div class="row">
+        <div class="col-lg-4 text-white">
+
+            <div class="card text-white bg-primary mb-3" style="max-width: 50rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">Python</h5>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 text-white">
+            <div class="card text-white bg-info mb-3" style="max-width: 50rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">Image Processing</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-white">
+            <div class="card text-white bg-success mb-3" style="max-width: 50rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">OpenCV</h5>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-4 text-white">
+
+            <div class="card text-white bg-warning mb-3" style="max-width: 50rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">Deep learning</h5>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 text-white">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 50rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">Data Structures</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-white">
+            <div class="card text-white bg-dark mb-3" style="max-width: 50rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">HTML5</h5>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-4 text-white">
+
+            <div class="card text-white bg-success mb-3" style="max-width: 50rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">MS Office</h5>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 text-white">
+            <div class="card text-white bg-danger mb-3" style="max-width: 50rem;">
+
+                <div class="card-body">
+                    <h6 class="card-title">Object Oriented Programming</h6>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-white">
+            <div class="card text-white bg-warning mb-3" style="max-width: 50rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Visual Studio Code</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 text-white">
+            <div class="card text-white bg-info mb-3" style="max-width: 50rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Git & GitHub</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-dark">
+            <div class="card text-dark bg-light mb-3" style="max-width: 50rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Algorithms</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-white">
+            <div class="card text-white bg-primary mb-3" style="max-width: 50rem;">
+                <div class="card-body">
+                    <h5 class="card-title">C++</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="parallax p-5 text-center bg-image">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+    </div>
+</div>
+
+
+
+<div class="shadow-3-strong bg-dark my-5 p-5 text-white funny" id="contact">
+    <div class="contant-section ">
+        <h2 class="h2 fw-light text mb-4"> Contact Me</h2>
+        <div class="row mb-4 d-flex justify-content-center">
+            <div class="col-md-5 ">
+                <div class="mt-1">
+                   
+                    <div class="h6"><i class="far fa-envelope pe-2 text-white" style="width:24px;opacity:0.85;"></i>
+                        <a class="text-white" href="mailto:rajarshiban13@gmail.com"
+                            title="Email">rajarshiban13@gmail.com</a>
+                    </div>
+                </div>
+
+
+                <div class="mt-5 d-print-none">
+                    <form action="https://formspree.io/f/myyozzza" method="POST">
+                        <div class="form-outline mb-4 text-white">
+                            <input type="text" id="name" class="form-control text-white" name="_name" required />
+                            <label class="form-label text-white" for="name">Name</label>
+                        </div>
+                        <div class="form-outline mb-4 text-white">
+                            <input type="email" id="email" class="form-control text-white" name="_replyto"
+                                required />
+                            <label class="form-label text-white" for="email">Email address</label>
+                        </div>
+                        <div class="form-outline mb-4 text-white">
+                            <textarea class="form-control text-white" style="resize: none;" id="message" rows="4"
+                                name="_message" required></textarea>
+                            <label class="form-label text-white" for="message">Message</label>
+                        </div>
+                        <button class="fancyButton btn btn-primary btn-block mb-4" type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+</div>
+
+</main>
+
+<script type="text/javascript" src="javascripts/mdb.min.js"></script>
+<!-- Custom scripts -->
+<script type="text/javascript" src="javascripts/app.js"></script>
+{% else %}
+{{ super() }}
+{% endif %}
+{% endblock %}

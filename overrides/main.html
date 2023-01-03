@@ -1,115 +1,170 @@
-{% extends "base.html" %}
+{% set var =  page %}
+{% if var.title=="Home" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <script src="https://kit.fontawesome.com/9389244c56.js" crossorigin="anonymous"></script>
+    <title>Portfolio</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="./images/icon.jpg" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="stylesheets/mdb.min.css" />
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    
+    <script src="./button.js"></script>
+
+    
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    
+</head>
+
+<body class="bg-black">
+    <div id="like_button_container"> </div>
+    <header class="d-print-none">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!-- Container wrapper -->
+
+            <div class="container-fluid">
+
+                <div><a href="#home"><img class="icon" src="./images/icon.jpg" style="width:30px; height: 30px;"
+                            alt=""></a>
+                </div>
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarRightAlignExample" aria-controls="navbarRightAlignExample"
+                    aria-expanded="false" aria-label="Toggle navigation" id="hamborgir">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+                    <!-- Left links -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#about"
+                                title="About"><span class="menu-title">About</span></a></li>
+                        <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#experience"
+                                title="Experience"><span class="menu-title">Work Experience</span></a></li>
+                        <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#education"
+                                title="Education"><span class="menu-title">Education</span></a></li>
+                        <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#projects"
+                                title="Projects"><span class="menu-title">Projects</span></a></li>
+                        <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#skills"
+                                title="Skills"><span class="menu-title">Skills</span></a></li>
+                        <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#contact"
+                                title="Contact"><span class="menu-title">Contact</span></a></li>
+
+                        </li>
+
+                    </ul>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
 
 
 
-
-
-
-{% block content %}
-{% if page.title.lower()=='home' %}
-<main>
-
-    <header>
-        <link rel="stylesheet" href="stylesheets/mdb.min.css" />
-        
     </header>
-    <div>
-        
-        
-        
-        <div id='stars' class="baal" ></div>
-        <div id='stars2' class="baal"></div>
-        <div id='stars3' class="baal"></div>
-        <div id='title' class="baal"></div>
+
+
+    <div id='stars' class="baal" ></div>
+    <div id='stars2' class="baal"></div>
+    <div id='stars3' class="baal"></div>
+    <div id='title' class="baal"></div>
         
         
         <div id="intro-example" class="p-5 text-center bg-image parallax"
-    style="background-image: url('https://images.hdqwalls.com/wallpapers/aurora-sky-morning-4k-sv.jpg');">
-    <!-- style="background-image: url('https://images.hdqwalls.com/wallpapers/aurora-sky-morning-4k-sv.jpg');"> -->
-    <!-- style="background-image: url('https://wallpaperaccess.com/full/17515.jpg');"> -->
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);" id="home">
-        <div class="d-flex justify-content-center align-items-center h-100">
-            <div class="text-white" id="chompa">
-                <h3>I am</h3>
-                
-                <h1 class="mb-3">RAJARSHI <span id='ban'> BANERJEE</span></h1>
-                <h5 class="mb-4">Optoelectronics Engineer |<span id="univ"> University of Calcutta</span>.</h5>
-                <p class="mb-3 fw-bold"> Computer Vision Enthusiast</p>
-                <a class="btn btn-outline-primary" href="./docs/RajarshiBanerjee_resume.pdf" target="_blank" role="button">
-                    Download
-                    CV</a>
-                    <!--                         <a class="btn btn-outline-primary" href="" target="_blank" role="button"> Download CV
-                        (Europass)</a> -->
+        style="background-image: url(../images/backg.png);">
+        <!-- style="background-image: url('https://images.hdqwalls.com/wallpapers/aurora-sky-morning-4k-sv.jpg');"> -->
+        <!-- style="background-image: url('https://wallpaperaccess.com/full/17515.jpg');"> -->
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);" id="home">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="text-white" id="chompa">
+                  
+                  <h3>Check out</h3>
+                    <h1 class="mb-3"><a href="http://127.0.0.1:8000/ML/kmeans/">  <span id='ban'>The Py Lama NOTES</span></a></h1>
+<!--                         <a class="btn btn-outline-primary" href="" target="_blank" role="button"> Download CV
+                            (Europass)</a> -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         
-        
-        
-        
-        
-        
-        
-        
-        <div class="shadow-2-strong my-5 p-5 text-white bg-matte" id="about">
-            <div class="about-section">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="row mt-2">
-                            <h3 class="h3 fw-light mb-4"><i class="fas fa-handshake" style="user-select: auto;"></i> Connect
-                            </h3>
-                    <table id="bio-text">
-                        <caption>Do connect on LinkedIn</caption>
-                        <th id="th-about-me"></th>
-                        <tr>
-                            <td>
-                                <i class="fab fa-linkedin"></i>
-                            </td>
-                            <td>
-                                <a class="text-white" href="https://www.linkedin.com/in/rajarshi-banerz/">
-                                    LinkedIn
-                                </a>
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fab fa-github pe-2 text-white"></i>
-                            </td>
-                            
-                            <td>
-                                <a class="text-white" href="https://github.com/GSAUC3/" title="Github">
-                                    Github
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-envelope-open-text"></i></td>
-                            
-                            <td>
-                                <a class="text-white" href="mailto:bsuvraneel@gmail.com" title="Email">
-                                    Gmail
-                                </a>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td>
-                                <i class="fas fa-map-marked-alt pe-2 text-white"></i>
-                            </td>
-                            <td>
-                                Kolkata, India
-                            </td>
-                            
-                        </tr>
-                        
-                    </table>
+
+
+
+
+
+
+
+    <div class="shadow-2-strong my-5 p-5 text-white bg-matte" id="about">
+        <div class="about-section">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="row mt-2">
+                        <h3 class="h3 fw-light mb-4"><i class="fas fa-handshake" style="user-select: auto;"></i> Connect
+                        </h3>
+                        <table id="bio-text">
+                            <caption>Do connect on LinkedIn</caption>
+                            <th id="th-about-me"></th>
+                            <tr>
+                                <td>
+                                    <i class="fab fa-linkedin"></i>
+                                </td>
+                                <td>
+                                    <a class="text-white" href="https://www.linkedin.com/in/rajarshi-banerz/">
+                                        LinkedIn
+                                    </a>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fab fa-github pe-2 text-white"></i>
+                                </td>
+
+                                <td>
+                                    <a class="text-white" href="https://github.com/GSAUC3/" title="Github">
+                                        Github
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-envelope-open-text"></i></td>
+
+                                <td>
+                                    <a class="text-white" href="mailto:bsuvraneel@gmail.com" title="Email">
+                                        Gmail
+                                    </a>
+                                </td>
+                            </tr>
+                          
+                            <tr>
+                                <td>
+                                    <i class="fas fa-map-marked-alt pe-2 text-white"></i>
+                                </td>
+                                <td>
+                                    Kolkata, India
+                                </td>
+
+                            </tr>
+
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <!-- bio ends here
-                -----about me starts from here -->
-                
+                <!-- bio ends here
+-----about me starts from here -->
+
                 <div class="col-md-6">
                     <h2 class="h2 fw-dark mb-4"><i class="fas fa-user"></i> About Me</h2>
                     <table id="about-text">
@@ -125,97 +180,97 @@
                                 I’m completed my B.Tech in Optics and Optoelectronics Engineering from University of
                                 Calcutta
                             </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br />
-                            <i class="fas fa-laptop-code text-white"> </i>
-                        </td>
-                        <td>
-                            <br />
-                            Keen interest in image processing, computer vision, extended reality, deep learnig, and <i
-                            class="fab fa-python"></i> python
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br />
-                            <i class="fas fa-scroll"></i>
-                        </td>
-                        <td>
-                            <br />
-                            Feel free to check my articles on GeeksforGeeks <a
-                            href="https://auth.geeksforgeeks.org/user/rajarshiban13/articles">here</a>.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br />
-                            <i class="fab fa-xbox"> </i>
-                        </td>
-                        <td>
-                            <br />
-                            My hobbies are <i class="fas fa-chess"></i> Chess, <i class="fas fa-music"></i> Music,
-                            Playing
-                            <i class="fas fa-guitar"></i> guitar, <i class="fas fa-palette"></i> Drawing, <i
-                            class="fas fa-gamepad"></i> Creating video games.
-                        </td>
-                    </tr>
-                    <br />
-                </table>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                                <i class="fas fa-laptop-code text-white"> </i>
+                            </td>
+                            <td>
+                                <br />
+                                Keen interest in image processing, computer vision, extended reality, deep learnig, and <i
+                                    class="fab fa-python"></i> python
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                                <i class="fas fa-scroll"></i>
+                            </td>
+                            <td>
+                                <br />
+                                Feel free to check my articles on GeeksforGeeks <a
+                                    href="https://auth.geeksforgeeks.org/user/rajarshiban13/articles">here</a>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                                <i class="fab fa-xbox"> </i>
+                            </td>
+                            <td>
+                                <br />
+                                My hobbies are <i class="fas fa-chess"></i> Chess, <i class="fas fa-music"></i> Music,
+                                Playing
+                                <i class="fas fa-guitar"></i> guitar, <i class="fas fa-palette"></i> Drawing, <i
+                                    class="fas fa-gamepad"></i> Creating video games.
+                            </td>
+                        </tr>
+                        <br />
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- about me ends here -->
-<div class="parallax p-5 text-center bg-image">
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+    <!-- about me ends here -->
+    <div class="parallax p-5 text-center bg-image">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+        </div>
     </div>
-</div>
 
-<!-- WORK EXPERIENCE STARTS -->
+    <!-- WORK EXPERIENCE STARTS -->
 
-<div class="shadow-1-strong bg-purple my-5 p-5 text-white" id="experience">
-    <div class="work-experience-section">
-        <h2 class="h2 fw-light mb-4"><i class="fas fa-briefcase"></i> Work Experience</h2>
-        <div class="timeline">
-            <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
-                <div class="timeline-head px-4 pt-3">
-                    <div class="h5">Research Intern <br /><span class="h6" style="color:rgb(11, 130, 248);"> Centre
-                        for Development of Advanced Computing (CDAC)</span></div>
-                        
+    <div class="shadow-1-strong bg-purple my-5 p-5 text-white" id="experience">
+        <div class="work-experience-section">
+            <h2 class="h2 fw-light mb-4"><i class="fas fa-briefcase"></i> Work Experience</h2>
+             <div class="timeline">
+                <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
+                    <div class="timeline-head px-4 pt-3">
+                        <div class="h5">Research Intern <br /><span class="h6" style="color:rgb(11, 130, 248);"> Centre
+                                for Development of Advanced Computing (CDAC)</span></div>
+
                     </div>
                     <div class="timeline-body px-4 pb-4">
-                        <div class="text-white text-small mb-3"> June 2022 - December 2022</div>
+                        <div class="text-white text-small mb-3"> June 2022 - Present</div>
                         <div>
                             <ul>
-                                
+
                                 <li> Team lead </li>
                                 <li>Working on Human-Computer Interactive systems</li>
                                 <li>Building an application using image processing and computer vision to control the
                                     cursor using hand gestures and facilitate air writing.</li>
-                                    
-                                </ul>
-                            </div>
+                                
+                            </ul>
                         </div>
-                    </div> 
-                    <div class="timeline">
-                        <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5">Project Intern <br /><span class="h6" style="color:rgb(11, 130, 248);"> Indian
-                                    Statistical Institute (ISI)</span></div>
-                                    
-                                </div>
-                <div class="timeline-body px-4 pb-4">
-                    <div class="text-white text-small mb-3"> Sept 2021 - June 2022</div>
-                    <div>
-                        <ul>
-                            
-                            
-                            <li>Worked on Medical Imaging</li>
-                            <li>Completed my final year B.Tech project on classification of retinal fundus images for diabetic retinopathy (DR) using  deep learning. </li>
-                            <li>Under supervision of <i>Dr. Uma Shankar </i> | Machine Intelligence Unit, ISI
-                                Calcutta </li>
+                    </div>
+                </div> 
+            <div class="timeline">
+                <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
+                    <div class="timeline-head px-4 pt-3">
+                        <div class="h5">Project Intern <br /><span class="h6" style="color:rgb(11, 130, 248);"> Indian
+                                Statistical Institute (ISI)</span></div>
+
+                    </div>
+                    <div class="timeline-body px-4 pb-4">
+                        <div class="text-white text-small mb-3"> Sept 2021 - June 2022</div>
+                        <div>
+                            <ul>
+
+
+                                <li>Worked on Medical Imaging</li>
+                                <li>Completed my final year B.Tech project on classification of retinal fundus images for diabetic retinopathy (DR) using  deep learning. </li>
+                                <li>Under supervision of <i>Dr. Uma Shankar </i> | Machine Intelligence Unit, ISI
+                                    Calcutta </li>
                             </ul>
                         </div>
                     </div>
@@ -223,77 +278,76 @@
                 <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="200">
                     <div class="timeline-head px-4 pt-3">
                         <div class="h5">Technical Content Writer <br /><span class="h6"
-                            style="color:rgb(11, 130, 248);">GeeksforGeeks</span></div>
-                        </div>
-                        <div class="timeline-body px-4 pb-4">
-                            <div class="text-white text-small mb-3">Sept 2021 - Feb 2022</div>
-                            <ul>
-                                
-                                <li>Published more than 10 articles</li>
-                                <li> Wrote about mathematics, OpenCV (image processing), computer vision, GUI application,
-                                    python programming, and MATLAB</li>
-                                </ul>
-                            </div>
-                        </div>
+                                style="color:rgb(11, 130, 248);">GeeksforGeeks</span></div>
+                    </div>
+                    <div class="timeline-body px-4 pb-4">
+                        <div class="text-white text-small mb-3">Sept 2021 - Feb 2022</div>
+                        <ul>
+
+                            <li>Published more than 10 articles</li>
+                            <li> Wrote about mathematics, OpenCV (image processing), computer vision, GUI application,
+                                python programming, and MATLAB</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            
-            <!-- WORK EXPERIENCE ends -->
-            
-            <div class="parallax p-5 text-center bg-image" id="bugsbunny">
-                <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
-                </div>
-            </div>
-            
-            
-            
-            <!-- EDUCATION STARTS -->
-            <div class="shadow-1-strong bg-purple my-5 p-5 text-white" id="education">
-                <div class="work-experience-section">
-                    <h2 class="h2 fw-light mb-4"><i class="fas fa-university"></i> Education</h2>
-                    <div class="timeline row">
-                        <div class="col-lg-4 timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5">Bachelor's of Technology<br />
-                                    <span class="h6"> in Optics and Optoelectronics Engineering </span><br>
-                                    <span class="h6" style="color:rgb(11, 130, 248);">University of Calcutta</span>
-                                </div>
-                            </div>
-                            <div class="timeline-body px-4 pb-4">
-                                <div class="text-white text-small mb-3"> 2018 - 2022</div>
-                                <div>
-                                    <ul>
-                                        
-                                        <li> Overall Percentage: 75.11%</li>
-                                    </ul>
-                                </div>
-                            </div>
+        </div>
+    </div>
+
+    <!-- WORK EXPERIENCE ends -->
+    <div class="parallax p-5 text-center bg-image" id="bugsbunny">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+        </div>
+    </div>
+
+
+
+    <!-- EDUCATION STARTS -->
+    <div class="shadow-1-strong bg-purple my-5 p-5 text-white" id="education">
+        <div class="work-experience-section">
+            <h2 class="h2 fw-light mb-4"><i class="fas fa-university"></i> Education</h2>
+            <div class="timeline row">
+                <div class="col-lg-4 timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
+                    <div class="timeline-head px-4 pt-3">
+                        <div class="h5">Bachelor's of Technology<br />
+                            <span class="h6"> in Optics and Optoelectronics Engineering </span><br>
+                            <span class="h6" style="color:rgb(11, 130, 248);">University of Calcutta</span>
                         </div>
-                        <div class="col-lg-4 timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="200">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5">Higher Secondary<br /><span class="h6" style="color:rgb(11, 130, 248);">Aditya
-                                    Academy Secondary</span></div>
-                                </div>
-                                <div class="timeline-body px-4 pb-4">
-                                    <div class="text-white text-small mb-3">2015 - 2017</div>
-                                    <ul>
-                                        
-                                        <li>Stream : Science</li>
-                        <!-- <li> Overall percentage: 78%</li> -->
-                    </ul>
+                    </div>
+                    <div class="timeline-body px-4 pb-4">
+                        <div class="text-white text-small mb-3"> 2018 - Present</div>
+                        <div>
+                            <ul>
+
+                                <!-- <li> Overall Percentage: 75.11%</li> -->
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="200">
-                <div class="timeline-head px-4 pt-3">
-                    <div class="h5"> Secondary<br /><span class="h6" style="color:rgb(11, 130, 248);">Aditya Academy
-                        Secondary</span></div>
+                <div class="col-lg-4 timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="200">
+                    <div class="timeline-head px-4 pt-3">
+                        <div class="h5">Higher Secondary<br /><span class="h6" style="color:rgb(11, 130, 248);">Aditya
+                                Academy Secondary</span></div>
+                    </div>
+                    <div class="timeline-body px-4 pb-4">
+                        <div class="text-white text-small mb-3">2015 - 2017</div>
+                        <ul>
+
+                            <li>Stream : Science</li>
+                            <!-- <li> Overall percentage: 78%</li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="200">
+                    <div class="timeline-head px-4 pt-3">
+                        <div class="h5"> Secondary<br /><span class="h6" style="color:rgb(11, 130, 248);">Aditya Academy
+                                Secondary</span></div>
                     </div>
                     <div class="timeline-body px-4 pb-4">
                         <div class="text-white text-small mb-3">2004 - 2015</div>
                         <ul>
-                            
-                            
+
+
                             <!-- <li> Overall CGPA: 7.4 (Class X C.B.S.E Boards)</li> -->
                         </ul>
                     </div>
@@ -301,214 +355,409 @@
             </div>
         </div>
     </div>
-</div>
-<!-- EDUCATION ends -->
-
-<div class="parallax p-5 text-center bg-image">
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
     </div>
-</div>
+    <!-- EDUCATION ends -->
 
-
-
-<!-- PROJECTS GOES HERE -->
-<div class="shadow-1-strong bg-matte my-5 p-5 d-print-none " id="projects">
-    
-
-</div>
-
-</div>
-
-<div class="parallax p-5 text-center bg-image" id="last">
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
-    </div>
-</div>
-
-
-
-<div id='stars' class="tara"></div>
-<div id='stars2' class="tara"></div>
-<div id='stars3'  class="tara"></div>
-<!-- <div id='title'></div> -->
-
-<div class="shadow-1-strong bg-matte my-5 p-5 d-print-none " id="skills">
-
-    <h2 class="h2 fw-light mb-4 text-white"><i class="fas fa-laptop-code"></i> Skills</h2>
-    <div class="row">
-        <div class="col-lg-4 text-white">
-
-            <div class="card text-white bg-primary mb-3" style="max-width: 50rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">Python</h5>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 text-white">
-            <div class="card text-white bg-info mb-3" style="max-width: 50rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">Image Processing</h5>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 text-white">
-            <div class="card text-white bg-success mb-3" style="max-width: 50rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">OpenCV</h5>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-lg-4 text-white">
-
-            <div class="card text-white bg-warning mb-3" style="max-width: 50rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">Deep learning</h5>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 text-white">
-            <div class="card text-white bg-secondary mb-3" style="max-width: 50rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">Data Structures</h5>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 text-white">
-            <div class="card text-white bg-dark mb-3" style="max-width: 50rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">HTML5</h5>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-lg-4 text-white">
-
-            <div class="card text-white bg-success mb-3" style="max-width: 50rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">MS Office</h5>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 text-white">
-            <div class="card text-white bg-danger mb-3" style="max-width: 50rem;">
-
-                <div class="card-body">
-                    <h6 class="card-title">Object Oriented Programming</h6>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 text-white">
-            <div class="card text-white bg-warning mb-3" style="max-width: 50rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Visual Studio Code</h5>
-                </div>
-            </div>
+    <div class="parallax p-5 text-center bg-image">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 text-white">
-            <div class="card text-white bg-info mb-3" style="max-width: 50rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Git & GitHub</h5>
+
+
+
+
+    <div class="shadow-1-strong bg-matte my-5 p-5 d-print-none " id="projects">
+
+        <h2 class="h2 fw-light mb-4 text-white"><i class="fas fa-archive"></i> Projects</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            <div class="col">
+                <div class="col">
+                    <div class="card">
+                        <img src="./images/algovis.gif" class="card-img-top" alt="Palm Springs Road" />
+                        <div class="card-body">
+                            <h5 class="card-title">Sorting Algorithm Visualizer</h5>
+                            <p class="card-text">
+                                A GUI program completely made in python programming language and tkinter library to
+                                visualize various sorting algorithms.
+                            </p>
+                        </div>
+
+                        <div class="card-body">
+                            <a href="https://www.youtube.com/watch?v=4iM-eggaS2I" class="card-link">View Project
+                                Demo</a>
+                            <a href="https://github.com/GSAUC3/Algorithm_visualizer" class="card-link">Source Code</a>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col">
+                    <div class="card">
+                        <video controls class="card-img-top">
+                            <source src="./images/tt.mp4" type="video/mp4">
+
+                        </video>
+                        <!-- <img src=""
+                            class="card-img-top" alt="Los Angeles Skyscrapers" /> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Trick or Treat Game</h5>
+                            <p class="card-text">
+                                Created a game in python programming language using the pygame library.
+                            </p>
+                        </div>
+
+                        <div class="card-body">
+                            <a href="https://github.com/GSAUC3/trick-or-treat" class="card-link">Source Code</a>
+
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4 text-dark">
-            <div class="card text-dark bg-light mb-3" style="max-width: 50rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Algorithms</h5>
+            <div class="col">
+
+                <div class="col">
+                    <div class="card">
+                        <video class="card-img-top" controls muted>
+                            <source src="./images/dsc.mp4" type="video/mp4">
+
+                        </video>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Discord Bot</h5>
+                            <p class="card-text">
+                                Created a discord bot in python using the discord API for python using OOPs concepts,
+                                integrated it with a free dictionary API, Reddit API to fetch memes or latest posts,
+                                GitHub
+                                API to collect stats of the user using the bot. Users can also play tic-tac-toe game
+                                with
+                                the bot. Hosted it on Heroku. Improved the bot based on the feedback given by people who
+                                used it.
+
+                            </p>
+                        </div>
+
+                        <div class="card-body">
+                            <a href="https://www.youtube.com/watch?v=J5CPLqbv3YY" class="card-link">View Project
+                                Demo</a>
+
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div class="col">
+                    <div class="card">
+                        <img src="./images/mini.jpeg" class="card-img-top" alt="mini project" />
+
+                        <div class="card-body">
+                            <h5 class="card-title">Bachelor's Mini Project</h5>
+                            <p class="card-text">
+                                Demonstrated the transmission of data through LASER using two Arduino Nanos as a
+                                transmitter and a receiver under the supervision of Dr. Kanik Palodhi at University of
+                                Calcutta
+                            </p>
+                        </div>
+
+                        <div class="card-body">
+                            <a href="https://github.com/GSAUC3/Mini-project/blob/master/Mini%20project%20roll%20423%20and%20401.pdf"
+                                class="card-link">View Project
+                                Details</a>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4 text-white">
-            <div class="card text-white bg-primary mb-3" style="max-width: 50rem;">
-                <div class="card-body">
-                    <h5 class="card-title">C++</h5>
+
+            <div class="col">
+                <div class="col">
+                    <div class="card">
+                        <img src="https://github.com/GSAUC3/GSAUC3/raw/main/InShot_20210822_204315352.gif"
+                            class="card-img-top" alt="Skyscrapers" />
+                        <div class="card-body">
+                            <h5 class="card-title">Data structure library</h5>
+                            <p class="card-text">
+                                This is my own advanced python data structure library which includes implementation of
+                                linked-lists, trees, and graphs.
+                            </p>
+                        </div>
+
+
+                        <div class="card-body">
+                            <a href="https://pypi.org/project/Gsauce-pyds/" class="card-link">Pypi Package</a>
+                            <a href="https://github.com/GSAUC3/Gsauce-pyds" class="card-link">Source Code</a>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="parallax p-5 text-center bg-image">
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
-    </div>
-</div>
+                <br>
+                <div class="col">
+                    <div class="card">
+                        <img src="https://user-images.githubusercontent.com/55054089/124488282-4c1dfd00-ddcd-11eb-8a86-464a8e217d44.png"
+                            class="card-img-top" alt="Skyscrapers" />
+                        <div class="card-body">
+                            <h5 class="card-title">Mp3 Music Player</h5>
+                            <p class="card-text">
+                                Created a GUI application in python using the Tkinter module that can play Mp3 songs. It
+                                gives users the liberty to choose any .mp3 songs they want to play, and mark them as
+                                favourites. Sqlite3 has been used for database to store songs marked as favourites by
+                                the users.
+                            </p>
+                        </div>
 
 
+                        <div class="card-body">
+                            <!-- <a href="" class="card-link">Pypi Package</a> -->
+                            <a href="https://github.com/GSAUC3/Music-MP3-player" class="card-link">Source Code</a>
 
-<div class="shadow-3-strong bg-dark my-5 p-5 text-white funny" id="contact">
-    <div class="contant-section ">
-        <h2 class="h2 fw-light text mb-4"> Contact Me</h2>
-        <div class="row mb-4 d-flex justify-content-center">
-            <div class="col-md-5 ">
-                <div class="mt-1">
-                   
-                    <div class="h6"><i class="far fa-envelope pe-2 text-white" style="width:24px;opacity:0.85;"></i>
-                        <a class="text-white" href="mailto:rajarshiban13@gmail.com"
-                            title="Email">rajarshiban13@gmail.com</a>
+                        </div>
                     </div>
                 </div>
 
 
-                <div class="mt-5 d-print-none">
-                    <form action="https://formspree.io/f/myyozzza" method="POST">
-                        <div class="form-outline mb-4 text-white">
-                            <input type="text" id="name" class="form-control text-white" name="_name" required />
-                            <label class="form-label text-white" for="name">Name</label>
-                        </div>
-                        <div class="form-outline mb-4 text-white">
-                            <input type="email" id="email" class="form-control text-white" name="_replyto"
-                                required />
-                            <label class="form-label text-white" for="email">Email address</label>
-                        </div>
-                        <div class="form-outline mb-4 text-white">
-                            <textarea class="form-control text-white" style="resize: none;" id="message" rows="4"
-                                name="_message" required></textarea>
-                            <label class="form-label text-white" for="message">Message</label>
-                        </div>
-                        <button class="fancyButton btn btn-primary btn-block mb-4" type="submit">Send</button>
-                    </form>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <div class="parallax p-5 text-center bg-image" id="last">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+        </div>
+    </div>
+
+
+    
+    <div id='stars' class="tara"></div>
+    <div id='stars2' class="tara"></div>
+    <div id='stars3'  class="tara"></div>
+    <!-- <div id='title'></div> -->
+
+    <div class="shadow-1-strong bg-matte my-5 p-5 d-print-none " id="skills">
+
+        <h2 class="h2 fw-light mb-4 text-white"><i class="fas fa-laptop-code"></i> Skills</h2>
+        <div class="row">
+            <div class="col-lg-4 text-white">
+
+                <div class="card text-white bg-primary mb-3" style="max-width: 50rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Python</h5>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 text-white">
+                <div class="card text-white bg-info mb-3" style="max-width: 50rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Image Processing</h5>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-white">
+                <div class="card text-white bg-success mb-3" style="max-width: 50rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">OpenCV</h5>
+
+                    </div>
                 </div>
             </div>
 
         </div>
+        <div class="row">
+            <div class="col-lg-4 text-white">
+
+                <div class="card text-white bg-warning mb-3" style="max-width: 50rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Deep learning</h5>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 text-white">
+                <div class="card text-white bg-secondary mb-3" style="max-width: 50rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Data Structures</h5>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-white">
+                <div class="card text-white bg-dark mb-3" style="max-width: 50rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">HTML5</h5>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-white">
+
+                <div class="card text-white bg-success mb-3" style="max-width: 50rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">MS Office</h5>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 text-white">
+                <div class="card text-white bg-danger mb-3" style="max-width: 50rem;">
+
+                    <div class="card-body">
+                        <h6 class="card-title">Object Oriented Programming</h6>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-white">
+                <div class="card text-white bg-warning mb-3" style="max-width: 50rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Visual Studio Code</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-white">
+                <div class="card text-white bg-info mb-3" style="max-width: 50rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Git & GitHub</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-dark">
+                <div class="card text-dark bg-light mb-3" style="max-width: 50rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Algorithms</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-white">
+                <div class="card text-white bg-primary mb-3" style="max-width: 50rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">C++</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
+    <div class="parallax p-5 text-center bg-image">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+        </div>
+    </div>
 
 
 
+    <div class="shadow-3-strong bg-dark my-5 p-5 text-white funny" id="contact">
+        <div class="contant-section ">
+            <h2 class="h2 fw-light text mb-4"> Contact Me</h2>
+            <div class="row mb-4 d-flex justify-content-center">
+                <div class="col-md-5 ">
+                    <div class="mt-1">
+                       
+                        <div class="h6"><i class="far fa-envelope pe-2 text-white" style="width:24px;opacity:0.85;"></i>
+                            <a class="text-white" href="mailto:rajarshiban13@gmail.com"
+                                title="Email">rajarshiban13@gmail.com</a>
+                        </div>
+                    </div>
 
-</div>
 
-</main>
+                    <div class="mt-5 d-print-none">
+                        <form action="https://formspree.io/f/myyozzza" method="POST">
+                            <div class="form-outline mb-4 text-white">
+                                <input type="text" id="name" class="form-control text-white" name="_name" required />
+                                <label class="form-label text-white" for="name">Name</label>
+                            </div>
+                            <div class="form-outline mb-4 text-white">
+                                <input type="email" id="email" class="form-control text-white" name="_replyto"
+                                    required />
+                                <label class="form-label text-white" for="email">Email address</label>
+                            </div>
+                            <div class="form-outline mb-4 text-white">
+                                <textarea class="form-control text-white" style="resize: none;" id="message" rows="4"
+                                    name="_message" required></textarea>
+                                <label class="form-label text-white" for="message">Message</label>
+                            </div>
+                            <button class="fancyButton btn btn-primary btn-block mb-4" type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
 
-<script type="text/javascript" src="javascripts/mdb.min.js"></script>
-<!-- Custom scripts -->
-<script type="text/javascript" src="javascripts/app.js"></script>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="pt-4 pb-4 text-white text-center d-print-none">
+        <div class="container">
+            <div class="my-3">
+                <div class="h4">
+                    <span id='fname'>
+
+                        Rajarshi
+                    </span>
+                    <span id="lname">
+                        Banerjee
+                    </span>
+                </div>
+                <div class="footer-nav">
+                    <nav role="navigation">
+                        <ul class="nav justify-content-center">
+                            <li class="nav-item"><a class="nav-link" onclick="toggleButton()"
+                                    href="https://github.com/GSAUC3" title="Github"><i class="fab fa-github"></i><span
+                                        class="menu-title sr-only">Github</span></a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" onclick="toggleButton()"
+                                    href="https://www.linkedin.com/in/rajarshi-banerz/" title="LinkedIn"><i
+                                        class="fab fa-linkedin-in"></i><span
+                                        class="menu-title sr-only">LinkedIn</span></a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" onclick="toggleButton()"
+                                    href="https://facebook.com/rajarshi.banerjee.988" title="Twitter"><i
+                                        class="fab fa-facebook"></i><span class="menu-title sr-only">Facebook</span></a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" onclick="toggleButton()"
+                                    href="https://www.instagram.com/__banerz__.py/" title="Instagram"><i
+                                        class="fab fa-instagram"></i><span
+                                        class="menu-title sr-only">Instagram</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script type="text/javascript" src="javascripts/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="javascripts/app.js"></script>
+</body>
+
+</html>
+
 {% else %}
-{{ super() }}
-{% endif %}
-{% endblock %}
+{% extends "base.html" %}
+
+{% endif%}

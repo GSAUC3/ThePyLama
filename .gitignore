@@ -3,3 +3,8 @@
 *.py
 *.csv
 outputs/*
+baal.html
+temp.html
+*.mp4
+*.jpg
+*.jpeg

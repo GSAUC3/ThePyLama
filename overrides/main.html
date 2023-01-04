@@ -56,8 +56,10 @@
                                 title="Experience"><span class="menu-title">Work Experience</span></a></li>
                         <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#education"
                                 title="Education"><span class="menu-title">Education</span></a></li>
-                        <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#projects"
+                        <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#work"
                                 title="Projects"><span class="menu-title">Projects</span></a></li>
+                        <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#resume"
+                                  title="Resume"><span class="menu-title">Resume</span></a></li>
                         <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#skills"
                                 title="Skills"><span class="menu-title">Skills</span></a></li>
                         <li class="nav-item"><a class="nav-link" onclick="toggleButton()" href="#contact"
@@ -104,7 +106,7 @@
 </div>
 
 <div class="w3-row">
-  <div class="w3-half w3-grey w3-container" style="height: 700px">
+  <div class="w3-half w3-grey w3-container" style="height: 700px" id="about">
     <div class="w3-padding-64 w3-center">
       <h1><i class="fas fa-user"></i> About Me</h1>
       <img
@@ -114,7 +116,7 @@
       />
       <div class="w3-left-align w3-padding-large">
         <p>
-          I’m an Optoelectronics Engineer who fell in love with AI, but haven't
+          Nomoskar eveyone! My name is Rajarshi Banerjee. I’m an Optoelectronics Engineer who fell in love with AI, but haven't
           proposed her yet!
         </p>
         <p>
@@ -126,7 +128,7 @@
     </div>
   </div>
 
-  <div class="w3-half w3-black w3-container w3-center" style="height: 700px">
+  <div class="w3-half w3-black w3-container w3-center" style="height: 700px" id="education">
     <div class="w3-padding-64">
       <h1><i class="fas fa-university"></i> My Education</h1>
     </div>
@@ -146,7 +148,7 @@
           <span class="h4" style="color: rgb(11, 130, 248)">Aditya Academy (C.B.S.E)</span>
           <br />
           <span class="h5"> in Science</span><br />
-          <div class="text-white text-small mb-3 h6">2017 - 2015</div>
+          <div class="text-white text-small mb-3 h6">2015 - 2017</div>
           <!-- <div class="text-white text-small mb-3 h6"> 78%</div> -->
         </div>
       </div>
@@ -186,15 +188,13 @@
                 </div>
               </div>
               <div class="timeline-body px-4 pb-4">
-                <div class="text-white text-small mb-3">June 2022 - Present</div>
+                <div class="text-white text-small mb-3">June 2022 - December 2022</div>
                 <div>
                   <ul>
-                    <li>Team lead</li>
-                    <li>Working on Human-Computer Interactive systems</li>
+                    <li>Worked as a team lead and built a computer vision application to convert hand scribbled words (written using hand gestures) to computer readable text format, using OpenCV, Mediapipe, easyocr and PyTorch.</li>
+                    <li>Worked on controlling mouse functionalities and keyboard shortcuts with hand gestures using OpenCV, and mediapipe.</li>
                     <li>
-                      Building an application using image processing and computer
-                      vision to control the cursor using hand gestures and facilitate
-                      air writing.
+                      Worked with a team on a No-Code AutoML framework in python, AutoNN, which provides little to no-code model training tools for classification or regression tasks
                     </li>
                   </ul>
                 </div>
@@ -313,26 +313,18 @@
   
         </div>
       </div>
-<!--   
-      <div class="w3-row w3-hide-small">
-        <div class="w3-half">
-          <img src="/w3images/sound.jpg" style="width:100%">
-        </div>
-        <div class="w3-half">
-          <img src="/w3images/workbench.jpg" style="width:100%">
-        </div>
-      </div> -->
+
       <br>
     </div>
-    <div class="w3-half w3-indigo w3-container" style="min-height:800px">
+    <div class="w3-half w3-indigo w3-container" style="min-height:800px" id="resume">
       <div class="w3-padding-64 w3-center">
         <h2>Resume</h2>
         <!-- <div class="w3-container w3-responsive"> -->
             
             <embed src="./images/CV.pdf" height="600px" width="100%" />
-            <!-- <a class="btn btn-outline-primary" href="./docs/RajarshiBanerjee_resume.pdf" target="_blank" role="button">
+            <a class="btn btn-dark btn-rounded" href="./images/CV.pdf" target="_blank" role="button">
                 Download
-                CV</a> -->
+                CV</a>
         <!-- </div> -->
       </div>
     </div>
@@ -498,6 +490,11 @@
                               href="https://www.kaggle.com/banerz" title="kaggle"><i
                                   class="fab fa-kaggle"></i><span
                                   class="menu-title sr-only">Kaggle</span></a>
+                      </li>
+                            <li class="nav-item"><a class="nav-link" onclick="toggleButton()"
+                              href="https://www.youtube.com/@thepylama" title="youtube"><i
+                                  class="fab fa-youtube"></i><span
+                                  class="menu-title sr-only">Youtube</span></a>
                       </li>
                         </ul>
                     </nav>

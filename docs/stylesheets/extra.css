@@ -1,6 +1,642 @@
-:root>* {
-    --md-primary-bg-color: #f1b500;
-    --md-primary-fg-color: #040404;
-    --md-secondary-fg-color: #ff0f0f;
-    --md-accent-fg-color: #fbc900;
-  }
+
+/* =========================================================
+   HOMEPAGE ONLY
+   Do NOT affect normal documentation pages
+   ========================================================= */
+
+body:has(.landing-page) .md-main__inner {
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+body:has(.landing-page) .md-grid {
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+body:has(.landing-page) .md-content {
+  max-width: none !important;
+  width: 100%;
+  margin: 0 !important;
+}
+
+body:has(.landing-page) .md-content__inner {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body:has(.landing-page) .md-content__inner::before {
+  display: none;
+}
+
+:root {
+    --lp: #a970ff;
+    --lp2: #c89cff;
+    --bg: #0b1020;
+    --card: rgba(24, 31, 53, .72);
+    --border: rgba(190, 150, 255, .20);
+    --text: #f5f2ff;
+    --muted: #aeb5cc
+}
+
+.landing-page {
+    min-height: calc(100vh - 64px);
+    overflow: hidden;
+    color: var(--text);
+    background: radial-gradient(circle at 75% 15%, rgba(120, 65, 210, .16), transparent 28rem), radial-gradient(circle at 15% 50%, rgba(83, 54, 170, .1), transparent 30rem), var(--bg)
+}
+
+.hero-section {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+
+  align-items: center;
+  gap: clamp(2rem, 5vw, 6rem);
+
+  min-height: min(720px, calc(100vh - 100px));
+
+  padding:
+    clamp(3rem, 7vw, 6rem)
+    clamp(1.5rem, 7vw, 8rem);
+
+  box-sizing: border-box;
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 720px
+}
+
+.hero-eyebrow {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    padding: .45rem .9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--lp2);
+    background: rgba(169, 112, 255, .08);
+    font-size: .9rem;
+    font-weight: 600
+}
+
+.hero-copy h1 {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(3rem, 6vw, 5.7rem);
+    line-height: .98;
+    letter-spacing: -.055em;
+    font-weight: 800
+}
+
+.hero-copy h1 span {
+    color: var(--lp2);
+    text-shadow: 0 0 45px rgba(169, 112, 255, .28)
+}
+
+.hero-subtitle {
+    max-width: 650px;
+    margin: 1.6rem 0 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.8
+}
+
+.hero-subtitle strong {
+    color: #ddd3f2
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+    margin-top: 2rem
+}
+
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: .7rem 1.15rem;
+    border-radius: 10px;
+    text-decoration: none !important;
+    font-weight: 700;
+    transition: .2s
+}
+
+.hero-button:hover {
+    transform: translateY(-2px)
+}
+
+.hero-button.primary {
+    color: #160d25 !important;
+    background: linear-gradient(135deg, #d1a7ff, #9b62ed);
+    box-shadow: 0 8px 30px rgba(140, 79, 220, .25)
+}
+
+.hero-button.secondary {
+    color: var(--text) !important;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .045)
+}
+
+.hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: 1.6rem
+}
+
+.hero-tags span {
+    padding: .4rem .7rem;
+    border-radius: 999px;
+    color: #bfc5d8;
+    background: rgba(255, 255, 255, .045);
+    border: 1px solid rgba(255, 255, 255, .07);
+    font-size: .78rem
+}
+
+.hero-art {
+    position: relative;
+    min-height: 430px;
+    isolation: isolate;
+    border-radius: 28px;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 25%, rgba(170, 120, 255, .18), transparent 20%), linear-gradient(180deg, #171b38 0%, #10172d 65%, #0b1020 100%);
+    border: 1px solid rgba(190, 150, 255, .12);
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, .2), 0 25px 80px rgba(0, 0, 0, .22)
+}
+
+.moon {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    top: 55px;
+    right: 70px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #d7c2ff, #8660c8 70%);
+    box-shadow: 0 0 60px rgba(170, 120, 255, .25);
+    opacity: .9
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 180px solid transparent;
+    border-right: 180px solid transparent;
+    border-bottom: 270px solid #171c3c
+}
+
+.mountain-back {
+    left: -40px;
+    opacity: .75
+}
+
+.mountain-front {
+    right: -30px;
+    border-left-width: 240px;
+    border-right-width: 240px;
+    border-bottom-width: 330px;
+    border-bottom-color: #10162f
+}
+
+.lama-card {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: 47px;
+    width: 220px;
+    height: 260px;
+    transform: translateX(-50%);
+    text-align: center
+}
+
+.lama-emoji {
+    position: relative;
+    z-index: 2;
+    font-size: 9rem;
+    line-height: 1;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, .35))
+}
+
+.laptop {
+    position: absolute;
+    z-index: 4;
+    left: 50%;
+    bottom: 0;
+    width: 190px;
+    height: 85px;
+    transform: translateX(-50%);
+    border: 5px solid #75609a;
+    border-radius: 12px 12px 5px 5px;
+    background: linear-gradient(135deg, #252040, #111525);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .3)
+}
+
+.laptop:after {
+    content: "";
+    position: absolute;
+    left: -18px;
+    right: -18px;
+    bottom: -14px;
+    height: 14px;
+    border-radius: 0 0 10px 10px;
+    background: #6b587e
+}
+
+.laptop span {
+    color: var(--lp2);
+    font-family: monospace;
+    font-size: 2.2rem;
+    line-height: 75px
+}
+
+.floating-code {
+    position: absolute;
+    z-index: 5;
+    padding: .45rem .65rem;
+    border: 1px solid rgba(200, 156, 255, .18);
+    border-radius: 8px;
+    color: #cda9ff;
+    background: rgba(10, 13, 28, .65);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+    font: .8rem/1.2 monospace;
+    backdrop-filter: blur(8px)
+}
+
+.code-one {
+    top: 105px;
+    left: 35px;
+    transform: rotate(-5deg)
+}
+
+.code-two {
+    top: 190px;
+    right: 25px;
+    transform: rotate(5deg)
+}
+
+.code-three {
+    bottom: 70px;
+    left: 35px;
+    transform: rotate(4deg)
+}
+
+.section-block {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 5rem clamp(1.5rem, 5vw, 3rem)
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem
+}
+
+.section-icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+    border-radius: 14px;
+    background: rgba(169, 112, 255, .1);
+    border: 1px solid var(--border);
+    font-size: 1.5rem
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: 2rem;
+    letter-spacing: -.03em
+}
+
+.section-heading p {
+    margin: .25rem 0 0;
+    color: var(--muted)
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem
+}
+
+.topic-card {
+    position: relative;
+    display: flex;
+    gap: 1.2rem;
+    min-height: 205px;
+    padding: 1.6rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    color: inherit !important;
+    background: linear-gradient(145deg, rgba(30, 38, 65, .8), rgba(15, 20, 38, .75));
+    text-decoration: none !important;
+    transition: transform .22s, border-color .22s, box-shadow .22s
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(200, 156, 255, .45);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .22)
+}
+
+.card-icon {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+    border-radius: 15px;
+    font-size: 1.8rem
+}
+
+.python-icon {
+    background: rgba(55, 118, 171, .15)
+}
+
+.dsa-icon {
+    background: rgba(169, 112, 255, .12)
+}
+
+.torch-icon {
+    background: rgba(255, 91, 42, .12)
+}
+
+.ml-icon {
+    background: rgba(240, 91, 180, .12)
+}
+
+.card-content h3 {
+    margin: .1rem 0 .5rem;
+    color: var(--text);
+    font-size: 1.35rem
+}
+
+.card-content p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.65;
+    font-size: .92rem
+}
+
+.card-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--lp2);
+    font-size: .85rem;
+    font-weight: 700
+}
+
+.quote-section {
+    position: relative;
+    max-width: 1100px;
+    min-height: 320px;
+    margin: 1rem auto 4rem;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(200, 156, 255, .16);
+    background: radial-gradient(circle at 20% 50%, rgba(110, 65, 190, .3), transparent 30%), radial-gradient(circle at 80% 40%, rgba(210, 80, 170, .16), transparent 28%), linear-gradient(135deg, #171633, #10162c)
+}
+
+.quote-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(169, 112, 255, .1);
+    filter: blur(50px)
+}
+
+.quote-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem
+}
+
+.quote-icon {
+    font-size: 2rem;
+    margin-bottom: .8rem
+}
+
+.quote-content h2 {
+    margin: .1rem 0;
+    color: var(--text);
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    letter-spacing: -.04em
+}
+
+.quote-content h2 span {
+    color: var(--lp2)
+}
+
+.quote-content p {
+    margin-top: 1.5rem;
+    color: var(--muted)
+}
+
+.roadmap {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .8rem
+}
+
+.roadmap-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, .025)
+}
+
+.roadmap-item>span {
+    font-size: 1.4rem
+}
+
+.roadmap-item strong {
+    display: block;
+    color: #e9e5f4;
+    font-size: .95rem
+}
+
+.roadmap-item small {
+    display: block;
+    margin-top: .2rem;
+    color: #858da5;
+    font-size: .75rem
+}
+
+.landing-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .9rem;
+    padding: 2.5rem 1rem 4rem;
+    color: #969db4;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, .05)
+}
+
+.footer-llama {
+    font-size: 2rem
+}
+
+.landing-footer strong {
+    color: #ddd7e9
+}
+
+.landing-footer p {
+    margin: .2rem 0 0;
+    font-size: .78rem
+}
+
+@media screen and (max-width:900px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem
+    }
+
+    .hero-art {
+        min-height: 360px
+    }
+
+    .topic-grid,
+    .roadmap {
+        grid-template-columns: 1fr
+    }
+}
+
+@media screen and (max-width:600px) {
+    .hero-section {
+        min-height: auto;
+        padding: 3rem 1.2rem
+    }
+
+    .hero-copy h1 {
+        font-size: 3rem
+    }
+
+    .hero-art {
+        min-height: 320px
+    }
+
+    .moon {
+        width: 90px;
+        height: 90px;
+        right: 35px
+    }
+
+    .lama-emoji {
+        font-size: 7rem
+    }
+
+    .topic-card {
+        padding: 1.2rem
+    }
+
+    .section-block {
+        padding: 3.5rem 1.2rem
+    }
+
+    .quote-section {
+        margin-left: 1rem;
+        margin-right: 1rem
+    }
+}
+
+
+
+
+/* =========================================================
+   NORMAL MKDOCS LAYOUT
+   Leave Material's grid/layout completely untouched.
+   ========================================================= */
+
+
+/* =========================================================
+   HOMEPAGE ONLY
+   ========================================================= */
+
+/* Make the homepage header blend into the hero */
+body:has(.landing-page) .md-header {
+  position: absolute;
+  width: 100%;
+  background: transparent;
+  box-shadow: none;
+  max-width: 1220px;
+  margin: 0 auto;
+
+}
+
+/* Keep the header contents at EXACTLY the same width
+   as normal MkDocs pages */
+/* body:has(.landing-page) .md-header__inner {
+  max-width: 1220px;
+  margin: 0 auto;
+} */
+
+/* Make the navigation bar transparent on homepage */
+body:has(.landing-page) .md-tabs {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Same width as the normal MkDocs content */
+body:has(.landing-page) .md-tabs__list {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HOMEPAGE CONTENT
+   ========================================================= */
+
+body:has(.landing-page) .md-main {
+  background: #0b1020;
+}
+
+body:has(.landing-page) .md-content__inner {
+  padding-top: 0;
+}
+
+body:has(.landing-page) .landing-page {
+  margin-top: 0;
+}
+
+
+/* =========================================================
+   HOMEPAGE NAVBAR
+   Keep exactly the same layout as normal pages.
+   Only make it transparent on the landing page.
+   ========================================================= */
+
+body:has(.landing-page) .md-header {
+  background: transparent;
+  box-shadow: none;
+}
+
+
+body:has(.landing-page) .md-tabs {
+  background: transparent;
+  box-shadow: none;
+}

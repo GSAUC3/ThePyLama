@@ -1,9 +1,16 @@
 site_name: The Py Lama Notes
 
+
 theme:
-  logo : imgs/logo.png  
-  favicon : imgs/logo.png  
   name: material
+
+  palette:
+    scheme: slate
+    primary: black
+
+  logo: imgs/logo.png
+  favicon: imgs/logo.png
+
   features:
     - navigation.instant
     - navigation.tracking
@@ -11,54 +18,21 @@ theme:
     - navigation.sections
     - navigation.expand
     - toc.follow
-    - content.code.annotate 
-  palette:
+    - content.code.annotate
 
-    # Palette toggle for automatic mode
-    - media: "(prefers-color-scheme: dark)"
-      toggle:
-        icon: material/brightness-auto
-        name: Switch to dark mode
+  
 
-    # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      toggle:
-        icon: material/brightness-4
-        name: Switch to system preference
-
-  extra:
-    homepage: https://gsauc3.github.io/personal-portfolio/
 nav:
   - Home: index.md
-  - Python: 
-    - Strings: python/strings.md
-    - Complex Numbers & class: python/complex.md
-    - Decorators: python/q.md
-  - DSA:
-    - Arrays: data structures/arrays.md
-    - Linked List: data structures/ll.md
-    - Stack: data structures/stack.md
-  #   - Doubly Linked List: data structures/dll.md
-  #   - Trees: data structures/trees.md
-  #   - Binary Search Trees: data structures/bst.md
- 
-  # - NumPy:
-  #   - Page 2: complex.md
-  - PyTorch:
-    - Tensors : pytorch/tensor.md
-    - Autograd: pytorch/grad.md
-    - Tensor operations: pytorch/tensor1.md
-  # - Linear Algebra with NumPy:
-  - Machine Learning:
-    - Introduction: ML/intro.md
-    - K-Means: ML/kmeans.md
-    - Gradient Descent: ML/sgd.md
-  # - Deep Learning:
-  # - Pandas:
-  # - Calculus:
-  # - Vector Calculus:
-  #   - Page 2: complex.md
+
+  - Data Structures:
+      - Arrays: data structures/arrays/arrays.md
+      - Hashing: data structures/hashing/hashing.md
+      - Two Pointers: data structures/arrays/two-pointers.md
+      - Sliding Window: data structures/arrays/sliding-window.md
+
+  - Algorithms:
+      - Binary Search: algorithms/binarysearch.md
 
 
 plugins:
@@ -88,19 +62,5 @@ markdown_extensions:
         kwds:
           case: lower
 
-extra_javascript:
-  - javascripts/mathjax.js
-  # - javascripts/app.js
-  # - javascripts/mdb.min.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  
-  
 extra_css:
   - stylesheets/extra.css
-  # - stylesheets/extra.css
-  # - stylesheets/extra.css
-  # - stylesheets/extra.css
-  # - stylesheets/extra.css
-  
-   

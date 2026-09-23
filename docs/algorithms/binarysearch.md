@@ -150,3 +150,173 @@ Direct ComparisonThe key difference is how they handle the exact target value.
 |Condition  |Greater than or equal to (>= target)|   Strictly greater than (> target)|
 |If target exists|Points to the first instance of the target|Points to the element after the last instance|
 |If target is missing|Points to the next larger element|Points to the next larger element|
+
+
+
+
+
+---
+
+# 21. Pattern: Binary Search
+
+Binary search requires some form of monotonicity.
+
+Classic sorted array:
+
+$$
+A_0\le A_1\le\cdots\le A_{n-1}
+$$
+
+Define:
+
+$$
+P(i)=[A[i]\ge x]
+$$
+
+Then:
+
+```text
+false false false false true true true
+                       ↑
+                  first true
+```
+
+Binary search finds the boundary.
+
+Each iteration halves the search space:
+
+$$
+n\rightarrow\frac n2
+\rightarrow\frac n4
+\rightarrow\cdots
+$$
+
+After \(k\) iterations:
+
+$$
+\frac{n}{2^k}\le1
+$$
+
+so:
+
+$$
+2^k\ge n
+$$
+
+and therefore:
+
+$$
+\boxed{k\ge\log_2n}
+$$
+
+Hence:
+
+$$
+\boxed{O(\log n)}
+$$
+
+---
+
+# 22. Binary Search on the Answer
+
+Binary search does not require the array itself to be sorted.
+
+Instead, search a numerical answer \(x\).
+
+Suppose we have a predicate:
+
+$$
+P(x)
+$$
+
+with structure:
+
+```text
+false false false false true true true
+                       ↑
+                     answer
+```
+
+If \(P(x)\) is monotonic, binary search can find the boundary.
+
+This pattern appears in:
+
+* Koko Eating Bananas,
+* Capacity to Ship Packages,
+* minimum feasible speed,
+* minimum capacity,
+* maximum achievable value.
+
+The important question is:
+
+> **Can I define a yes/no feasibility function that is monotonic?**
+
+---
+
+# 23. Lower Bound
+
+The lower bound is the first position satisfying:
+
+$$
+A[i]\ge x
+$$
+
+For a sorted array:
+
+```text
+A = [1,2,4,4,4,7,9]
+             ↑
+```
+
+for \(x=4\):
+
+$$
+lower\_bound(4)=2
+$$
+
+Conceptually:
+
+```text
+false false true true true true
+             ↑
+        first true
+```
+
+---
+
+# 24. Upper Bound
+
+The upper bound is the first position satisfying:
+
+$$
+A[i]>x
+$$
+
+For:
+
+```text
+[1,2,4,4,4,7,9]
+```
+
+and \(x=4\):
+
+$$
+upper\_bound(4)=5
+$$
+
+Conceptually:
+
+```text
+false false false false false true
+                              ↑
+                         first > x
+```
+
+In Python:
+
+```python
+from bisect import bisect_left, bisect_right
+
+bisect_left(nums, x)   # lower bound
+bisect_right(nums, x)  # upper bound
+```

@@ -1,5 +1,5 @@
 
-# 15. Pattern: Two Pointers
+## 15. Pattern: Two Pointers
 
 Use two indices:
 
@@ -26,7 +26,7 @@ Two pointers are especially useful when:
 
 ---
 
-# 16. Two Sum on a Sorted Array
+## 16. Two Sum on a Sorted Array
 
 Suppose:
 

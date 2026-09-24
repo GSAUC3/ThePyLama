@@ -1,7 +1,7 @@
 These 
 
 
-# 17. Pattern: Sliding Window
+## 17. Pattern: Sliding Window
 
 A sliding window maintains an interval:
 
@@ -59,7 +59,7 @@ $$
 
 ---
 
-# 18. Fixed-Size Sliding Window
+## 18. Fixed-Size Sliding Window
 
 If the window has fixed size \(k\):
 
@@ -93,7 +93,7 @@ $$
 
 ---
 
-# 19. Variable-Size Sliding Window
+## 19. Variable-Size Sliding Window
 
 Typical problem:
 
@@ -119,7 +119,7 @@ The crucial requirement is that the validity condition should allow the left poi
 
 ---
 
-# 20. Sliding Window Warning
+## 20. Sliding Window Warning
 
 Do **not** automatically use sliding window just because the problem says "subarray".
 

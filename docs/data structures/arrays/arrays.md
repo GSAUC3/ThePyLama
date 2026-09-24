@@ -14,7 +14,7 @@ This page develops arrays from:
 
 ---
 
-# 1. What Is an Array?
+## 1. What Is an Array?
 
 An array is an ordered collection of elements stored under consecutive indices.
 Starting from [0,n-1]. N is the number of elements in an array.
@@ -39,7 +39,7 @@ The important property is:
 
 ---
 
-# 2. The Mathematical Model
+## 2. The Mathematical Model
 
 An array can be modeled as a function.
 
@@ -92,7 +92,7 @@ This mathematical model is useful because it separates two concepts:
 
 ---
 
-# 3. Array as a Sequence
+## 3. Array as a Sequence
 
 An array is also a finite sequence:
 
@@ -121,7 +121,7 @@ This distinction becomes important in problems involving:
 
 ---
 
-# 4. Why Is Array Access \(O(1)\)?
+## 4. Why Is Array Access \(O(1)\)?
 
 The key property of an array is **contiguous memory**.
 
@@ -192,7 +192,7 @@ $$
 
 ---
 
-# 5. What Does \(O(1)\) Actually Mean?
+## 5. What Does \(O(1)\) Actually Mean?
 
 \(O(1)\) does **not** necessarily mean:
 
@@ -235,7 +235,7 @@ $$
 
 ---
 
-# 6. Array Memory Layout
+## 6. Array Memory Layout
 
 Conceptually:
 
@@ -261,7 +261,7 @@ This is the fundamental reason random access is possible.
 
 ---
 
-# 7. Array Operations
+## 7. Array Operations
 
 Let:
 
@@ -271,7 +271,7 @@ $$
 
 be the number of elements.
 
-## 7.1 Access
+### 7.1 Access
 
 ```python
 x = A[i]
@@ -285,7 +285,7 @@ $$
 
 ---
 
-## 7.2 Update
+### 7.2 Update
 
 ```python
 A[i] = x
@@ -299,7 +299,7 @@ $$
 
 ---
 
-## 7.3 Traverse
+### 7.3 Traverse
 
 ```python
 for x in A:
@@ -314,7 +314,7 @@ $$
 
 ---
 
-## 7.4 Linear Search
+### 7.4 Linear Search
 
 Find whether \(x\) exists:
 
@@ -334,7 +334,7 @@ because we may need to inspect every element.
 
 ---
 
-## 7.5 Insert at the End
+### 7.5 Insert at the End
 
 If there is free capacity:
 
@@ -356,7 +356,7 @@ $$
 
 ---
 
-## 7.6 Insert at the Beginning
+### 7.6 Insert at the Beginning
 
 Suppose:
 
@@ -380,7 +380,7 @@ $$
 
 ---
 
-## 7.7 Insert in the Middle
+### 7.7 Insert in the Middle
 
 For insertion at index \(i\), approximately:
 
@@ -400,7 +400,7 @@ worst case.
 
 ---
 
-## 7.8 Delete from the End
+### 7.8 Delete from the End
 
 If the array supports removing the final element:
 
@@ -410,7 +410,7 @@ $$
 
 ---
 
-## 7.9 Delete from the Beginning
+### 7.9 Delete from the Beginning
 
 Removing the first element requires shifting the remaining elements.
 
@@ -420,7 +420,7 @@ $$
 
 ---
 
-## 7.10 Delete from the Middle
+### 7.10 Delete from the Middle
 
 Deleting \(A[i]\) requires shifting:
 
@@ -438,7 +438,7 @@ $$
 
 ---
 
-# 8. Complete Array Complexity Table
+## 8. Complete Array Complexity Table
 
 | Operation           |                             Complexity |
 | ------------------- | -------------------------------------: |
@@ -458,7 +458,7 @@ $$
 
 ---
 
-# 9. Important Array Patterns
+## 9. Important Array Patterns
 
 Most LeetCode and competitive-programming array problems are not solved by knowing more syntax.
 
@@ -493,7 +493,7 @@ Arrays
 
 ---
 
-# 10. Pattern: Basic Traversal
+## 10. Pattern: Basic Traversal
 
 The simplest array pattern.
 
@@ -519,7 +519,7 @@ Typical examples:
 
 ---
 
-## Running State
+### Running State
 
 Instead of storing everything, maintain only what is necessary.
 
@@ -550,7 +550,7 @@ $$
 
 ---
 
-# 11. Pattern: Frequency Counting
+## 11. Pattern: Frequency Counting
 
 When values belong to a manageable domain, count occurrences.
 
@@ -579,7 +579,7 @@ average time with hashing.
 
 ---
 
-## Frequency Array
+### Frequency Array
 
 If:
 
@@ -606,7 +606,7 @@ $$
 
 ---
 
-# 12. Pattern: Prefix Sum
+## 12. Pattern: Prefix Sum
 
 Define:
 
@@ -655,7 +655,7 @@ This version avoids special-casing \(l=0\).
 
 ---
 
-# 13. Prefix/Suffix Maximum
+## 13. Prefix/Suffix Maximum
 
 For:
 
@@ -684,7 +684,7 @@ Useful for:
 
 ---
 
-# 14. Pattern: Difference Array
+## 14. Pattern: Difference Array
 
 For range updates:
 
@@ -733,47 +733,47 @@ $$
 
 ---
 
-# 15. Pattern: Two Pointers
+## 15. Pattern: Two Pointers
 
 ---
 
-# 16. Two Sum on a Sorted Array
+## 16. Two Sum on a Sorted Array
 
 ---
 
-# 17. Pattern: Sliding Window
+## 17. Pattern: Sliding Window
 
 ---
 
-# 18. Fixed-Size Sliding Window
+## 18. Fixed-Size Sliding Window
 
 ---
 
-# 19. Variable-Size Sliding Window
+## 19. Variable-Size Sliding Window
 
 ---
 
-# 20. Sliding Window Warning
+## 20. Sliding Window Warning
 
 ---
 
-# 21. Pattern: Binary Search
+## 21. Pattern: Binary Search
 
 ---
 
-# 22. Binary search on the answer
+## 22. Binary search on the answer
 
 ---
 
-# 23. Lower Bound
+## 23. Lower Bound
 
 ---
 
-# 24. Upper Bound
+## 24. Upper Bound
 
 ---
 
-# 25. Pattern: Sorting + Scanning
+## 25. Pattern: Sorting + Scanning
 
 Sometimes the original order does not matter.
 
@@ -808,7 +808,7 @@ exploit ordering
 
 ---
 
-# 26. 3Sum Pattern
+## 26. 3Sum Pattern
 
 Sort:
 
@@ -847,7 +847,7 @@ and similarly for the two pointers.
 
 ---
 
-# 27. Pattern: Hashing
+## 27. Pattern: Hashing
 
 If we need fast membership:
 
@@ -894,7 +894,7 @@ $$
 
 ---
 
-# 28. Pattern: Complement Lookup
+## 28. Pattern: Complement Lookup
 
 For Two Sum:
 
@@ -942,7 +942,7 @@ $$
 
 ---
 
-# 29. Pattern: Kadane's Algorithm
+## 29. Pattern: Kadane's Algorithm
 
 Maximum subarray sum.
 
@@ -997,7 +997,7 @@ $$
 
 ---
 
-# 30. Pattern: Monotonic Stack
+## 30. Pattern: Monotonic Stack
 
 Use when the problem asks for relationships with the:
 
@@ -1037,7 +1037,7 @@ $$
 
 ---
 
-# 31. Pattern: Monotonic Deque
+## 31. Pattern: Monotonic Deque
 
 Useful when we need:
 
@@ -1065,7 +1065,7 @@ $$
 
 ---
 
-# 32. Pattern: Intervals
+## 32. Pattern: Intervals
 
 An interval is:
 
@@ -1099,7 +1099,7 @@ which makes overlap relationships easier to reason about.
 
 ---
 
-# 33. Interval Overlap
+## 33. Interval Overlap
 
 Two intervals:
 
@@ -1135,7 +1135,7 @@ This identity is worth remembering.
 
 ---
 
-# 34. Pattern: Cyclic Sort / Index Placement
+## 34. Pattern: Cyclic Sort / Index Placement
 
 Useful when:
 
@@ -1171,7 +1171,7 @@ This pattern appears in:
 
 ---
 
-# 35. Pattern: In-Place Marking
+## 35. Pattern: In-Place Marking
 
 If values are restricted to indices, use the array itself as memory.
 
@@ -1207,7 +1207,7 @@ Be careful when modifying the array because the original values may be needed la
 
 ---
 
-# 36. Pattern: Dutch National Flag
+## 36. Pattern: Dutch National Flag
 
 For arrays containing three categories, for example:
 
@@ -1246,7 +1246,7 @@ space.
 
 ---
 
-# 37. Pattern: Majority Element
+## 37. Pattern: Majority Element
 
 If an element appears more than:
 
@@ -1300,7 +1300,7 @@ space.
 
 ---
 
-# 38. Pattern: Prefix + Hash Map
+## 38. Pattern: Prefix + Hash Map
 
 A powerful combination.
 
@@ -1347,7 +1347,7 @@ This technique is extremely important for subarray-sum problems, especially when
 
 ---
 
-# 39. Pattern: Greedy Scanning
+## 39. Pattern: Greedy Scanning
 
 Sometimes a locally optimal decision can be proven to lead to a globally optimal result.
 
@@ -1368,7 +1368,7 @@ A greedy solution should have a correctness argument.
 
 ---
 
-# 40. Pattern: Dynamic Programming on Arrays
+## 40. Pattern: Dynamic Programming on Arrays
 
 Many DP problems define a state based on an index.
 
@@ -1397,7 +1397,7 @@ The important questions are:
 
 ---
 
-# 41. Pattern: Divide and Conquer
+## 41. Pattern: Divide and Conquer
 
 Split:
 
@@ -1440,7 +1440,7 @@ $$
 
 ---
 
-# 42. Pattern: Coordinate Compression
+## 42. Pattern: Coordinate Compression
 
 Suppose values are huge:
 
@@ -1476,7 +1476,7 @@ Useful for:
 
 ---
 
-# 43. Pattern: Sweep Line
+## 43. Pattern: Sweep Line
 
 Convert an interval problem into events.
 
@@ -1506,7 +1506,7 @@ Useful for:
 
 ---
 
-# 44. Pattern: Matrix / 2D Array
+## 44. Pattern: Matrix / 2D Array
 
 A matrix is simply a multidimensional array.
 
@@ -1536,7 +1536,7 @@ Common patterns:
 
 ---
 
-# 45. 2D Prefix Sum
+## 45. 2D Prefix Sum
 
 Define:
 
@@ -1567,9 +1567,9 @@ The final addition is necessary because the top-left region was subtracted twice
 
 ---
 
-# 46. Common Array Tricks
+## 46. Common Array Tricks
 
-## Reverse in-place
+### Reverse in-place
 
 ```python
 l, r = 0, len(nums) - 1
@@ -1594,7 +1594,7 @@ $$
 
 ---
 
-## Swap Without Extra Array
+### Swap Without Extra Array
 
 Python:
 
@@ -1604,7 +1604,7 @@ a, b = b, a
 
 ---
 
-## Rotate Array
+### Rotate Array
 
 A rotation can be performed using reversals.
 
@@ -1632,7 +1632,7 @@ for rotations.
 
 ---
 
-# 47. Avoiding Off-by-One Errors
+## 47. Avoiding Off-by-One Errors
 
 Always explicitly define whether your interval is:
 
@@ -1664,17 +1664,17 @@ A large number of binary-search and sliding-window bugs are boundary-definition 
 
 ---
 
-# 48. Useful Index Identities
+## 48. Useful Index Identities
 
 For an array of length \(n\):
 
-### Last index
+#### Last index
 
 $$
 n-1
 $$
 
-### Number of elements in inclusive interval
+#### Number of elements in inclusive interval
 
 $$
 [l,r]:
@@ -1684,7 +1684,7 @@ $$
 r-l+1
 $$
 
-### Number of elements in half-open interval
+#### Number of elements in half-open interval
 
 $$
 [l,r):
@@ -1694,7 +1694,7 @@ $$
 r-l
 $$
 
-### Middle
+#### Middle
 
 $$
 mid=l+\left\lfloor\frac{r-l}{2}\right\rfloor
@@ -1704,9 +1704,9 @@ This form avoids overflow in languages where integer overflow is possible.
 
 ---
 
-# 49. Common Complexity Traps
+## 49. Common Complexity Traps
 
-## Nested loops do not automatically mean \(O(n^2)\)
+### Nested loops do not automatically mean \(O(n^2)\)
 
 Consider:
 
@@ -1730,7 +1730,7 @@ Always count **total pointer movement**, not merely nesting depth.
 
 ---
 
-# 50. Another Important Trap
+## 50. Another Important Trap
 
 This:
 
@@ -1762,7 +1762,7 @@ $$
 
 ---
 
-# 51. In-Place vs Auxiliary Space
+## 51. In-Place vs Auxiliary Space
 
 If an algorithm modifies the input array:
 
@@ -1808,7 +1808,7 @@ Always distinguish:
 
 ---
 
-# 52. When You See These Words...
+## 52. When You See These Words...
 
 | Problem wording          | Consider                             |
 | ------------------------ | ------------------------------------ |
@@ -1837,7 +1837,7 @@ These are **hints**, not rules.
 
 ---
 
-# 53. The Most Important Question
+## 53. The Most Important Question
 
 When solving an array problem, do not immediately ask:
 
@@ -1845,7 +1845,7 @@ When solving an array problem, do not immediately ask:
 
 Instead ask:
 
-### 1. What information does the problem require?
+#### 1. What information does the problem require?
 
 Is it asking about:
 
@@ -1857,7 +1857,7 @@ Is it asking about:
 - ranges?
 - ordering?
 
-### 2. What structure does the input provide?
+#### 2. What structure does the input provide?
 
 Is it:
 
@@ -1869,7 +1869,7 @@ Is it:
 - circular?
 - partially ordered?
 
-### 3. What information can be maintained?
+#### 3. What information can be maintained?
 
 Can I maintain:
 
@@ -1905,7 +1905,7 @@ $$
 stack
 $$
 
-### 4. What can be eliminated?
+#### 4. What can be eliminated?
 
 A good algorithm usually wins by eliminating possibilities.
 
@@ -1923,7 +1923,7 @@ Dynamic programming eliminates repeated subproblems.
 
 ---
 
-# 54. Array Problem-Solving Checklist
+## 54. Array Problem-Solving Checklist
 
 Before coding:
 
@@ -1952,45 +1952,45 @@ Before coding:
 
 ---
 
-# 55. Core Formulas
+## 55. Core Formulas
 
-### Array access
+#### Array access
 
 $$
 \boxed{\operatorname{addr}(A[i])=B+iw}
 $$
 
-### Inclusive interval size
+#### Inclusive interval size
 
 $$
 \boxed{r-l+1}
 $$
 
-### Half-open interval size
+#### Half-open interval size
 
 $$
 \boxed{r-l}
 $$
 
-### Number of subarrays
+#### Number of subarrays
 
 $$
 \boxed{\frac{n(n+1)}2}
 $$
 
-### Number of subsets
+#### Number of subsets
 
 $$
 \boxed{2^n}
 $$
 
-### Prefix sum
+#### Prefix sum
 
 $$
 \boxed{P[i]=\sum_{j=0}^{i}A[j]}
 $$
 
-### Range sum
+#### Range sum
 
 $$
 \boxed{
@@ -2000,13 +2000,13 @@ P[r]-P[l-1]
 }
 $$
 
-### Binary-search iterations
+#### Binary-search iterations
 
 $$
 \boxed{k=\Theta(\log_2 n)}
 $$
 
-### Arithmetic series
+#### Arithmetic series
 
 $$
 \boxed{
@@ -2014,7 +2014,7 @@ $$
 }
 $$
 
-### Geometric series
+#### Geometric series
 
 $$
 \boxed{
@@ -2026,11 +2026,11 @@ $$
 
 ---
 
-# 56. Final Mental Model
+## 56. Final Mental Model
 
 Think of an array at four different levels.
 
-## Level 1 — Mathematical
+### Level 1 — Mathematical
 
 $$
 A:\{0,\ldots,n-1\}\rightarrow S
@@ -2038,7 +2038,7 @@ $$
 
 It is a finite sequence/function.
 
-## Level 2 — Memory
+### Level 2 — Memory
 
 $$
 \operatorname{address}(A[i])=B+iw
@@ -2046,7 +2046,7 @@ $$
 
 It is contiguous memory plus address arithmetic.
 
-## Level 3 — Algorithmic
+### Level 3 — Algorithmic
 
 Exploit properties such as:
 
@@ -2074,7 +2074,7 @@ $$
 \text{locality}
 $$
 
-## Level 4 — Problem Solving
+### Level 4 — Problem Solving
 
 Transform the problem:
 

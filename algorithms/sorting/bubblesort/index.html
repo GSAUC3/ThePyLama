@@ -1,0 +1,2473 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../binarysearch/">
+      
+      
+        <link rel="next" href="../mergesort/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../imgs/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Bubble Sort - The Py Lama Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bubble-sort-complete-explanation-with-python-code" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="The Py Lama Notes" class="md-header__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../../imgs/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Py Lama Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bubble Sort
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../data%20structures/arrays/arrays/" class="md-tabs__link">
+          
+  
+  
+  Data Structures
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../binarysearch/" class="md-tabs__link">
+          
+  
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="The Py Lama Notes" class="md-nav__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../../imgs/logo.png" alt="logo">
+
+    </a>
+    The Py Lama Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data%20structures/arrays/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data%20structures/hashing/hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hashing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data%20structures/queue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data%20structures/stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data%20structures/arrays/sliding-window/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sliding Window
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data%20structures/arrays/two-pointers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Two Pointers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binarysearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Binary Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bubble Sort
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bubble Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-bubble-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What Is Bubble Sort?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-understanding-bubble-sort-through-an-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Understanding Bubble Sort Through an Example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Understanding Bubble Sort Through an Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pass-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass 1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pass 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-1-5-and-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 1: 5 and 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-2-5-and-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 2: 5 and 8
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-3-8-and-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 3: 8 and 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-4-8-and-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 4: 8 and 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass 2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pass 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-1-3-and-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 1: 3 and 5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-2-5-and-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 2: 5 and 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-3-5-and-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 3: 5 and 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass 3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pass 3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-1-3-and-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 1: 3 and 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-2-4-and-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 2: 4 and 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-basic-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Basic Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Basic Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-understanding-the-code-line-by-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Understanding the Code Line by Line
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Understanding the Code Line by Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#outer-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outer Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inner-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inner Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-mathematical-foundation-of-bubble-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Mathematical Foundation of Bubble Sort
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Mathematical Foundation of Bubble Sort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-key-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Key Property
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-loop-invariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Loop Invariant
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Loop Invariant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#termination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Termination
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-time-complexity-detailed-mathematical-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Time Complexity: Detailed Mathematical Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Time Complexity: Detailed Mathematical Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-number-of-comparisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Number of Comparisons
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-optimized-bubble-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Optimized Bubble Sort
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Optimized Bubble Sort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What changed?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-complexity-of-optimized-bubble-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Complexity of Optimized Bubble Sort
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Complexity of Optimized Bubble Sort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#best-case-derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best-case derivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worst-case-derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worst-case derivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-stability-and-in-place-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Stability and In-Place Sorting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Stability and In-Place Sorting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-place-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In-Place Sorting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-bubble-sort-vs-other-sorting-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Bubble Sort vs. Other Sorting Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mergesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merge Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../insertionsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Insertion Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quicksort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-bubble-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What Is Bubble Sort?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-understanding-bubble-sort-through-an-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Understanding Bubble Sort Through an Example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Understanding Bubble Sort Through an Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pass-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass 1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pass 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-1-5-and-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 1: 5 and 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-2-5-and-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 2: 5 and 8
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-3-8-and-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 3: 8 and 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-4-8-and-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 4: 8 and 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass 2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pass 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-1-3-and-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 1: 3 and 5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-2-5-and-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 2: 5 and 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-3-5-and-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 3: 5 and 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass 3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pass 3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-1-3-and-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 1: 3 and 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-2-4-and-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison 2: 4 and 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-basic-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Basic Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Basic Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-understanding-the-code-line-by-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Understanding the Code Line by Line
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Understanding the Code Line by Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#outer-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outer Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inner-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inner Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-mathematical-foundation-of-bubble-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Mathematical Foundation of Bubble Sort
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Mathematical Foundation of Bubble Sort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-key-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Key Property
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-loop-invariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Loop Invariant
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Loop Invariant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#termination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Termination
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-time-complexity-detailed-mathematical-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Time Complexity: Detailed Mathematical Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Time Complexity: Detailed Mathematical Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-number-of-comparisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Number of Comparisons
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-optimized-bubble-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Optimized Bubble Sort
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Optimized Bubble Sort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What changed?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-complexity-of-optimized-bubble-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Complexity of Optimized Bubble Sort
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Complexity of Optimized Bubble Sort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#best-case-derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best-case derivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worst-case-derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worst-case derivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-stability-and-in-place-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Stability and In-Place Sorting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Stability and In-Place Sorting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-place-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In-Place Sorting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-bubble-sort-vs-other-sorting-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Bubble Sort vs. Other Sorting Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="bubble-sort-complete-explanation-with-python-code">Bubble Sort: Complete Explanation with Python Code</h1>
+<p><strong>Bubble Sort</strong> is a simple sorting algorithm that repeatedly compares adjacent elements and swaps them if they are in the wrong order.</p>
+<p>It is called <em>Bubble Sort</em> because larger elements gradually move toward the end of the array, just as bubbles rise to the surface.</p>
+<p>Let's understand it from the ground up: the intuition, mathematical foundation, algorithm, Python implementation, dry run, correctness, and time complexity.</p>
+<hr />
+<h2 id="1-what-is-bubble-sort">1. What Is Bubble Sort?</h2>
+<p>Suppose we have an unsorted array:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+<p>Our goal is to sort it in ascending order:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[2, 3, 4, 5, 8]
+</code></pre></div>
+<p>Bubble Sort works by comparing <strong>adjacent elements</strong>.</p>
+<p>For every pair of adjacent elements:</p>
+<ul>
+<li>If the left element is smaller than or equal to the right element, do nothing.</li>
+<li>If the left element is greater than the right element, swap them.</li>
+</ul>
+<p>The comparison is:</p>
+<div class="arithmatex">\[
+\text{if } arr[i] &gt; arr[i+1]
+\]</div>
+<p>Then swap:</p>
+<div class="arithmatex">\[
+arr[i] \leftrightarrow arr[i+1]
+\]</div>
+<p>After one complete pass through the array, the largest element reaches the last position.</p>
+<hr />
+<h2 id="2-understanding-bubble-sort-through-an-example">2. Understanding Bubble Sort Through an Example</h2>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+<p>We will sort this array in ascending order.</p>
+<h3 id="pass-1">Pass 1</h3>
+<p>We compare adjacent elements from left to right.</p>
+<h4 id="comparison-1-5-and-3">Comparison 1: 5 and 3</h4>
+<p>Since:</p>
+<div class="arithmatex">\[
+5 &gt; 3
+\]</div>
+<p>Swap them.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[3, 5, 8, 4, 2]
+</code></pre></div>
+<h4 id="comparison-2-5-and-8">Comparison 2: 5 and 8</h4>
+<p>Since:</p>
+<div class="arithmatex">\[
+5 &lt; 8
+\]</div>
+<p>No swap is required.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>[3, 5, 8, 4, 2]
+</code></pre></div>
+<h4 id="comparison-3-8-and-4">Comparison 3: 8 and 4</h4>
+<p>Since:</p>
+<div class="arithmatex">\[
+8 &gt; 4
+\]</div>
+<p>Swap them.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>[3, 5, 4, 8, 2]
+</code></pre></div>
+<h4 id="comparison-4-8-and-2">Comparison 4: 8 and 2</h4>
+<p>Since:</p>
+<div class="arithmatex">\[
+8 &gt; 2
+\]</div>
+<p>Swap them.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[3, 5, 4, 2, 8]
+</code></pre></div>
+<p><strong>After Pass 1:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>[3, 5, 4, 2, 8]
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>                  ↑
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>          Largest element is fixed
+</code></pre></div>
+<p>The largest element, <code>8</code>, is now in its correct position.</p>
+<hr />
+<h3 id="pass-2">Pass 2</h3>
+<p>We do not need to compare the last element again because <code>8</code> is already in its final position.</p>
+<p>Start with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[3, 5, 4, 2, 8]
+</code></pre></div>
+<h4 id="comparison-1-3-and-5">Comparison 1: 3 and 5</h4>
+<p>No swap.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[3, 5, 4, 2, 8]
+</code></pre></div>
+<h4 id="comparison-2-5-and-4">Comparison 2: 5 and 4</h4>
+<p>Swap.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>[3, 4, 5, 2, 8]
+</code></pre></div>
+<h4 id="comparison-3-5-and-2">Comparison 3: 5 and 2</h4>
+<p>Swap.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[3, 4, 2, 5, 8]
+</code></pre></div>
+<p><strong>After Pass 2:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[3, 4, 2, 5, 8]
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>               ↑
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        5 and 8 are fixed
+</code></pre></div>
+<hr />
+<h3 id="pass-3">Pass 3</h3>
+<p>Start with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>[3, 4, 2, 5, 8]
+</code></pre></div>
+<h4 id="comparison-1-3-and-4">Comparison 1: 3 and 4</h4>
+<p>No swap.</p>
+<h4 id="comparison-2-4-and-2">Comparison 2: 4 and 2</h4>
+<p>Swap.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>[3, 2, 4, 5, 8]
+</code></pre></div>
+<p><strong>After Pass 3:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>[3, 2, 4, 5, 8]
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>            ↑
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>     Sorted suffix: [4, 5, 8]
+</code></pre></div>
+<hr />
+<h3 id="pass-4">Pass 4</h3>
+<p>Start with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[3, 2, 4, 5, 8]
+</code></pre></div>
+<p>Compare <code>3</code> and <code>2</code>.</p>
+<p>Swap:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>[2, 3, 4, 5, 8]
+</code></pre></div>
+<p>The array is now sorted.</p>
+<hr />
+<h2 id="3-python-implementation">3. Python Implementation</h2>
+<p>Let's implement the standard Bubble Sort algorithm.</p>
+<h3 id="31-basic-implementation">3.1 Basic Implementation</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">bubble_sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>    <span class="k">return</span> <span class="n">arr</span>
+</code></pre></div>
+<h4 id="example">Example</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">bubble_sort</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>[2, 3, 4, 5, 8]
+</code></pre></div>
+<p>This implementation sorts the array <strong>in place</strong>, meaning it modifies the original list instead of creating a separate sorted list.</p>
+<hr />
+<h2 id="4-understanding-the-code-line-by-line">4. Understanding the Code Line by Line</h2>
+<p>Let's examine the implementation carefully.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">bubble_sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+</code></pre></div>
+<p>Defines a function that accepts an array.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</code></pre></div>
+<p>Stores the number of elements in the array.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+</code></pre></div>
+<hr />
+<h3 id="outer-loop">Outer Loop</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</code></pre></div>
+<p>The outer loop controls the number of passes.</p>
+<p>For an array of length <span class="arithmatex">\(n\)</span>, at most <span class="arithmatex">\(n-1\)</span> passes are needed.</p>
+<p>Why?</p>
+<p>After every pass, the largest remaining unsorted element reaches its correct position.</p>
+<p>After <span class="arithmatex">\(n-1\)</span> passes, all elements must be sorted.</p>
+<hr />
+<h3 id="inner-loop">Inner Loop</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
+</code></pre></div>
+<p>The inner loop performs adjacent comparisons.</p>
+<p>The expression:</p>
+<div class="arithmatex">\[
+n-1-i
+\]</div>
+<p>determines how far the current pass needs to go.</p>
+<p>Why subtract <span class="arithmatex">\(i\)</span>?</p>
+<p>Because after each pass, one additional element is fixed at the end.</p>
+<p>For example, if:</p>
+<div class="arithmatex">\[
+n=5
+\]</div>
+<p>Then:</p>
+<table>
+<thead>
+<tr>
+<th>Pass</th>
+<th style="text-align: right;"><code>i</code></th>
+<th style="text-align: right;">Inner-loop comparisons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>The number of comparisons decreases after every pass.</p>
+<hr />
+<h3 id="comparison">Comparison</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+</code></pre></div>
+<p>This checks whether two adjacent elements are in the wrong order.</p>
+<p>For ascending order:</p>
+<div class="arithmatex">\[
+arr[j] \leq arr[j+1]
+\]</div>
+<p>is the desired relationship.</p>
+<p>If the relationship is violated, we swap the elements.</p>
+<hr />
+<h3 id="swap">Swap</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</code></pre></div>
+<p>Python allows simultaneous assignment.</p>
+<p>This swaps the two elements without requiring a temporary variable.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+<p>After the swap:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="5-mathematical-foundation-of-bubble-sort">5. Mathematical Foundation of Bubble Sort</h2>
+<p>Now let's understand why the algorithm works.</p>
+<h3 id="51-key-property">5.1 Key Property</h3>
+<p><strong>After the <span class="arithmatex">\(i\)</span>-th complete pass, the last <span class="arithmatex">\(i\)</span> elements are in their final sorted positions.</strong></p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Initial:
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>[5, 3, 8, 4, 2]
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>After Pass 1:
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>[3, 5, 4, 2, 8]
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>After Pass 2:
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>[3, 4, 2, 5, 8]
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a>After Pass 3:
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a>[3, 2, 4, 5, 8]
+</code></pre></div>
+<p>After three passes, the last three elements are sorted:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>[3, 2 | 4, 5, 8]
+</code></pre></div>
+<p>The remaining unsorted portion is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>[3, 2]
+</code></pre></div>
+<p>Only one more pass is required.</p>
+<hr />
+<h3 id="52-loop-invariant">5.2 Loop Invariant</h3>
+<p>A loop invariant is a property that remains true at a particular point in an algorithm.</p>
+<p>For Bubble Sort, we can state:</p>
+<blockquote>
+<p>At the beginning of pass <span class="arithmatex">\(i\)</span>, the last <span class="arithmatex">\(i\)</span> elements contain the <span class="arithmatex">\(i\)</span> largest elements in sorted order.</p>
+</blockquote>
+<h4 id="initialization">Initialization</h4>
+<p>Before the first pass:</p>
+<div class="arithmatex">\[
+i=0
+\]</div>
+<p>There are no elements in the sorted suffix.</p>
+<p>The invariant holds trivially.</p>
+<h4 id="maintenance">Maintenance</h4>
+<p>During each pass, the largest element in the unsorted prefix moves toward the right.</p>
+<p>After the pass, that element occupies its correct final position.</p>
+<p>Therefore, the sorted suffix grows by one element.</p>
+<h4 id="termination">Termination</h4>
+<p>After <span class="arithmatex">\(n-1\)</span> passes, the sorted suffix contains <span class="arithmatex">\(n-1\)</span> elements.</p>
+<p>The remaining element must also be in its correct position.</p>
+<p>Hence, the array is sorted.</p>
+<hr />
+<h2 id="6-time-complexity-detailed-mathematical-analysis">6. Time Complexity: Detailed Mathematical Analysis</h2>
+<p>This is one of the most important parts of understanding Bubble Sort.</p>
+<p>The standard implementation contains two nested loops.</p>
+<p>Let's derive its complexity mathematically.</p>
+<h3 id="61-number-of-comparisons">6.1 Number of Comparisons</h3>
+<p>For an array of length <span class="arithmatex">\(n\)</span>:</p>
+<ul>
+<li>First pass: <span class="arithmatex">\(n-1\)</span> comparisons.</li>
+<li>Second pass: <span class="arithmatex">\(n-2\)</span> comparisons.</li>
+<li>Third pass: <span class="arithmatex">\(n-3\)</span> comparisons.</li>
+<li>Final pass: <span class="arithmatex">\(1\)</span> comparison.</li>
+</ul>
+<p>Therefore, the total number of comparisons is:</p>
+<div class="arithmatex">\[
+C(n)=(n-1)+(n-2)+\cdots+1
+\]</div>
+<p>Using the arithmetic series formula:</p>
+<div class="arithmatex">\[
+1+2+\cdots+k=\frac{k(k+1)}{2}
+\]</div>
+<p>we get:</p>
+<div class="arithmatex">\[
+C(n)=\frac{n(n-1)}{2}
+\]</div>
+<p>Expanding:</p>
+<div class="arithmatex">\[
+C(n)=\frac{n^2-n}{2}
+\]</div>
+<p>The dominant term is:</p>
+<div class="arithmatex">\[
+\frac{n^2}{2}
+\]</div>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{T(n)=O(n^2)}
+\]</div>
+<p>The standard implementation has:</p>
+<ul>
+<li>Best-case time: <span class="arithmatex">\(O(n^2)\)</span></li>
+<li>Average-case time: <span class="arithmatex">\(O(n^2)\)</span></li>
+<li>Worst-case time: <span class="arithmatex">\(O(n^2)\)</span></li>
+</ul>
+<p>Even if the array is already sorted, the standard implementation still performs all the comparisons.</p>
+<hr />
+<h2 id="7-optimized-bubble-sort">7. Optimized Bubble Sort</h2>
+<p>We can improve the best-case performance by detecting whether any swaps occurred during a pass.</p>
+<p>If no swaps occur, the array is already sorted.</p>
+<p>There is no need to continue.</p>
+<h3 id="python-code">Python Code</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">bubble_sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>        <span class="n">swapped</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a>
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a>            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a>
+<a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a>                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a>                <span class="n">swapped</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-33-14" name="__codelineno-33-14" href="#__codelineno-33-14"></a>
+<a id="__codelineno-33-15" name="__codelineno-33-15" href="#__codelineno-33-15"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">swapped</span><span class="p">:</span>
+<a id="__codelineno-33-16" name="__codelineno-33-16" href="#__codelineno-33-16"></a>            <span class="k">break</span>
+<a id="__codelineno-33-17" name="__codelineno-33-17" href="#__codelineno-33-17"></a>
+<a id="__codelineno-33-18" name="__codelineno-33-18" href="#__codelineno-33-18"></a>    <span class="k">return</span> <span class="n">arr</span>
+</code></pre></div>
+<h4 id="what-changed">What changed?</h4>
+<p>We introduced:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">swapped</span> <span class="o">=</span> <span class="kc">False</span>
+</code></pre></div>
+<p>At the beginning of each pass.</p>
+<p>Whenever a swap occurs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">swapped</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+<p>At the end of the pass:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">swapped</span><span class="p">:</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>    <span class="k">break</span>
+</code></pre></div>
+<p>If no swaps occurred, the array is sorted.</p>
+<hr />
+<h2 id="8-complexity-of-optimized-bubble-sort">8. Complexity of Optimized Bubble Sort</h2>
+<p>The optimized version has different best-case and worst-case complexities.</p>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Time complexity</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Best case</td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+<td>Already sorted; one pass</td>
+</tr>
+<tr>
+<td>Average case</td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+<td>Many comparisons and swaps</td>
+</tr>
+<tr>
+<td>Worst case</td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+<td>Reverse-sorted array</td>
+</tr>
+<tr>
+<td>Auxiliary space</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+<td>In-place sorting</td>
+</tr>
+</tbody>
+</table>
+<h4 id="best-case-derivation">Best-case derivation</h4>
+<p>For an already sorted array:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</code></pre></div>
+<p>The algorithm performs:</p>
+<div class="arithmatex">\[
+n-1
+\]</div>
+<p>comparisons in the first pass.</p>
+<p>No swaps occur.</p>
+<p>The algorithm stops.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+T(n)=n-1
+\]</div>
+<p>Hence:</p>
+<div class="arithmatex">\[
+\boxed{T(n)=O(n)}
+\]</div>
+<h4 id="worst-case-derivation">Worst-case derivation</h4>
+<p>For a reverse-sorted array:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>The algorithm performs:</p>
+<div class="arithmatex">\[
+\frac{n(n-1)}{2}
+\]</div>
+<p>comparisons.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{T(n)=O(n^2)}
+\]</div>
+<hr />
+<h2 id="9-stability-and-in-place-sorting">9. Stability and In-Place Sorting</h2>
+<p>Bubble Sort has two important properties.</p>
+<h3 id="stability">Stability</h3>
+<p>A sorting algorithm is stable if equal elements retain their original relative order.</p>
+<p>Bubble Sort is stable when it swaps elements only when:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>It does not swap equal elements.</p>
+<p>For example, suppose we have:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>[(5, A), (3, B), (5, C)]
+</code></pre></div>
+<p>After sorting by the first value:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>[(3, B), (5, A), (5, C)]
+</code></pre></div>
+<p>The two elements with value <code>5</code> retain their original relative order.</p>
+<h3 id="in-place-sorting">In-Place Sorting</h3>
+<p>Bubble Sort modifies the original array.</p>
+<p>It uses only a constant number of additional variables.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{S(n)=O(1)}
+\]</div>
+<p>This is its auxiliary space complexity.</p>
+<hr />
+<h2 id="10-bubble-sort-vs-other-sorting-algorithms">10. Bubble Sort vs. Other Sorting Algorithms</h2>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Best case</th>
+<th>Average case</th>
+<th>Worst case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bubble Sort (optimized)</td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+</tr>
+<tr>
+<td>Selection Sort</td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+</tr>
+<tr>
+<td>Insertion Sort</td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+</tr>
+<tr>
+<td>Merge Sort</td>
+<td><span class="arithmatex">\(O(n\log n)\)</span></td>
+<td><span class="arithmatex">\(O(n\log n)\)</span></td>
+<td><span class="arithmatex">\(O(n\log n)\)</span></td>
+</tr>
+<tr>
+<td>Heap Sort</td>
+<td><span class="arithmatex">\(O(n\log n)\)</span></td>
+<td><span class="arithmatex">\(O(n\log n)\)</span></td>
+<td><span class="arithmatex">\(O(n\log n)\)</span></td>
+</tr>
+<tr>
+<td>Quick Sort</td>
+<td><span class="arithmatex">\(O(n\log n)\)</span></td>
+<td><span class="arithmatex">\(O(n\log n)\)</span></td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Bubble Sort is primarily useful for learning sorting fundamentals.</p>
+<p>For large arrays, algorithms such as Merge Sort, Heap Sort, and Quick Sort generally offer better asymptotic performance.</p>
+<hr />
+<p>It is generally not suitable for large datasets because of its quadratic time complexity.</p>
+<p>For practical Python sorting, use:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</code></pre></div>
+<p>or:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="n">sorted_arr</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</code></pre></div>
+<p>Python's built-in sorting uses <strong>Timsort</strong>, which is designed to perform efficiently on real-world data.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "toc.follow", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

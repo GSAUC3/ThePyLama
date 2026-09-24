@@ -1,0 +1,5447 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../queue/">
+      
+      
+        <link rel="next" href="../arrays/sliding-window/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../imgs/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Stack - The Py Lama Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stack-data-structure" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Py Lama Notes" class="md-header__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../imgs/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Py Lama Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Stack
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../arrays/arrays/" class="md-tabs__link">
+          
+  
+  
+  Data Structures
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../algorithms/binarysearch/" class="md-tabs__link">
+          
+  
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Py Lama Notes" class="md-nav__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../imgs/logo.png" alt="logo">
+
+    </a>
+    The Py Lama Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hashing/hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hashing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-mathematical-foundations-of-a-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Mathematical Foundations of a Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Mathematical Foundations of a Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-what-is-a-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 What is a Stack?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-stack-invariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 The Stack Invariant
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 The Stack Invariant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-in-interviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters in interviews
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-stack-implementation-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Stack Implementation in Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Stack Implementation in Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stack-complexity-what-you-must-know" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Stack Complexity: What You Must Know
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Stack Complexity: What You Must Know">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-worst-case-versus-amortized-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Worst-case versus Amortized Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-stack-space-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Stack Space Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-core-stack-problem-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Core Stack Problem Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-pattern-1-matching-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Pattern 1: Matching and Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Pattern 1: Matching and Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-when-should-you-use-this-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 When should you use this pattern?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-example-valid-parentheses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Example: Valid Parentheses
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Example: Valid Parentheses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interview-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview insight
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#related-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-pattern-2-monotonic-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Pattern 2: Monotonic Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Pattern 2: Monotonic Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-what-is-a-monotonic-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 What is a Monotonic Stack?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 What is a Monotonic Stack?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monotonically-increasing-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monotonically increasing stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monotonically-decreasing-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monotonically decreasing stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-pattern-3-next-greater-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Pattern 3: Next Greater Element
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Pattern 3: Next Greater Element">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-problem-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Problem definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-why-brute-force-is-inefficient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Why brute force is inefficient
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-the-monotonic-stack-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 The Monotonic Stack Insight
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 The Monotonic Stack Insight">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-invariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key invariant
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Python implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4 Python implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-pattern-4-previous-greater-and-previous-smaller-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pattern 4: Previous Greater and Previous Smaller Elements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Pattern 4: Previous Greater and Previous Smaller Elements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-previous-greater-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Previous Greater Element
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1 Previous Greater Element">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-previous-smaller-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Previous Smaller Element
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2 Previous Smaller Element">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pattern-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-pattern-5-daily-temperatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Pattern 5: Daily Temperatures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Pattern 5: Daily Temperatures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interview-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-pattern-6-largest-rectangle-in-histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Pattern 6: Largest Rectangle in Histogram
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Pattern 6: Largest Rectangle in Histogram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Mathematical Foundation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-monotonic-stack-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Monotonic Stack Solution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2 Monotonic Stack Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-pattern-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this pattern matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pattern-7-trapping-rain-water" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Pattern 7: Trapping Rain Water
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Pattern 7: Trapping Rain Water">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Mathematical Foundation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-stack-based-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Stack-Based Solution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.2 Stack-Based Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key insight
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-pattern-8-expression-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Pattern 8: Expression Evaluation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Pattern 8: Expression Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-reverse-polish-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Reverse Polish Notation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.1 Reverse Polish Notation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important detail
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-pattern-9-parsing-and-decoding-nested-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Pattern 9: Parsing and Decoding Nested Strings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Pattern 9: Parsing and Decoding Nested Strings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-decode-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Decode String
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.1 Decode String">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#related-problems_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-pattern-10-stack-based-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Pattern 10: Stack-Based Simulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Pattern 10: Stack-Based Simulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-asteroid-collision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Asteroid Collision
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.1 Asteroid Collision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key observation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interview-insight_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview insight
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-pattern-11-stack-greedy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Pattern 11: Stack + Greedy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Pattern 11: Stack + Greedy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-remove-k-digits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Remove K Digits
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15.1 Remove K Digits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#greedy-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Greedy insight
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-pattern-12-designing-data-structures-with-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Pattern 12: Designing Data Structures with Stacks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Pattern 12: Designing Data Structures with Stacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-min-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Min Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16.1 Min Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-pattern-13-stack-binary-tree-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Pattern 13: Stack + Binary Tree Traversal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Pattern 13: Stack + Binary Tree Traversal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-binary-tree-inorder-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Binary Tree Inorder Traversal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.1 Binary Tree Inorder Traversal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterative-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Iterative implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#related-problems_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-pattern-14-stack-dynamic-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Pattern 14: Stack + Dynamic Programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Pattern 14: Stack + Dynamic Programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-maximal-rectangle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Maximal Rectangle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.1 Maximal Rectangle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-pattern-15-sum-of-subarray-minimums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Pattern 15: Sum of Subarray Minimums
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Pattern 15: Sum of Subarray Minimums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-contribution-technique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.1 Contribution Technique
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19.1 Contribution Technique">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-advanced-pattern-cartesian-trees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Advanced Pattern: Cartesian Trees
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="20. Advanced Pattern: Cartesian Trees">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-it-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why it matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-stack-pattern-recognition-cheat-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Stack Pattern Recognition Cheat Sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-leetcode-stack-problem-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. LeetCode Stack Problem Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="22. LeetCode Stack Problem Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#level-1-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1: Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-2-monotonic-stack-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2: Monotonic Stack Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-3-intermediate-stack-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3: Intermediate Stack Problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-4-advanced-monotonic-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4: Advanced Monotonic Stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-5-advanced-expression-and-tree-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 5: Advanced Expression and Tree Problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-advanced-interview-techniques-and-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Advanced Interview Techniques and Tricks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="23. Advanced Interview Techniques and Tricks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trick-1-store-indices-instead-of-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 1: Store Indices Instead of Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trick-2-use-a-sentinel-to-simplify-boundary-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 2: Use a Sentinel to Simplify Boundary Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trick-3-understand-strict-and-non-strict-comparisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 3: Understand Strict and Non-Strict Comparisons
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trick-4-prove-linear-time-with-aggregate-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 4: Prove Linear Time with Aggregate Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trick-5-distinguish-a-stack-from-a-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 5: Distinguish a Stack from a Queue
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-common-mistakes-in-stack-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Common Mistakes in Stack Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="24. Common Mistakes in Stack Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-forgetting-to-check-whether-the-stack-is-empty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Forgetting to check whether the stack is empty
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-using-values-when-indices-are-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Using values when indices are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-using-the-wrong-comparison-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Using the wrong comparison operator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-forgetting-to-process-remaining-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Forgetting to process remaining elements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-confusing-the-top-of-the-stack-with-the-bottom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Confusing the top of the stack with the bottom
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-assuming-every-nested-loop-is-quadratic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Assuming every nested loop is quadratic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-ignoring-duplicate-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Ignoring duplicate values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/sliding-window/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sliding Window
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/two-pointers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Two Pointers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/binarysearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Binary Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/sorting/bubblesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bubble Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/sorting/mergesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merge Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/sorting/insertionsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Insertion Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/sorting/quicksort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-mathematical-foundations-of-a-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Mathematical Foundations of a Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Mathematical Foundations of a Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-what-is-a-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 What is a Stack?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-stack-invariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 The Stack Invariant
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 The Stack Invariant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-in-interviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters in interviews
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-stack-implementation-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Stack Implementation in Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Stack Implementation in Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stack-complexity-what-you-must-know" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Stack Complexity: What You Must Know
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Stack Complexity: What You Must Know">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-worst-case-versus-amortized-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Worst-case versus Amortized Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-stack-space-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Stack Space Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-core-stack-problem-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Core Stack Problem Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-pattern-1-matching-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Pattern 1: Matching and Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Pattern 1: Matching and Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-when-should-you-use-this-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 When should you use this pattern?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-example-valid-parentheses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Example: Valid Parentheses
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Example: Valid Parentheses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interview-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview insight
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#related-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-pattern-2-monotonic-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Pattern 2: Monotonic Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Pattern 2: Monotonic Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-what-is-a-monotonic-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 What is a Monotonic Stack?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 What is a Monotonic Stack?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monotonically-increasing-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monotonically increasing stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monotonically-decreasing-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monotonically decreasing stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-pattern-3-next-greater-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Pattern 3: Next Greater Element
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Pattern 3: Next Greater Element">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-problem-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Problem definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-why-brute-force-is-inefficient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Why brute force is inefficient
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-the-monotonic-stack-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 The Monotonic Stack Insight
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 The Monotonic Stack Insight">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-invariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key invariant
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Python implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4 Python implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-pattern-4-previous-greater-and-previous-smaller-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pattern 4: Previous Greater and Previous Smaller Elements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Pattern 4: Previous Greater and Previous Smaller Elements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-previous-greater-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Previous Greater Element
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1 Previous Greater Element">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-previous-smaller-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Previous Smaller Element
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2 Previous Smaller Element">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pattern-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-pattern-5-daily-temperatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Pattern 5: Daily Temperatures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Pattern 5: Daily Temperatures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interview-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-pattern-6-largest-rectangle-in-histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Pattern 6: Largest Rectangle in Histogram
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Pattern 6: Largest Rectangle in Histogram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Mathematical Foundation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-monotonic-stack-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Monotonic Stack Solution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2 Monotonic Stack Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-pattern-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this pattern matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pattern-7-trapping-rain-water" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Pattern 7: Trapping Rain Water
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Pattern 7: Trapping Rain Water">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Mathematical Foundation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-stack-based-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Stack-Based Solution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.2 Stack-Based Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key insight
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-pattern-8-expression-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Pattern 8: Expression Evaluation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Pattern 8: Expression Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-reverse-polish-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Reverse Polish Notation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.1 Reverse Polish Notation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important detail
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-pattern-9-parsing-and-decoding-nested-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Pattern 9: Parsing and Decoding Nested Strings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Pattern 9: Parsing and Decoding Nested Strings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-decode-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Decode String
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.1 Decode String">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#related-problems_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-pattern-10-stack-based-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Pattern 10: Stack-Based Simulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Pattern 10: Stack-Based Simulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-asteroid-collision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Asteroid Collision
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.1 Asteroid Collision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key observation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interview-insight_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview insight
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-pattern-11-stack-greedy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Pattern 11: Stack + Greedy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Pattern 11: Stack + Greedy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-remove-k-digits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Remove K Digits
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15.1 Remove K Digits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#greedy-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Greedy insight
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-pattern-12-designing-data-structures-with-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Pattern 12: Designing Data Structures with Stacks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Pattern 12: Designing Data Structures with Stacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-min-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Min Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16.1 Min Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-pattern-13-stack-binary-tree-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Pattern 13: Stack + Binary Tree Traversal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Pattern 13: Stack + Binary Tree Traversal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-binary-tree-inorder-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Binary Tree Inorder Traversal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.1 Binary Tree Inorder Traversal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterative-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Iterative implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#related-problems_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-pattern-14-stack-dynamic-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Pattern 14: Stack + Dynamic Programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Pattern 14: Stack + Dynamic Programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-maximal-rectangle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Maximal Rectangle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.1 Maximal Rectangle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-pattern-15-sum-of-subarray-minimums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Pattern 15: Sum of Subarray Minimums
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Pattern 15: Sum of Subarray Minimums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-contribution-technique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.1 Contribution Technique
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19.1 Contribution Technique">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-advanced-pattern-cartesian-trees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Advanced Pattern: Cartesian Trees
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="20. Advanced Pattern: Cartesian Trees">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-it-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why it matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-stack-pattern-recognition-cheat-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Stack Pattern Recognition Cheat Sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-leetcode-stack-problem-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. LeetCode Stack Problem Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="22. LeetCode Stack Problem Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#level-1-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1: Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-2-monotonic-stack-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2: Monotonic Stack Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-3-intermediate-stack-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3: Intermediate Stack Problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-4-advanced-monotonic-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4: Advanced Monotonic Stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-5-advanced-expression-and-tree-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 5: Advanced Expression and Tree Problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-advanced-interview-techniques-and-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Advanced Interview Techniques and Tricks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="23. Advanced Interview Techniques and Tricks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trick-1-store-indices-instead-of-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 1: Store Indices Instead of Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trick-2-use-a-sentinel-to-simplify-boundary-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 2: Use a Sentinel to Simplify Boundary Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trick-3-understand-strict-and-non-strict-comparisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 3: Understand Strict and Non-Strict Comparisons
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trick-4-prove-linear-time-with-aggregate-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 4: Prove Linear Time with Aggregate Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trick-5-distinguish-a-stack-from-a-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trick 5: Distinguish a Stack from a Queue
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-common-mistakes-in-stack-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Common Mistakes in Stack Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="24. Common Mistakes in Stack Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-forgetting-to-check-whether-the-stack-is-empty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Forgetting to check whether the stack is empty
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-using-values-when-indices-are-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Using values when indices are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-using-the-wrong-comparison-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Using the wrong comparison operator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-forgetting-to-process-remaining-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Forgetting to process remaining elements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-confusing-the-top-of-the-stack-with-the-bottom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Confusing the top of the stack with the bottom
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-assuming-every-nested-loop-is-quadratic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Assuming every nested loop is quadratic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-ignoring-duplicate-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Ignoring duplicate values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="stack-data-structure">Stack Data Structure:</h1>
+<p>A stack is one of the most important data structures for coding interviews. It is particularly useful for problems involving <strong>nested structures, expression evaluation, monotonic relationships, sequential dependencies, and maintaining state while traversing data</strong>.</p>
+<hr />
+<h2 id="1-mathematical-foundations-of-a-stack">1. Mathematical Foundations of a Stack</h2>
+<h3 id="11-what-is-a-stack">1.1 What is a Stack?</h3>
+<p>A stack is a linear abstract data type that follows the <strong>Last-In, First-Out (LIFO)</strong> principle.</p>
+<p>The element inserted most recently is the first one removed.</p>
+<p>For a sequence of elements</p>
+<div class="arithmatex">\[
+S = [a_1,a_2,\ldots,a_n]
+\]</div>
+<p>where <span class="arithmatex">\(a_n\)</span> is the top element, the stack supports insertion and removal at one end.</p>
+<p>The top of the stack is:</p>
+<div class="arithmatex">\[
+\operatorname{top}(S)=a_n
+\]</div>
+<p>The fundamental operations are:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Mathematical description</th>
+<th>Typical complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>push(x)</code></td>
+<td><span class="arithmatex">\(S \gets S \mathbin{\|} [x]\)</span></td>
+<td><span class="arithmatex">\(O(1)\)</span> amortized</td>
+</tr>
+<tr>
+<td><code>pop()</code></td>
+<td>Remove the last element</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><code>top()</code></td>
+<td>Return the last element</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><code>isEmpty()</code></td>
+<td>Check whether <span class="arithmatex">\(S=[]\)</span></td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><code>size()</code></td>
+<td>Return the number of elements</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here, <span class="arithmatex">\(\mathbin{\|}\)</span> denotes sequence concatenation.</p>
+<p>A stack is an <strong>abstract data type (ADT)</strong>, meaning it defines how elements behave rather than how they are physically stored.</p>
+<p>It can be implemented using:</p>
+<ul>
+<li>Dynamic arrays</li>
+<li>Linked lists</li>
+<li>Fixed-size arrays</li>
+<li>Other data structures</li>
+</ul>
+<hr />
+<h3 id="12-the-stack-invariant">1.2 The Stack Invariant</h3>
+<p>An invariant is a property that remains true throughout an algorithm.</p>
+<p>For a conventional stack, the key invariant is:</p>
+<blockquote>
+<p>The most recently pushed element that has not yet been removed is always at the top.</p>
+</blockquote>
+<p>Suppose we execute:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p>The stack becomes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Bottom → [10, 20, 30] ← Top
+</code></pre></div>
+<p>After:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre></div>
+<p>The stack becomes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Bottom → [10, 20] ← Top
+</code></pre></div>
+<p>The element <code>30</code> is removed because it was inserted last.</p>
+<h4 id="why-this-matters-in-interviews">Why this matters in interviews</h4>
+<p>Many stack problems are based on maintaining a carefully chosen invariant.</p>
+<p>Examples:</p>
+<ul>
+<li><strong>Parentheses validation:</strong> The stack contains unmatched opening brackets.</li>
+<li><strong>Monotonic stack:</strong> The stack contains elements in a particular sorted order.</li>
+<li><strong>Expression evaluation:</strong> The stack contains intermediate operands or operators.</li>
+<li><strong>Backtracking:</strong> The stack contains the current path or pending operations.</li>
+</ul>
+<p>Understanding the invariant is more important than memorizing the implementation.</p>
+<hr />
+<h2 id="2-stack-implementation-in-python">2. Stack Implementation in Python</h2>
+<p>Python's <code>list</code> is the standard choice for stack problems.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Push</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># Peek</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">top</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Pop</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">removed</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># Check empty</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">stack</span><span class="p">:</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Stack is empty"</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="complexity">Complexity</h4>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>append()</code></td>
+<td><span class="arithmatex">\(O(1)\)</span> amortized</td>
+</tr>
+<tr>
+<td><code>pop()</code> from the end</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><code>stack[-1]</code></td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><code>len(stack)</code></td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><code>stack.pop(0)</code></td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td><code>stack.insert(0, x)</code></td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interview tip:</strong> Use <code>append()</code> and <code>pop()</code> at the end of a list. Avoid inserting or removing elements from the beginning.</p>
+<p>For a queue, use <code>collections.deque</code> instead.</p>
+<hr />
+<h2 id="3-stack-complexity-what-you-must-know">3. Stack Complexity: What You Must Know</h2>
+<h3 id="31-worst-case-versus-amortized-complexity">3.1 Worst-case versus Amortized Complexity</h3>
+<p>A Python list is a dynamic array.</p>
+<p>When its allocated capacity is exhausted, it may need to allocate a larger array and copy existing elements.</p>
+<p>Therefore:</p>
+<ul>
+<li>A single <code>append()</code> can take <span class="arithmatex">\(O(n)\)</span> in the worst case.</li>
+<li>The amortized cost of <code>append()</code> is <span class="arithmatex">\(O(1)\)</span>.</li>
+<li>A <code>pop()</code> from the end is <span class="arithmatex">\(O(1)\)</span>.</li>
+</ul>
+<p>Amortized analysis considers the total cost of a sequence of operations.</p>
+<p>If <span class="arithmatex">\(n\)</span> elements are pushed, the total cost is <span class="arithmatex">\(O(n)\)</span>, giving an amortized cost of:</p>
+<div class="arithmatex">\[
+\frac{O(n)}{n}=O(1)
+\]</div>
+<p>per push.</p>
+<hr />
+<h3 id="32-stack-space-complexity">3.2 Stack Space Complexity</h3>
+<p>If a stack stores <span class="arithmatex">\(k\)</span> elements:</p>
+<div class="arithmatex">\[
+S(k)=O(k)
+\]</div>
+<p>For an algorithm that processes an array of length <span class="arithmatex">\(n\)</span>, the stack may contain at most <span class="arithmatex">\(n\)</span> elements.</p>
+<p>Therefore, its auxiliary space complexity is often:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>However, some stack problems use only a constant number of elements, resulting in <span class="arithmatex">\(O(1)\)</span> auxiliary space.</p>
+<p><strong>Important:</strong> Recursive function calls also use a call stack. Recursive algorithms may consume <span class="arithmatex">\(O(n)\)</span> stack space even if no explicit stack is declared.</p>
+<hr />
+<h2 id="4-the-core-stack-problem-patterns">4. The Core Stack Problem Patterns</h2>
+<p>Most stack-based interview problems can be organized into the following patterns.</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Main purpose</th>
+<th>Typical problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Matching and validation</td>
+<td>Match nested structures</td>
+<td>Valid Parentheses</td>
+</tr>
+<tr>
+<td>2. Monotonic increasing stack</td>
+<td>Find next smaller elements</td>
+<td>Next Smaller Element</td>
+</tr>
+<tr>
+<td>3. Monotonic decreasing stack</td>
+<td>Find next greater elements</td>
+<td>Daily Temperatures</td>
+</tr>
+<tr>
+<td>4. Previous/next boundary</td>
+<td>Find nearest smaller or greater boundaries</td>
+<td>Largest Rectangle in Histogram</td>
+</tr>
+<tr>
+<td>5. Expression evaluation</td>
+<td>Evaluate mathematical expressions</td>
+<td>Evaluate Reverse Polish Notation</td>
+</tr>
+<tr>
+<td>6. Parsing and decoding</td>
+<td>Process nested or encoded strings</td>
+<td>Decode String</td>
+</tr>
+<tr>
+<td>7. Simulation</td>
+<td>Maintain a sequence of unresolved states</td>
+<td>Asteroid Collision</td>
+</tr>
+<tr>
+<td>8. Design problems</td>
+<td>Implement data structures using stacks</td>
+<td>Min Stack</td>
+</tr>
+<tr>
+<td>9. Stack + greedy</td>
+<td>Remove or retain elements optimally</td>
+<td>Remove K Digits</td>
+</tr>
+<tr>
+<td>10. Stack + traversal</td>
+<td>Process trees and graphs iteratively</td>
+<td>Binary Tree Inorder Traversal</td>
+</tr>
+<tr>
+<td>11. Stack + dynamic programming</td>
+<td>Track unresolved states or subproblems</td>
+<td>Maximal Rectangle</td>
+</tr>
+<tr>
+<td>12. Advanced monotonic techniques</td>
+<td>Aggregate contributions over intervals</td>
+<td>Sum of Subarray Minimums</td>
+</tr>
+</tbody>
+</table>
+<p>Let's explore these patterns in detail.</p>
+<hr />
+<h2 id="5-pattern-1-matching-and-validation">5. Pattern 1: Matching and Validation</h2>
+<h3 id="51-when-should-you-use-this-pattern">5.1 When should you use this pattern?</h3>
+<p>Use a stack when a problem involves:</p>
+<ul>
+<li>Parentheses or brackets</li>
+<li>Nested structures</li>
+<li>Opening and closing delimiters</li>
+<li>Matching symbols in a specific order</li>
+<li>Validating whether an expression is properly nested</li>
+</ul>
+<p>The key property is that <strong>the most recently opened structure must be closed first</strong>.</p>
+<p>This is precisely the LIFO property.</p>
+<h3 id="52-example-valid-parentheses">5.2 Example: Valid Parentheses</h3>
+<p>LeetCode 20 — Valid Parentheses</p>
+<p>Given:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>s = "({[]})"
+</code></pre></div>
+<p>Determine whether the string contains correctly matched and nested brackets.</p>
+<h4 id="approach">Approach</h4>
+<ol>
+<li>Push every opening bracket.</li>
+<li>When a closing bracket appears, check whether it matches the top.</li>
+<li>If it does, pop the opening bracket.</li>
+<li>If it doesn't, return <code>False</code>.</li>
+<li>At the end, the stack must be empty.</li>
+</ol>
+<h4 id="python-implementation">Python implementation</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">isValid</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">pairs</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="s1">')'</span><span class="p">:</span> <span class="s1">'('</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="s1">']'</span><span class="p">:</span> <span class="s1">'['</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="s1">'}'</span><span class="p">:</span> <span class="s1">'{'</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="p">}</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="s2">"([{"</span><span class="p">:</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">stack</span><span class="p">:</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>                <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>            <span class="k">if</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">pairs</span><span class="p">[</span><span class="n">ch</span><span class="p">]:</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>                <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>    <span class="k">return</span> <span class="ow">not</span> <span class="n">stack</span>
+</code></pre></div>
+<h4 id="complexity_1">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span></li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span></li>
+</ul>
+<p>Each character is processed once and each opening bracket is pushed and popped at most once.</p>
+<h4 id="interview-insight">Interview insight</h4>
+<p>A common mistake is checking only whether the total number of opening and closing brackets matches.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>([)]
+</code></pre></div>
+<p>The counts are balanced, but the nesting is invalid.</p>
+<p>The stack preserves the order needed to detect this.</p>
+<h4 id="related-problems">Related problems</h4>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>LeetCode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Valid Parentheses</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Minimum Add to Make Parentheses Valid</td>
+<td>921</td>
+</tr>
+<tr>
+<td>Minimum Remove to Make Valid Parentheses</td>
+<td>1249</td>
+</tr>
+<tr>
+<td>Generate Parentheses</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Longest Valid Parentheses</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Score of Parentheses</td>
+<td>856</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pattern recognition:</strong> If a problem asks whether a sequence is properly nested, consider a stack first.</p>
+<hr />
+<h2 id="6-pattern-2-monotonic-stack">6. Pattern 2: Monotonic Stack</h2>
+<p>This is one of the most important stack patterns for coding interviews.</p>
+<p>A monotonic stack maintains elements in either non-decreasing or non-increasing order.</p>
+<p>It is commonly used to find:</p>
+<ul>
+<li>Next greater element</li>
+<li>Next smaller element</li>
+<li>Previous greater element</li>
+<li>Previous smaller element</li>
+<li>Nearest element satisfying an inequality</li>
+<li>Boundaries of contiguous intervals</li>
+</ul>
+<h3 id="61-what-is-a-monotonic-stack">6.1 What is a Monotonic Stack?</h3>
+<p>A monotonic stack maintains a specific ordering among its elements.</p>
+<h4 id="monotonically-increasing-stack">Monotonically increasing stack</h4>
+<p>From bottom to top:</p>
+<div class="arithmatex">\[
+S_1 \leq S_2 \leq \cdots \leq S_k
+\]</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Bottom → [2, 4, 7, 9] ← Top
+</code></pre></div>
+<h4 id="monotonically-decreasing-stack">Monotonically decreasing stack</h4>
+<p>From bottom to top:</p>
+<div class="arithmatex">\[
+S_1 \geq S_2 \geq \cdots \geq S_k
+\]</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Bottom → [9, 7, 4, 2] ← Top
+</code></pre></div>
+<p>In practice, you often store indices rather than values.</p>
+<p>Why?</p>
+<p>Because indices allow you to:</p>
+<ul>
+<li>Retrieve the corresponding values.</li>
+<li>Calculate distances.</li>
+<li>Determine interval widths.</li>
+<li>Handle duplicate values consistently.</li>
+</ul>
+<hr />
+<h2 id="7-pattern-3-next-greater-element">7. Pattern 3: Next Greater Element</h2>
+<h3 id="71-problem-definition">7.1 Problem definition</h3>
+<p>Given an array:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+<p>For every element, find the first greater element to its right.</p>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[4, 2, 4, -1, -1]
+</code></pre></div>
+<p>For example:</p>
+<ul>
+<li>The next greater element for <code>2</code> at index 0 is <code>4</code>.</li>
+<li>The next greater element for <code>1</code> is <code>2</code>.</li>
+<li>The next greater element for <code>4</code> does not exist.</li>
+</ul>
+<h3 id="72-why-brute-force-is-inefficient">7.2 Why brute force is inefficient</h3>
+<p>For each element, scan the remaining array until you find a greater element.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nextGreater</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>                <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>                <span class="k">break</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div>
+<p>Complexity:</p>
+<div class="arithmatex">\[
+T(n)=O(n^2)
+\]</div>
+<p>The nested loops repeatedly inspect elements that have already been examined.</p>
+<p>A monotonic stack can reduce the time complexity to <span class="arithmatex">\(O(n)\)</span>.</p>
+<hr />
+<h3 id="73-the-monotonic-stack-insight">7.3 The Monotonic Stack Insight</h3>
+<p>Imagine scanning the array from left to right.</p>
+<p>Some elements are waiting for a greater element to appear.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>[2, 1, 4]
+</code></pre></div>
+<p>Before processing <code>4</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Stack = [2, 1]
+</code></pre></div>
+<p>When <code>4</code> arrives, it is greater than both <code>1</code> and <code>2</code>.</p>
+<p>Therefore, <code>4</code> is the next greater element for both.</p>
+<p>We can resolve both elements by popping them.</p>
+<h4 id="key-invariant">Key invariant</h4>
+<p>The stack contains indices of elements whose next greater element has not yet been found.</p>
+<p>The values at these indices are maintained in decreasing order from bottom to top.</p>
+<hr />
+<h3 id="74-python-implementation">7.4 Python implementation</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nextGreater</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>        <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">:</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>            <span class="n">j</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>            <span class="n">ans</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>    <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div>
+<h4 id="complexity_2">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span></li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span></li>
+</ul>
+<p>Although there is a <code>while</code> loop inside a <code>for</code> loop, the total number of stack pops is at most <span class="arithmatex">\(n\)</span>.</p>
+<p>Every index is:</p>
+<ul>
+<li>Pushed once.</li>
+<li>Popped at most once.</li>
+</ul>
+<p>Therefore, the total work is linear.</p>
+<hr />
+<h2 id="8-pattern-4-previous-greater-and-previous-smaller-elements">8. Pattern 4: Previous Greater and Previous Smaller Elements</h2>
+<p>The same technique can be adapted to find elements on the left.</p>
+<h3 id="81-previous-greater-element">8.1 Previous Greater Element</h3>
+<p>For each element, find the nearest greater element to its left.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nums = [3, 1, 4, 2, 5]
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>[-1, 3, -1, 4, -1]
+</code></pre></div>
+<h4 id="python-implementation_1">Python implementation</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">previousGreater</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>        <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">:</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>        <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">if</span> <span class="n">stack</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>    <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div>
+<p>The stack removes elements that cannot be the previous greater element for the current value.</p>
+<h3 id="82-previous-smaller-element">8.2 Previous Smaller Element</h3>
+<p>For each element, find the nearest smaller element to its left.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">previousSmaller</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>        <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="p">:</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>        <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">if</span> <span class="n">stack</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>    <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div>
+<h4 id="pattern-table">Pattern table</h4>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Stack order</th>
+<th>Pop condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Next greater, left to right</td>
+<td>Decreasing</td>
+<td><code>top &lt; current</code></td>
+</tr>
+<tr>
+<td>Next smaller, left to right</td>
+<td>Increasing</td>
+<td><code>top &gt; current</code></td>
+</tr>
+<tr>
+<td>Previous greater, left to right</td>
+<td>Decreasing</td>
+<td><code>top &lt;= current</code></td>
+</tr>
+<tr>
+<td>Previous smaller, left to right</td>
+<td>Increasing</td>
+<td><code>top &gt;= current</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important:</strong> The exact comparison operator depends on whether equal values are allowed to remain on the stack.</p>
+<p>This becomes especially important in histogram and subarray contribution problems.</p>
+<hr />
+<h2 id="9-pattern-5-daily-temperatures">9. Pattern 5: Daily Temperatures</h2>
+<p>LeetCode 739 — Daily Temperatures</p>
+<p>Given daily temperatures, return the number of days until a warmer temperature occurs.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">73</span><span class="p">,</span> <span class="mi">74</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">73</span><span class="p">]</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>[1, 1, 4, 2, 1, 1, 0, 0]
+</code></pre></div>
+<h3 id="approach_1">Approach</h3>
+<p>Maintain a stack of indices whose next warmer day has not yet been found.</p>
+<p>When a warmer temperature appears, resolve all earlier temperatures that are smaller.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">dailyTemperatures</span><span class="p">(</span><span class="n">temperatures</span><span class="p">):</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">temp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">temperatures</span><span class="p">):</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>        <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">temperatures</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="n">temp</span><span class="p">:</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>            <span class="n">j</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>            <span class="n">ans</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>    <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div>
+<h4 id="complexity_3">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span></li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span></li>
+</ul>
+<h4 id="interview-takeaway">Interview takeaway</h4>
+<p>Whenever a problem asks:</p>
+<ul>
+<li>How many positions until a greater value?</li>
+<li>How far away is the next qualifying element?</li>
+<li>When will a condition first become true?</li>
+</ul>
+<p>A monotonic stack is a strong candidate.</p>
+<hr />
+<h2 id="10-pattern-6-largest-rectangle-in-histogram">10. Pattern 6: Largest Rectangle in Histogram</h2>
+<p>This is a classic advanced monotonic stack problem.</p>
+<p>LeetCode 84 — Largest Rectangle in Histogram</p>
+<p>Given bar heights:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>heights = [2, 1, 5, 6, 2, 3]
+</code></pre></div>
+<p>Find the largest rectangle that can be formed within the histogram.</p>
+<p>The answer is:</p>
+<div class="arithmatex">\[
+10
+\]</div>
+<p>The rectangle uses the bars of heights <code>5</code> and <code>6</code>, with width <span class="arithmatex">\(2\)</span>:</p>
+<div class="arithmatex">\[
+A=5\times2=10
+\]</div>
+<h3 id="101-mathematical-foundation">10.1 Mathematical Foundation</h3>
+<p>For a bar at index <span class="arithmatex">\(i\)</span>, suppose:</p>
+<ul>
+<li><span class="arithmatex">\(L_i\)</span> is the nearest index to the left with height strictly smaller than <span class="arithmatex">\(h_i\)</span>.</li>
+<li><span class="arithmatex">\(R_i\)</span> is the nearest index to the right with height strictly smaller than <span class="arithmatex">\(h_i\)</span>.</li>
+</ul>
+<p>Then the maximum width for a rectangle of height <span class="arithmatex">\(h_i\)</span> is:</p>
+<div class="arithmatex">\[
+W_i=R_i-L_i-1
+\]</div>
+<p>The corresponding area is:</p>
+<div class="arithmatex">\[
+A_i=h_i(R_i-L_i-1)
+\]</div>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{
+A_{\max}=\max_i h_i(R_i-L_i-1)
+}
+\]</div>
+<p>The challenge is finding these boundaries efficiently.</p>
+<hr />
+<h3 id="102-monotonic-stack-solution">10.2 Monotonic Stack Solution</h3>
+<p>Maintain indices of bars in increasing order of height.</p>
+<p>When a shorter bar appears, taller bars can no longer extend beyond the current index.</p>
+<p>Their maximum rectangle areas can be calculated immediately.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">largestRectangleArea</span><span class="p">(</span><span class="n">heights</span><span class="p">):</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="n">max_area</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">heights</span><span class="p">):</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>        <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">heights</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="n">h</span><span class="p">:</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>            <span class="n">height</span> <span class="o">=</span> <span class="n">heights</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()]</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>            <span class="n">left</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">stack</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>            <span class="n">width</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>            <span class="n">max_area</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span><span class="p">)</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">heights</span><span class="p">)</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>        <span class="n">height</span> <span class="o">=</span> <span class="n">heights</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()]</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>        <span class="n">left</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">stack</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a>
+<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a>        <span class="n">width</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a>        <span class="n">max_area</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span><span class="p">)</span>
+<a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a>
+<a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a>    <span class="k">return</span> <span class="n">max_area</span>
+</code></pre></div>
+<h4 id="complexity_4">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span></li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span></li>
+</ul>
+<h4 id="why-this-pattern-matters">Why this pattern matters</h4>
+<p>This problem introduces a general technique:</p>
+<blockquote>
+<p>When an element's contribution is determined by the first smaller or greater element on either side, use a monotonic stack to find its boundaries.</p>
+</blockquote>
+<p>This idea appears in:</p>
+<ul>
+<li>Maximal Rectangle</li>
+<li>Trapping Rain Water</li>
+<li>Sum of Subarray Minimums</li>
+<li>Sum of Subarray Ranges</li>
+</ul>
+<hr />
+<h2 id="11-pattern-7-trapping-rain-water">11. Pattern 7: Trapping Rain Water</h2>
+<p>LeetCode 42 — Trapping Rain Water</p>
+<p>Given an elevation map, calculate how much water can be trapped.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">height</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>6
+</code></pre></div>
+<h3 id="111-mathematical-foundation">11.1 Mathematical Foundation</h3>
+<p>For each index <span class="arithmatex">\(i\)</span>, define:</p>
+<div class="arithmatex">\[
+L_i=\max(h_0,h_1,\ldots,h_i)
+\]</div>
+<div class="arithmatex">\[
+R_i=\max(h_i,h_{i+1},\ldots,h_{n-1})
+\]</div>
+<p>The water trapped at position <span class="arithmatex">\(i\)</span> is:</p>
+<div class="arithmatex">\[
+w_i=\max(0,\min(L_i,R_i)-h_i)
+\]</div>
+<p>Total trapped water:</p>
+<div class="arithmatex">\[
+W=\sum_{i=0}^{n-1}w_i
+\]</div>
+<p>A monotonic stack provides another way to calculate the trapped water by identifying bounded regions.</p>
+<h3 id="112-stack-based-solution">11.2 Stack-Based Solution</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">trap</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>    <span class="n">water</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>        <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="n">height</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]:</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>            <span class="n">bottom</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">stack</span><span class="p">:</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>                <span class="k">break</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>            <span class="n">left</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>            <span class="n">width</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>            <span class="n">bounded_height</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">height</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">height</span><span class="p">[</span><span class="n">bottom</span><span class="p">]</span>
+<a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>
+<a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a>            <span class="n">water</span> <span class="o">+=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">bounded_height</span>
+<a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a>
+<a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a>
+<a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a>    <span class="k">return</span> <span class="n">water</span>
+</code></pre></div>
+<h4 id="complexity_5">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span></li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span></li>
+</ul>
+<h4 id="key-insight">Key insight</h4>
+<p>The stack identifies a depression bounded by a left wall and a newly encountered right wall.</p>
+<p>The trapped water is calculated as:</p>
+<div class="arithmatex">\[
+\text{width}\times\text{bounded height}
+\]</div>
+<p><strong>Interview note:</strong> This problem can also be solved using two pointers in <span class="arithmatex">\(O(n)\)</span> time and <span class="arithmatex">\(O(1)\)</span> auxiliary space.</p>
+<hr />
+<h2 id="12-pattern-8-expression-evaluation">12. Pattern 8: Expression Evaluation</h2>
+<p>Stacks are naturally suited to mathematical expressions because operators and operands often need to be processed in a particular order.</p>
+<p>Common problem types:</p>
+<ul>
+<li>Reverse Polish Notation</li>
+<li>Infix-to-postfix conversion</li>
+<li>Infix expression evaluation</li>
+<li>Operator precedence</li>
+<li>Parenthesized expressions</li>
+</ul>
+<h3 id="121-reverse-polish-notation">12.1 Reverse Polish Notation</h3>
+<p>LeetCode 150 — Evaluate Reverse Polish Notation</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>["2", "1", "+", "3", "*"]
+</code></pre></div>
+<p>This represents:</p>
+<div class="arithmatex">\[
+(2+1)\times3=9
+\]</div>
+<h4 id="algorithm">Algorithm</h4>
+<ol>
+<li>Push operands.</li>
+<li>When an operator appears, pop the required operands.</li>
+<li>Apply the operator.</li>
+<li>Push the result.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">evalRPN</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>        <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"+"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">,</span> <span class="s2">"*"</span><span class="p">,</span> <span class="s2">"/"</span><span class="p">}:</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>            <span class="n">b</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>            <span class="n">a</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a>
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a>            <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"+"</span><span class="p">:</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>                <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a>
+<a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a>            <span class="k">elif</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"-"</span><span class="p">:</span>
+<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a>                <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a>
+<a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a>            <span class="k">elif</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"*"</span><span class="p">:</span>
+<a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a>                <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a>
+<a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a>            <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-29-21" name="__codelineno-29-21" href="#__codelineno-29-21"></a>                <span class="n">result</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+<a id="__codelineno-29-22" name="__codelineno-29-22" href="#__codelineno-29-22"></a>
+<a id="__codelineno-29-23" name="__codelineno-29-23" href="#__codelineno-29-23"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<a id="__codelineno-29-24" name="__codelineno-29-24" href="#__codelineno-29-24"></a>
+<a id="__codelineno-29-25" name="__codelineno-29-25" href="#__codelineno-29-25"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-29-26" name="__codelineno-29-26" href="#__codelineno-29-26"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+<a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a>
+<a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a>    <span class="k">return</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<h4 id="complexity_6">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span></li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span></li>
+</ul>
+<h4 id="important-detail">Important detail</h4>
+<p>For subtraction and division, operand order matters:</p>
+<div class="arithmatex">\[
+a-b
+\]</div>
+<p>not:</p>
+<div class="arithmatex">\[
+b-a
+\]</div>
+<p>For LeetCode's Reverse Polish Notation problem, integer division truncates toward zero.</p>
+<hr />
+<h2 id="13-pattern-9-parsing-and-decoding-nested-strings">13. Pattern 9: Parsing and Decoding Nested Strings</h2>
+<p>Stacks are useful for nested structures that must be processed from the innermost level outward.</p>
+<h3 id="131-decode-string">13.1 Decode String</h3>
+<p>LeetCode 394 — Decode String</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>s = "3[a2[c]]"
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>"accaccacc"
+</code></pre></div>
+<p>The expression means:</p>
+<div class="arithmatex">\[
+3\times(a+(2\times c))
+\]</div>
+<h4 id="approach_2">Approach</h4>
+<p>Maintain:</p>
+<ul>
+<li>A stack of previous strings.</li>
+<li>A stack of repetition counts.</li>
+<li>A current string.</li>
+<li>A current number.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">decodeString</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>    <span class="n">current</span> <span class="o">=</span> <span class="s2">""</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>    <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>        <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>            <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>
+<a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>        <span class="k">elif</span> <span class="n">ch</span> <span class="o">==</span> <span class="s2">"["</span><span class="p">:</span>
+<a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">current</span><span class="p">,</span> <span class="n">num</span><span class="p">))</span>
+<a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a>            <span class="n">current</span> <span class="o">=</span> <span class="s2">""</span>
+<a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a>            <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a>
+<a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a>        <span class="k">elif</span> <span class="n">ch</span> <span class="o">==</span> <span class="s2">"]"</span><span class="p">:</span>
+<a id="__codelineno-32-17" name="__codelineno-32-17" href="#__codelineno-32-17"></a>            <span class="n">previous</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-32-18" name="__codelineno-32-18" href="#__codelineno-32-18"></a>            <span class="n">current</span> <span class="o">=</span> <span class="n">previous</span> <span class="o">+</span> <span class="n">current</span> <span class="o">*</span> <span class="n">count</span>
+<a id="__codelineno-32-19" name="__codelineno-32-19" href="#__codelineno-32-19"></a>
+<a id="__codelineno-32-20" name="__codelineno-32-20" href="#__codelineno-32-20"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-32-21" name="__codelineno-32-21" href="#__codelineno-32-21"></a>            <span class="n">current</span> <span class="o">+=</span> <span class="n">ch</span>
+<a id="__codelineno-32-22" name="__codelineno-32-22" href="#__codelineno-32-22"></a>
+<a id="__codelineno-32-23" name="__codelineno-32-23" href="#__codelineno-32-23"></a>    <span class="k">return</span> <span class="n">current</span>
+</code></pre></div>
+<h4 id="complexity_7">Complexity</h4>
+<p>Let <span class="arithmatex">\(L\)</span> be the length of the decoded output.</p>
+<ul>
+<li>Time: <span class="arithmatex">\(O(L)\)</span> in terms of output construction, with additional costs possible from repeated string concatenation.</li>
+<li>Space: <span class="arithmatex">\(O(L+n)\)</span> including the output and auxiliary state, where <span class="arithmatex">\(n\)</span> is the encoded input length.</li>
+</ul>
+<p>In Python, repeated string concatenation can create additional copying costs. A list-based string builder may be preferable for larger parsing tasks.</p>
+<h4 id="related-problems_1">Related problems</h4>
+<ul>
+<li>Decode String — 394</li>
+<li>Basic Calculator — 224</li>
+<li>Basic Calculator II — 227</li>
+<li>Basic Calculator III — 772</li>
+<li>Mini Parser — 385</li>
+</ul>
+<hr />
+<h2 id="14-pattern-10-stack-based-simulation">14. Pattern 10: Stack-Based Simulation</h2>
+<p>A stack can model systems in which an incoming element interacts with the most recent unresolved element.</p>
+<p>This is particularly useful for collision, cancellation, and elimination problems.</p>
+<h3 id="141-asteroid-collision">14.1 Asteroid Collision</h3>
+<p>LeetCode 735 — Asteroid Collision</p>
+<p>Positive numbers represent asteroids moving right.</p>
+<p>Negative numbers represent asteroids moving left.</p>
+<p>When two asteroids collide, the smaller one explodes. If they have equal size, both explode.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">asteroids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>[5, 10]
+</code></pre></div>
+<h4 id="key-observation">Key observation</h4>
+<p>A collision can occur only when:</p>
+<ul>
+<li>The stack's top asteroid is moving right.</li>
+<li>The current asteroid is moving left.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">asteroidCollision</span><span class="p">(</span><span class="n">asteroids</span><span class="p">):</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>    <span class="k">for</span> <span class="n">asteroid</span> <span class="ow">in</span> <span class="n">asteroids</span><span class="p">:</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>        <span class="n">alive</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>        <span class="k">while</span> <span class="p">(</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>            <span class="n">alive</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>            <span class="ow">and</span> <span class="n">stack</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>            <span class="ow">and</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a>            <span class="ow">and</span> <span class="n">asteroid</span> <span class="o">&lt;</span> <span class="mi">0</span>
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a>        <span class="p">):</span>
+<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a>
+<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a>            <span class="k">if</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">asteroid</span><span class="p">:</span>
+<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a>                <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a>
+<a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a>            <span class="k">elif</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="n">asteroid</span><span class="p">:</span>
+<a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a>                <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a>                <span class="n">alive</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a>
+<a id="__codelineno-35-21" name="__codelineno-35-21" href="#__codelineno-35-21"></a>            <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-35-22" name="__codelineno-35-22" href="#__codelineno-35-22"></a>                <span class="n">alive</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a>
+<a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a>        <span class="k">if</span> <span class="n">alive</span><span class="p">:</span>
+<a id="__codelineno-35-25" name="__codelineno-35-25" href="#__codelineno-35-25"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">asteroid</span><span class="p">)</span>
+<a id="__codelineno-35-26" name="__codelineno-35-26" href="#__codelineno-35-26"></a>
+<a id="__codelineno-35-27" name="__codelineno-35-27" href="#__codelineno-35-27"></a>    <span class="k">return</span> <span class="n">stack</span>
+</code></pre></div>
+<h4 id="complexity_8">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span></li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span></li>
+</ul>
+<h4 id="interview-insight_1">Interview insight</h4>
+<p>Look for problems where:</p>
+<ul>
+<li>New elements interact with the latest unresolved element.</li>
+<li>An interaction can trigger further interactions.</li>
+<li>Removing one element may expose another interaction.</li>
+</ul>
+<p>These are strong candidates for stack-based simulation.</p>
+<hr />
+<h2 id="15-pattern-11-stack-greedy">15. Pattern 11: Stack + Greedy</h2>
+<p>In certain problems, the stack maintains a partially constructed answer.</p>
+<p>When a new element arrives, the algorithm may remove earlier elements if doing so leads to a better solution.</p>
+<p>This combines a stack with a greedy decision rule.</p>
+<h3 id="151-remove-k-digits">15.1 Remove K Digits</h3>
+<p>LeetCode 402 — Remove K Digits</p>
+<p>Given a number represented as a string, remove exactly <span class="arithmatex">\(k\)</span> digits to obtain the smallest possible number.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>num = "1432219"
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>k = 3
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>"1219"
+</code></pre></div>
+<h4 id="greedy-insight">Greedy insight</h4>
+<p>If a digit is larger than the next digit, removing it can make the number smaller.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>143
+</code></pre></div>
+<p>Removing <code>4</code> gives:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>13
+</code></pre></div>
+<p>This is smaller than removing <code>1</code> or <code>3</code>.</p>
+<h4 id="implementation">Implementation</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">removeKdigits</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>    <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="n">num</span><span class="p">:</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a>        <span class="k">while</span> <span class="p">(</span>
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>            <span class="n">stack</span>
+<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a>            <span class="ow">and</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a>            <span class="ow">and</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digit</span>
+<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a>        <span class="p">):</span>
+<a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a>            <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+<a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a>
+<a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+<a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a>
+<a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a>    <span class="k">while</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-40-18" name="__codelineno-40-18" href="#__codelineno-40-18"></a>        <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+<a id="__codelineno-40-19" name="__codelineno-40-19" href="#__codelineno-40-19"></a>
+<a id="__codelineno-40-20" name="__codelineno-40-20" href="#__codelineno-40-20"></a>    <span class="n">result</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)</span>
+<a id="__codelineno-40-21" name="__codelineno-40-21" href="#__codelineno-40-21"></a>
+<a id="__codelineno-40-22" name="__codelineno-40-22" href="#__codelineno-40-22"></a>    <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="s2">"0"</span>
+</code></pre></div>
+<h4 id="complexity_9">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span></li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span></li>
+</ul>
+<h4 id="general-pattern">General pattern</h4>
+<p>Use a monotonic stack when the goal is to construct an optimal sequence by removing earlier elements that violate a greedy ordering condition.</p>
+<p>Related problems:</p>
+<ul>
+<li>Remove K Digits — 402</li>
+<li>Create Maximum Number — 321</li>
+<li>Smallest Subsequence of Distinct Characters — 1081</li>
+<li>Remove Duplicate Letters — 316</li>
+</ul>
+<hr />
+<h2 id="16-pattern-12-designing-data-structures-with-stacks">16. Pattern 12: Designing Data Structures with Stacks</h2>
+<p>Interviewers may ask you to implement a data structure using one or more stacks.</p>
+<p>These questions test whether you can maintain additional information efficiently.</p>
+<h3 id="161-min-stack">16.1 Min Stack</h3>
+<p>LeetCode 155 — Min Stack</p>
+<p>Design a stack supporting:</p>
+<ul>
+<li><code>push(x)</code></li>
+<li><code>pop()</code></li>
+<li><code>top()</code></li>
+<li><code>getMin()</code></li>
+</ul>
+<p>All operations should run in <span class="arithmatex">\(O(1)\)</span> time.</p>
+<h4 id="approach_3">Approach</h4>
+<p>Maintain:</p>
+<ol>
+<li>A regular stack.</li>
+<li>A second stack storing the minimum value at each level.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MinStack</span><span class="p">:</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">min_stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a>
+<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_stack</span><span class="p">:</span>
+<a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">min_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">min_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a>                <span class="nb">min</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a>            <span class="p">)</span>
+<a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a>
+<a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">min_stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a>
+<a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">top</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-41-23" name="__codelineno-41-23" href="#__codelineno-41-23"></a>
+<a id="__codelineno-41-24" name="__codelineno-41-24" href="#__codelineno-41-24"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">getMin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-41-25" name="__codelineno-41-25" href="#__codelineno-41-25"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<h4 id="complexity_10">Complexity</h4>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Push</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td>Pop</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td>Top</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td>Get minimum</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Auxiliary space:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<h4 id="alternative">Alternative</h4>
+<p>Store pairs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">minimum_so_far</span><span class="p">)</span>
+</code></pre></div>
+<p>This combines the two stacks into one.</p>
+<hr />
+<h2 id="17-pattern-13-stack-binary-tree-traversal">17. Pattern 13: Stack + Binary Tree Traversal</h2>
+<p>Stacks are used to simulate recursive traversal iteratively.</p>
+<p>This is particularly useful when:</p>
+<ul>
+<li>Recursion depth may become large.</li>
+<li>The problem explicitly asks for iterative traversal.</li>
+<li>You need to control traversal state manually.</li>
+</ul>
+<h3 id="171-binary-tree-inorder-traversal">17.1 Binary Tree Inorder Traversal</h3>
+<p>LeetCode 94 — Binary Tree Inorder Traversal</p>
+<p>Inorder traversal visits:</p>
+<div class="arithmatex">\[
+\text{Left}\rightarrow\text{Root}\rightarrow\text{Right}
+\]</div>
+<h4 id="iterative-implementation">Iterative implementation</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">inorderTraversal</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>    <span class="n">current</span> <span class="o">=</span> <span class="n">root</span>
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>    <span class="k">while</span> <span class="n">current</span> <span class="ow">or</span> <span class="n">stack</span><span class="p">:</span>
+<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a>
+<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a>        <span class="k">while</span> <span class="n">current</span><span class="p">:</span>
+<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a>            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a>            <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">left</span>
+<a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a>
+<a id="__codelineno-43-12" name="__codelineno-43-12" href="#__codelineno-43-12"></a>        <span class="n">current</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<a id="__codelineno-43-13" name="__codelineno-43-13" href="#__codelineno-43-13"></a>        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+<a id="__codelineno-43-14" name="__codelineno-43-14" href="#__codelineno-43-14"></a>
+<a id="__codelineno-43-15" name="__codelineno-43-15" href="#__codelineno-43-15"></a>        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">right</span>
+<a id="__codelineno-43-16" name="__codelineno-43-16" href="#__codelineno-43-16"></a>
+<a id="__codelineno-43-17" name="__codelineno-43-17" href="#__codelineno-43-17"></a>    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<h4 id="complexity_11">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span></li>
+<li>Auxiliary space: <span class="arithmatex">\(O(h)\)</span>, where <span class="arithmatex">\(h\)</span> is the tree height.</li>
+</ul>
+<p>In the worst case:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>For a balanced tree:</p>
+<div class="arithmatex">\[
+O(\log n)
+\]</div>
+<h4 id="related-problems_2">Related problems</h4>
+<ul>
+<li>Binary Tree Inorder Traversal — 94</li>
+<li>Binary Tree Preorder Traversal — 144</li>
+<li>Binary Tree Postorder Traversal — 145</li>
+<li>Flatten Binary Tree to Linked List — 114</li>
+<li>Binary Search Tree Iterator — 173</li>
+</ul>
+<hr />
+<h2 id="18-pattern-14-stack-dynamic-programming">18. Pattern 14: Stack + Dynamic Programming</h2>
+<p>Stacks and dynamic programming can work together when a problem involves:</p>
+<ul>
+<li>Finding valid substrings.</li>
+<li>Maintaining boundaries.</li>
+<li>Tracking unresolved positions.</li>
+<li>Combining interval information.</li>
+</ul>
+<h3 id="181-maximal-rectangle">18.1 Maximal Rectangle</h3>
+<p>LeetCode 85 — Maximal Rectangle</p>
+<p>Given a binary matrix, find the largest rectangle containing only <code>1</code>s.</p>
+<p>The central insight is to transform each row into a histogram.</p>
+<p>For every row:</p>
+<ol>
+<li>Update the height of consecutive <code>1</code>s in each column.</li>
+<li>Treat the resulting heights as a histogram.</li>
+<li>Solve the Largest Rectangle in Histogram problem.</li>
+</ol>
+<p>If the matrix is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>1 0 1 0 0
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>1 0 1 1 1
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>1 1 1 1 1
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>1 0 0 1 0
+</code></pre></div>
+<p>The height array evolves as rows are processed.</p>
+<p>For each row:</p>
+<div class="arithmatex">\[
+h_j=
+\begin{cases}
+h_j+1, &amp; \text{if matrix}[i][j]=1\\
+0, &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<p>The histogram solution can then be applied.</p>
+<h4 id="complexity_12">Complexity</h4>
+<p>For an <span class="arithmatex">\(m\times n\)</span> matrix:</p>
+<ul>
+<li>Time: <span class="arithmatex">\(O(mn)\)</span></li>
+<li>Auxiliary space: <span class="arithmatex">\(O(n)\)</span>, excluding the input matrix.</li>
+</ul>
+<p>This problem combines dynamic programming-style state updates with a monotonic stack.</p>
+<hr />
+<h2 id="19-pattern-15-sum-of-subarray-minimums">19. Pattern 15: Sum of Subarray Minimums</h2>
+<p>LeetCode 907 — Sum of Subarray Minimums</p>
+<p>Given an array, calculate the sum of the minimum element of every contiguous subarray.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</code></pre></div>
+<p>The subarrays are:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>[3]       → 3
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>[1]       → 1
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>[2]       → 2
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>[4]       → 4
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>[3,1]     → 1
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>[1,2]     → 1
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>[2,4]     → 2
+<a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>[3,1,2]   → 1
+<a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>[1,2,4]   → 1
+<a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a>[3,1,2,4] → 1
+</code></pre></div>
+<p>The sum is:</p>
+<div class="arithmatex">\[
+17
+\]</div>
+<h3 id="191-contribution-technique">19.1 Contribution Technique</h3>
+<p>Instead of enumerating every subarray, calculate how many subarrays use each element as their minimum.</p>
+<p>For each element <span class="arithmatex">\(a_i\)</span>, determine:</p>
+<ul>
+<li><span class="arithmatex">\(L_i\)</span>: distance to the previous strictly smaller element.</li>
+<li><span class="arithmatex">\(R_i\)</span>: distance to the next smaller-or-equal element.</li>
+</ul>
+<p>Then the number of subarrays in which <span class="arithmatex">\(a_i\)</span> is the selected minimum is:</p>
+<div class="arithmatex">\[
+C_i=L_iR_i
+\]</div>
+<p>Its contribution is:</p>
+<div class="arithmatex">\[
+a_iL_iR_i
+\]</div>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{
+\text{Answer}=\sum_i a_iL_iR_i
+}
+\]</div>
+<p>A consistent tie-breaking rule is necessary when duplicate values exist.</p>
+<p>For example, one valid convention is:</p>
+<ul>
+<li>Previous strictly smaller.</li>
+<li>Next smaller or equal.</li>
+</ul>
+<p>Another valid convention reverses the strictness.</p>
+<h4 id="why-this-matters">Why this matters</h4>
+<p>This pattern transforms a problem that appears to require examining <span class="arithmatex">\(O(n^2)\)</span> subarrays into a linear-time contribution calculation.</p>
+<p>Related problems:</p>
+<ul>
+<li>Sum of Subarray Minimums — 907</li>
+<li>Sum of Subarray Ranges — 2104</li>
+<li>Number of Visible People in a Queue — 1944</li>
+</ul>
+<hr />
+<h2 id="20-advanced-pattern-cartesian-trees">20. Advanced Pattern: Cartesian Trees</h2>
+<p>A monotonic stack can construct a Cartesian tree.</p>
+<p>A Cartesian tree is a binary tree that satisfies:</p>
+<ol>
+<li>The inorder traversal reproduces the original array order.</li>
+<li>The tree satisfies a heap-ordering property.</li>
+</ol>
+<p>For a min-Cartesian tree, the parent has a value no greater than its children.</p>
+<p>This structure is closely connected to range minimum queries and histogram problems.</p>
+<h4 id="why-it-matters">Why it matters</h4>
+<p>A Cartesian tree provides a structural interpretation of monotonic stack algorithms.</p>
+<p>The stack is effectively maintaining the rightmost path of a partially constructed tree.</p>
+<p>You do not need to master Cartesian trees before solving ordinary monotonic stack problems, but the connection is useful for advanced algorithm study.</p>
+<hr />
+<h2 id="21-stack-pattern-recognition-cheat-sheet">21. Stack Pattern Recognition Cheat Sheet</h2>
+<p>Use this table when deciding whether a stack is appropriate.</p>
+<table>
+<thead>
+<tr>
+<th>Problem clue</th>
+<th>Potential pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nested parentheses or brackets</td>
+<td>Matching stack</td>
+</tr>
+<tr>
+<td>Nearest greater element</td>
+<td>Monotonic stack</td>
+</tr>
+<tr>
+<td>Nearest smaller element</td>
+<td>Monotonic stack</td>
+</tr>
+<tr>
+<td>First warmer day</td>
+<td>Next greater element</td>
+</tr>
+<tr>
+<td>Largest rectangle in a histogram</td>
+<td>Monotonic boundaries</td>
+</tr>
+<tr>
+<td>Water trapped between bars</td>
+<td>Monotonic stack or two pointers</td>
+</tr>
+<tr>
+<td>Evaluate postfix expression</td>
+<td>Operand stack</td>
+</tr>
+<tr>
+<td>Nested encoded strings</td>
+<td>Parsing stack</td>
+</tr>
+<tr>
+<td>Elements collide or cancel</td>
+<td>Simulation stack</td>
+</tr>
+<tr>
+<td>Remove elements to optimize an ordering</td>
+<td>Greedy monotonic stack</td>
+</tr>
+<tr>
+<td>Retrieve minimum in <span class="arithmatex">\(O(1)\)</span></td>
+<td>Auxiliary stack</td>
+</tr>
+<tr>
+<td>Iterative tree traversal</td>
+<td>Explicit stack</td>
+</tr>
+<tr>
+<td>Largest rectangle in a binary matrix</td>
+<td>Histogram + monotonic stack</td>
+</tr>
+<tr>
+<td>Sum of subarray minima</td>
+<td>Contribution counting + monotonic stack</td>
+</tr>
+<tr>
+<td>Process undo operations</td>
+<td>Stack</td>
+</tr>
+<tr>
+<td>Reverse a sequence</td>
+<td>Stack</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="22-leetcode-stack-problem-roadmap">22. LeetCode Stack Problem Roadmap</h2>
+<p>The following roadmap is organized by difficulty and pattern.</p>
+<p>It is intended to help you build skills progressively rather than solve problems randomly.</p>
+<h3 id="level-1-fundamentals">Level 1: Fundamentals</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20</td>
+<td>Valid Parentheses</td>
+<td>Matching</td>
+</tr>
+<tr>
+<td>155</td>
+<td>Min Stack</td>
+<td>Stack design</td>
+</tr>
+<tr>
+<td>150</td>
+<td>Evaluate Reverse Polish Notation</td>
+<td>Expression evaluation</td>
+</tr>
+<tr>
+<td>1047</td>
+<td>Remove All Adjacent Duplicates In String</td>
+<td>Simulation</td>
+</tr>
+<tr>
+<td>1544</td>
+<td>Make The String Great</td>
+<td>Simulation</td>
+</tr>
+<tr>
+<td>682</td>
+<td>Baseball Game</td>
+<td>Simulation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="level-2-monotonic-stack-fundamentals">Level 2: Monotonic Stack Fundamentals</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>496</td>
+<td>Next Greater Element I</td>
+<td>Next greater</td>
+</tr>
+<tr>
+<td>739</td>
+<td>Daily Temperatures</td>
+<td>Next greater</td>
+</tr>
+<tr>
+<td>901</td>
+<td>Online Stock Span</td>
+<td>Previous greater</td>
+</tr>
+<tr>
+<td>1475</td>
+<td>Final Prices With a Special Discount in a Shop</td>
+<td>Next smaller or equal</td>
+</tr>
+<tr>
+<td>496</td>
+<td>Next Greater Element I</td>
+<td>Mapping + monotonic stack</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Next Greater Element II</td>
+<td>Circular next greater</td>
+</tr>
+</tbody>
+</table>
+<h3 id="level-3-intermediate-stack-problems">Level 3: Intermediate Stack Problems</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>71</td>
+<td>Simplify Path</td>
+<td>Stack simulation</td>
+</tr>
+<tr>
+<td>394</td>
+<td>Decode String</td>
+<td>Nested parsing</td>
+</tr>
+<tr>
+<td>735</td>
+<td>Asteroid Collision</td>
+<td>Simulation</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Remove K Digits</td>
+<td>Greedy monotonic stack</td>
+</tr>
+<tr>
+<td>853</td>
+<td>Car Fleet</td>
+<td>Sorting + stack</td>
+</tr>
+<tr>
+<td>856</td>
+<td>Score of Parentheses</td>
+<td>Matching and evaluation</td>
+</tr>
+<tr>
+<td>901</td>
+<td>Online Stock Span</td>
+<td>Monotonic stack</td>
+</tr>
+</tbody>
+</table>
+<h3 id="level-4-advanced-monotonic-stack">Level 4: Advanced Monotonic Stack</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>84</td>
+<td>Largest Rectangle in Histogram</td>
+<td>Boundary detection</td>
+</tr>
+<tr>
+<td>42</td>
+<td>Trapping Rain Water</td>
+<td>Bounded regions</td>
+</tr>
+<tr>
+<td>85</td>
+<td>Maximal Rectangle</td>
+<td>Histogram + stack</td>
+</tr>
+<tr>
+<td>907</td>
+<td>Sum of Subarray Minimums</td>
+<td>Contribution counting</td>
+</tr>
+<tr>
+<td>2104</td>
+<td>Sum of Subarray Ranges</td>
+<td>Contribution counting</td>
+</tr>
+<tr>
+<td>1944</td>
+<td>Number of Visible People in a Queue</td>
+<td>Visibility</td>
+</tr>
+<tr>
+<td>456</td>
+<td>132 Pattern</td>
+<td>Reverse monotonic stack</td>
+</tr>
+</tbody>
+</table>
+<h3 id="level-5-advanced-expression-and-tree-problems">Level 5: Advanced Expression and Tree Problems</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Problem</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>224</td>
+<td>Basic Calculator</td>
+<td>Expression parsing</td>
+</tr>
+<tr>
+<td>227</td>
+<td>Basic Calculator II</td>
+<td>Operator precedence</td>
+</tr>
+<tr>
+<td>772</td>
+<td>Basic Calculator III</td>
+<td>Nested expression parsing</td>
+</tr>
+<tr>
+<td>94</td>
+<td>Binary Tree Inorder Traversal</td>
+<td>Iterative traversal</td>
+</tr>
+<tr>
+<td>144</td>
+<td>Binary Tree Preorder Traversal</td>
+<td>Iterative traversal</td>
+</tr>
+<tr>
+<td>145</td>
+<td>Binary Tree Postorder Traversal</td>
+<td>Iterative traversal</td>
+</tr>
+<tr>
+<td>173</td>
+<td>Binary Search Tree Iterator</td>
+<td>Controlled traversal</td>
+</tr>
+<tr>
+<td>341</td>
+<td>Flatten Nested List Iterator</td>
+<td>Nested traversal</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Study recommendation:</strong> Start with Level 1 and Level 2, then focus on the monotonic stack problems in Levels 3 and 4. Those patterns cover a substantial portion of stack-based interview questions.</p>
+<hr />
+<h2 id="23-advanced-interview-techniques-and-tricks">23. Advanced Interview Techniques and Tricks</h2>
+<h3 id="trick-1-store-indices-instead-of-values">Trick 1: Store Indices Instead of Values</h3>
+<p>For many monotonic stack problems, storing indices is more useful than storing values.</p>
+<p>Instead of:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</code></pre></div>
+<p>Use:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div>
+<p>Then access the value using:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="n">nums</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+</code></pre></div>
+<p>This allows you to calculate:</p>
+<ul>
+<li>Distance between elements.</li>
+<li>Width of intervals.</li>
+<li>Position of the next greater element.</li>
+<li>Position of the previous smaller element.</li>
+</ul>
+<hr />
+<h3 id="trick-2-use-a-sentinel-to-simplify-boundary-handling">Trick 2: Use a Sentinel to Simplify Boundary Handling</h3>
+<p>A sentinel is an artificial element added to simplify edge cases.</p>
+<p>For example, in a histogram problem, a final height of <code>0</code> can force all remaining bars to be processed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">largestRectangleArea</span><span class="p">(</span><span class="n">heights</span><span class="p">):</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>    <span class="n">max_area</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">heights</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a>
+<a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a>        <span class="n">h</span> <span class="o">=</span> <span class="n">heights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">heights</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+<a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a>
+<a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a>        <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">heights</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="n">h</span><span class="p">:</span>
+<a id="__codelineno-50-10" name="__codelineno-50-10" href="#__codelineno-50-10"></a>            <span class="n">height</span> <span class="o">=</span> <span class="n">heights</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()]</span>
+<a id="__codelineno-50-11" name="__codelineno-50-11" href="#__codelineno-50-11"></a>            <span class="n">left</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">stack</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-50-12" name="__codelineno-50-12" href="#__codelineno-50-12"></a>            <span class="n">width</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-50-13" name="__codelineno-50-13" href="#__codelineno-50-13"></a>
+<a id="__codelineno-50-14" name="__codelineno-50-14" href="#__codelineno-50-14"></a>            <span class="n">max_area</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_area</span><span class="p">,</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span><span class="p">)</span>
+<a id="__codelineno-50-15" name="__codelineno-50-15" href="#__codelineno-50-15"></a>
+<a id="__codelineno-50-16" name="__codelineno-50-16" href="#__codelineno-50-16"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-50-17" name="__codelineno-50-17" href="#__codelineno-50-17"></a>
+<a id="__codelineno-50-18" name="__codelineno-50-18" href="#__codelineno-50-18"></a>    <span class="k">return</span> <span class="n">max_area</span>
+</code></pre></div>
+<p>The sentinel removes the need for a separate cleanup loop.</p>
+<p><strong>Caution:</strong> This particular implementation assumes non-negative histogram heights and uses a strict comparison. Equal heights remain on the stack until a smaller height appears.</p>
+<hr />
+<h3 id="trick-3-understand-strict-and-non-strict-comparisons">Trick 3: Understand Strict and Non-Strict Comparisons</h3>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+<p>For a next greater element problem, the comparison:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="n">nums</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</code></pre></div>
+<p>does not treat equal values as greater.</p>
+<p>For a next greater-or-equal problem, use:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="n">nums</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</code></pre></div>
+<p>The comparison operator determines how duplicates are handled.</p>
+<p>In contribution-counting problems, inconsistent treatment of duplicates can cause double-counting.</p>
+<hr />
+<h3 id="trick-4-prove-linear-time-with-aggregate-analysis">Trick 4: Prove Linear Time with Aggregate Analysis</h3>
+<p>A nested loop does not automatically imply quadratic complexity.</p>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>    <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">:</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>        <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre></div>
+<p>Each element is pushed once and popped at most once.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\text{Total pushes}\leq n
+\]</div>
+<div class="arithmatex">\[
+\text{Total pops}\leq n
+\]</div>
+<p>Hence:</p>
+<div class="arithmatex">\[
+T(n)=O(n)
+\]</div>
+<p>This is an example of amortized analysis.</p>
+<hr />
+<h3 id="trick-5-distinguish-a-stack-from-a-queue">Trick 5: Distinguish a Stack from a Queue</h3>
+<p>A stack uses LIFO:</p>
+<div class="arithmatex">\[
+\text{Last In}\rightarrow\text{First Out}
+\]</div>
+<p>A queue uses FIFO:</p>
+<div class="arithmatex">\[
+\text{First In}\rightarrow\text{First Out}
+\]</div>
+<p>Use a stack when the most recent unresolved element matters.</p>
+<p>Use a queue when the earliest pending element matters.</p>
+<p>Examples:</p>
+<ul>
+<li>Stack: parentheses matching.</li>
+<li>Queue: breadth-first search.</li>
+<li>Monotonic stack: nearest greater element.</li>
+<li>Monotonic deque: sliding-window maximum.</li>
+</ul>
+<hr />
+<h2 id="24-common-mistakes-in-stack-problems">24. Common Mistakes in Stack Problems</h2>
+<h4 id="1-forgetting-to-check-whether-the-stack-is-empty">1. Forgetting to check whether the stack is empty</h4>
+<p>Incorrect:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="k">if</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>    <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre></div>
+<p>Correct:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="k">if</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>    <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="2-using-values-when-indices-are-required">2. Using values when indices are required</h4>
+<p>If the problem asks for distance or interval width, indices are generally more useful.</p>
+<h4 id="3-using-the-wrong-comparison-operator">3. Using the wrong comparison operator</h4>
+<p><code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> and <code>&gt;=</code> have different meanings.</p>
+<p>Always define whether equal values should remain on the stack.</p>
+<h4 id="4-forgetting-to-process-remaining-elements">4. Forgetting to process remaining elements</h4>
+<p>Some next-greater problems leave elements unresolved at the end.</p>
+<p>These elements typically retain a default answer such as <code>-1</code> or <code>0</code>.</p>
+<p>Histogram problems may require a final cleanup or a sentinel.</p>
+<h4 id="5-confusing-the-top-of-the-stack-with-the-bottom">5. Confusing the top of the stack with the bottom</h4>
+<p>In Python:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p>adds to the end.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre></div>
+<p>removes from the end.</p>
+<p>Therefore:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>is the top.</p>
+<h4 id="6-assuming-every-nested-loop-is-quadratic">6. Assuming every nested loop is quadratic</h4>
+<p>When elements are pushed and popped at most once, the total complexity can still be linear.</p>
+<h4 id="7-ignoring-duplicate-values">7. Ignoring duplicate values</h4>
+<p>This is especially dangerous in:</p>
+<ul>
+<li>Sum of Subarray Minimums</li>
+<li>Sum of Subarray Ranges</li>
+<li>Largest Rectangle in Histogram</li>
+<li>Previous/next greater-or-equal problems</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "toc.follow", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

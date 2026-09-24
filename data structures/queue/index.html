@@ -1,0 +1,1387 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../hashing/hashing/">
+      
+      
+        <link rel="next" href="../stack/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../imgs/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Queue - The Py Lama Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#queue-data-structure" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Py Lama Notes" class="md-header__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../imgs/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Py Lama Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Queue
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../arrays/arrays/" class="md-tabs__link">
+          
+  
+  
+  Data Structures
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../algorithms/binarysearch/" class="md-tabs__link">
+          
+  
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Py Lama Notes" class="md-nav__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../imgs/logo.png" alt="logo">
+
+    </a>
+    The Py Lama Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hashing/hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hashing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-mathematical-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Mathematical Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-how-a-queue-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. How a Queue Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-not-use-a-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why not use a list?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-queue-implementation-using-a-circular-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Queue Implementation Using a Circular Array
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-queue-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Queue Variants
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-important-queue-patterns-for-leetcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Important Queue Patterns for LeetCode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Important Queue Patterns for LeetCode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-breadth-first-search-bfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Breadth-First Search (BFS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-multi-source-bfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Multi-source BFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-monotonic-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Monotonic Queue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-topological-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Topological Processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-queue-vs-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Queue vs. Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Queue vs. Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/sliding-window/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sliding Window
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/two-pointers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Two Pointers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/binarysearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Binary Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/sorting/bubblesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bubble Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/sorting/mergesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merge Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/sorting/insertionsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Insertion Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/sorting/quicksort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-mathematical-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Mathematical Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-how-a-queue-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. How a Queue Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-not-use-a-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why not use a list?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-queue-implementation-using-a-circular-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Queue Implementation Using a Circular Array
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-queue-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Queue Variants
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-important-queue-patterns-for-leetcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Important Queue Patterns for LeetCode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Important Queue Patterns for LeetCode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-breadth-first-search-bfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Breadth-First Search (BFS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-multi-source-bfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Multi-source BFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-monotonic-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Monotonic Queue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-topological-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Topological Processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-queue-vs-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Queue vs. Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Queue vs. Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key takeaway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="queue-data-structure">Queue Data Structure</h1>
+<p>A <strong>Queue</strong> is a linear data structure that follows the <strong>FIFO (First In, First Out)</strong> principle.</p>
+<p>The first element inserted is the first element removed.</p>
+<p>Think of a line at a ticket counter: the person who arrives first is served first.</p>
+<hr />
+<h2 id="1-mathematical-model">1. Mathematical Model</h2>
+<p>A queue can be represented as an ordered sequence:</p>
+<div class="arithmatex">\[
+Q = (a_1, a_2, \ldots, a_n)
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(a_1\)</span> is the <strong>front</strong> element.</li>
+<li><span class="arithmatex">\(a_n\)</span> is the <strong>rear</strong> element.</li>
+</ul>
+<p>The fundamental operations are:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Meaning</th>
+<th>Complexity*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enqueue(x)</code></td>
+<td>Insert <span class="arithmatex">\(x\)</span> at the rear</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><code>dequeue()</code></td>
+<td>Remove the front element</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><code>front()</code></td>
+<td>Return the front element</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td><code>is_empty()</code></td>
+<td>Check whether the queue is empty</td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><em>These complexities assume a suitable queue implementation.</em></p>
+<hr />
+<h2 id="2-how-a-queue-works">2. How a Queue Works</h2>
+<p>Consider the following sequence:</p>
+<p><strong>Step 1: Enqueue 10, 20, 30</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Front → [10] [20] [30] ← Rear
+</code></pre></div>
+<p><strong>Step 2: Dequeue</strong></p>
+<p>The element <code>10</code> is removed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Front → [20] [30] ← Rear
+</code></pre></div>
+<p><strong>Step 3: Enqueue 40</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Front → [20] [30] [40] ← Rear
+</code></pre></div>
+<p>The element <code>20</code> will be removed next.</p>
+<hr />
+<h2 id="3-python-implementation">3. Python Implementation</h2>
+<p>Python provides <code>collections.deque</code>, which supports efficient insertion and removal at both ends.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># Enqueue</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># deque([10, 20, 30])</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1"># Front element</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 10</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1"># Dequeue</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">popleft</span><span class="p">())</span>  <span class="c1"># 10</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="c1"># deque([20, 30])</span>
+</code></pre></div>
+<h3 id="why-not-use-a-list">Why not use a list?</h3>
+<p>Using <code>list.pop(0)</code> takes <span class="arithmatex">\(O(n)\)</span> time because the remaining elements must shift.</p>
+<p>Using <code>deque.popleft()</code> takes <span class="arithmatex">\(O(1)\)</span> time.</p>
+<hr />
+<h2 id="4-queue-implementation-using-a-circular-array">4. Queue Implementation Using a Circular Array</h2>
+<p>A queue can be implemented using a fixed-size array of capacity <span class="arithmatex">\(C\)</span>.</p>
+<p>Two indices are maintained:</p>
+<ul>
+<li><code>front</code>: index of the first element.</li>
+<li><code>rear</code>: index where the next element will be inserted.</li>
+</ul>
+<p>To wrap around the array:</p>
+<div class="arithmatex">\[
+\text{next index} = (i+1)\bmod C
+\]</div>
+<p>This allows the queue to reuse empty positions without shifting elements.</p>
+<hr />
+<h2 id="5-queue-variants">5. Queue Variants</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple Queue</td>
+<td>Standard FIFO behavior</td>
+</tr>
+<tr>
+<td>Circular Queue</td>
+<td>Reuses array positions through wraparound</td>
+</tr>
+<tr>
+<td>Deque</td>
+<td>Insertion and deletion at both ends</td>
+</tr>
+<tr>
+<td>Priority Queue</td>
+<td>Removes elements according to priority rather than FIFO</td>
+</tr>
+</tbody>
+</table>
+<p>A <strong>priority queue</strong> is commonly implemented using a heap.</p>
+<hr />
+<h2 id="6-important-queue-patterns-for-leetcode">6. Important Queue Patterns for LeetCode</h2>
+<h3 id="1-breadth-first-search-bfs">1. Breadth-First Search (BFS)</h3>
+<p>Used to explore nodes level by level.</p>
+<p>Examples:</p>
+<ul>
+<li>Binary Tree Level Order Traversal</li>
+<li>Rotting Oranges</li>
+<li>Shortest Path in an Unweighted Graph</li>
+</ul>
+<h3 id="2-multi-source-bfs">2. Multi-source BFS</h3>
+<p>Initialize the queue with multiple starting nodes.</p>
+<p>Example: <strong>01 Matrix</strong> — calculate the distance of each cell to its nearest zero.</p>
+<h3 id="3-monotonic-queue">3. Monotonic Queue</h3>
+<p>Maintain elements in increasing or decreasing order to efficiently find sliding-window minima or maxima.</p>
+<p>Example: <strong>Sliding Window Maximum</strong> — LeetCode 239.</p>
+<h3 id="4-topological-processing">4. Topological Processing</h3>
+<p>Queues are used in Kahn's algorithm for topological sorting of directed acyclic graphs.</p>
+<p>Example: <strong>Course Schedule II</strong>.</p>
+<hr />
+<h2 id="7-queue-vs-stack">7. Queue vs. Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Queue</th>
+<th>Stack</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Principle</td>
+<td>FIFO</td>
+<td>LIFO</td>
+</tr>
+<tr>
+<td>Insertion</td>
+<td>Rear</td>
+<td>Top</td>
+</tr>
+<tr>
+<td>Removal</td>
+<td>Front</td>
+<td>Top</td>
+</tr>
+<tr>
+<td>Common application</td>
+<td>BFS</td>
+<td>DFS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-takeaway">Key takeaway</h3>
+<p>A queue is a FIFO data structure. Its most important algorithmic application is <strong>BFS</strong>, where it ensures that nodes are processed in the order they are discovered.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "toc.follow", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

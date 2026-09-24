@@ -1,0 +1,4602 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../../hashing/hashing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../imgs/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Arrays - The Py Lama Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#arrays" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="The Py Lama Notes" class="md-header__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../../imgs/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Py Lama Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Arrays
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Data Structures
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../algorithms/binarysearch/" class="md-tabs__link">
+          
+  
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="The Py Lama Notes" class="md-nav__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../../imgs/logo.png" alt="logo">
+
+    </a>
+    The Py Lama Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-an-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What Is an Array?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-mathematical-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Mathematical Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-array-as-a-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Array as a Sequence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-why-is-array-access-o1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Why Is Array Access \(O(1)\)?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-does-o1-actually-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What Does \(O(1)\) Actually Mean?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-array-memory-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Array Memory Layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-array-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Array Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Array Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Update
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-traverse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Traverse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-linear-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Linear Search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-insert-at-the-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Insert at the End
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-insert-at-the-beginning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Insert at the Beginning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-insert-in-the-middle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7 Insert in the Middle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#78-delete-from-the-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.8 Delete from the End
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#79-delete-from-the-beginning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.9 Delete from the Beginning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#710-delete-from-the-middle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.10 Delete from the Middle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-complete-array-complexity-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Complete Array Complexity Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-important-array-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Important Array Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-pattern-basic-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Pattern: Basic Traversal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Pattern: Basic Traversal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running State
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pattern-frequency-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Pattern: Frequency Counting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Pattern: Frequency Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#frequency-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frequency Array
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-pattern-prefix-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Pattern: Prefix Sum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-prefixsuffix-maximum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Prefix/Suffix Maximum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-pattern-difference-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Pattern: Difference Array
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-pattern-two-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Pattern: Two Pointers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-two-sum-on-a-sorted-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Two Sum on a Sorted Array
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-pattern-sliding-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Pattern: Sliding Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-fixed-size-sliding-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Fixed-Size Sliding Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-variable-size-sliding-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Variable-Size Sliding Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-sliding-window-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Sliding Window Warning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-pattern-binary-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Pattern: Binary Search
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-binary-search-on-the-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Binary search on the answer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-lower-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Lower Bound
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-upper-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Upper Bound
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-pattern-sorting-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Pattern: Sorting + Scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-3sum-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. 3Sum Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-pattern-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. Pattern: Hashing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-pattern-complement-lookup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Pattern: Complement Lookup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-pattern-kadanes-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Pattern: Kadane's Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-pattern-monotonic-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Pattern: Monotonic Stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-pattern-monotonic-deque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31. Pattern: Monotonic Deque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-pattern-intervals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32. Pattern: Intervals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-interval-overlap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33. Interval Overlap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-pattern-cyclic-sort-index-placement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34. Pattern: Cyclic Sort / Index Placement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-pattern-in-place-marking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35. Pattern: In-Place Marking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-pattern-dutch-national-flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        36. Pattern: Dutch National Flag
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-pattern-majority-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        37. Pattern: Majority Element
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38-pattern-prefix-hash-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        38. Pattern: Prefix + Hash Map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39-pattern-greedy-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        39. Pattern: Greedy Scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40-pattern-dynamic-programming-on-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        40. Pattern: Dynamic Programming on Arrays
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-pattern-divide-and-conquer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        41. Pattern: Divide and Conquer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-pattern-coordinate-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        42. Pattern: Coordinate Compression
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-pattern-sweep-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        43. Pattern: Sweep Line
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-pattern-matrix-2d-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        44. Pattern: Matrix / 2D Array
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-2d-prefix-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        45. 2D Prefix Sum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-common-array-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        46. Common Array Tricks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="46. Common Array Tricks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reverse-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reverse in-place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swap-without-extra-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swap Without Extra Array
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rotate Array
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-avoiding-off-by-one-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        47. Avoiding Off-by-One Errors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48-useful-index-identities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        48. Useful Index Identities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="48. Useful Index Identities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#last-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Last index
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-elements-in-inclusive-interval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number of elements in inclusive interval
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-elements-in-half-open-interval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number of elements in half-open interval
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Middle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49-common-complexity-traps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        49. Common Complexity Traps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="49. Common Complexity Traps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nested-loops-do-not-automatically-mean-on2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nested loops do not automatically mean \(O(n^2)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50-another-important-trap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        50. Another Important Trap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-in-place-vs-auxiliary-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        51. In-Place vs Auxiliary Space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-when-you-see-these-words" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        52. When You See These Words...
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-the-most-important-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        53. The Most Important Question
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="53. The Most Important Question">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-information-does-the-problem-require" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What information does the problem require?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-what-structure-does-the-input-provide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. What structure does the input provide?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-what-information-can-be-maintained" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. What information can be maintained?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-what-can-be-eliminated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. What can be eliminated?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-array-problem-solving-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        54. Array Problem-Solving Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-core-formulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        55. Core Formulas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="55. Core Formulas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#array-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Array access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inclusive-interval-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inclusive interval size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#half-open-interval-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Half-open interval size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-subarrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number of subarrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-subsets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number of subsets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefix-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefix sum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#range-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Range sum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binary-search-iterations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binary-search iterations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arithmetic-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arithmetic series
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometric-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometric series
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-final-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        56. Final Mental Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="56. Final Mental Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#level-1-mathematical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 — Mathematical
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-2-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 — Memory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-3-algorithmic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 — Algorithmic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-4-problem-solving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 — Problem Solving
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hashing/hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hashing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sliding-window/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sliding Window
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../two-pointers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Two Pointers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/binarysearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Binary Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/sorting/bubblesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bubble Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/sorting/mergesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merge Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/sorting/insertionsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Insertion Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/sorting/quicksort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-an-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What Is an Array?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-mathematical-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Mathematical Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-array-as-a-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Array as a Sequence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-why-is-array-access-o1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Why Is Array Access \(O(1)\)?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-does-o1-actually-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What Does \(O(1)\) Actually Mean?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-array-memory-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Array Memory Layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-array-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Array Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Array Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Update
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-traverse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Traverse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-linear-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Linear Search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-insert-at-the-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Insert at the End
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-insert-at-the-beginning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Insert at the Beginning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-insert-in-the-middle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7 Insert in the Middle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#78-delete-from-the-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.8 Delete from the End
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#79-delete-from-the-beginning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.9 Delete from the Beginning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#710-delete-from-the-middle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.10 Delete from the Middle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-complete-array-complexity-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Complete Array Complexity Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-important-array-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Important Array Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-pattern-basic-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Pattern: Basic Traversal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Pattern: Basic Traversal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running State
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pattern-frequency-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Pattern: Frequency Counting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Pattern: Frequency Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#frequency-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frequency Array
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-pattern-prefix-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Pattern: Prefix Sum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-prefixsuffix-maximum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Prefix/Suffix Maximum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-pattern-difference-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Pattern: Difference Array
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-pattern-two-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Pattern: Two Pointers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-two-sum-on-a-sorted-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Two Sum on a Sorted Array
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-pattern-sliding-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Pattern: Sliding Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-fixed-size-sliding-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Fixed-Size Sliding Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-variable-size-sliding-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Variable-Size Sliding Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-sliding-window-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Sliding Window Warning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-pattern-binary-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Pattern: Binary Search
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-binary-search-on-the-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Binary search on the answer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-lower-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Lower Bound
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-upper-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Upper Bound
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-pattern-sorting-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Pattern: Sorting + Scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-3sum-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. 3Sum Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-pattern-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. Pattern: Hashing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-pattern-complement-lookup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Pattern: Complement Lookup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-pattern-kadanes-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Pattern: Kadane's Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-pattern-monotonic-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Pattern: Monotonic Stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-pattern-monotonic-deque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31. Pattern: Monotonic Deque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-pattern-intervals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32. Pattern: Intervals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-interval-overlap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33. Interval Overlap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-pattern-cyclic-sort-index-placement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34. Pattern: Cyclic Sort / Index Placement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-pattern-in-place-marking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35. Pattern: In-Place Marking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-pattern-dutch-national-flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        36. Pattern: Dutch National Flag
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-pattern-majority-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        37. Pattern: Majority Element
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38-pattern-prefix-hash-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        38. Pattern: Prefix + Hash Map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39-pattern-greedy-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        39. Pattern: Greedy Scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40-pattern-dynamic-programming-on-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        40. Pattern: Dynamic Programming on Arrays
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-pattern-divide-and-conquer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        41. Pattern: Divide and Conquer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-pattern-coordinate-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        42. Pattern: Coordinate Compression
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-pattern-sweep-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        43. Pattern: Sweep Line
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-pattern-matrix-2d-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        44. Pattern: Matrix / 2D Array
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-2d-prefix-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        45. 2D Prefix Sum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-common-array-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        46. Common Array Tricks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="46. Common Array Tricks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reverse-in-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reverse in-place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swap-without-extra-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swap Without Extra Array
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rotate Array
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-avoiding-off-by-one-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        47. Avoiding Off-by-One Errors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48-useful-index-identities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        48. Useful Index Identities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="48. Useful Index Identities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#last-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Last index
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-elements-in-inclusive-interval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number of elements in inclusive interval
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-elements-in-half-open-interval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number of elements in half-open interval
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Middle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49-common-complexity-traps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        49. Common Complexity Traps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="49. Common Complexity Traps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nested-loops-do-not-automatically-mean-on2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nested loops do not automatically mean \(O(n^2)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50-another-important-trap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        50. Another Important Trap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-in-place-vs-auxiliary-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        51. In-Place vs Auxiliary Space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-when-you-see-these-words" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        52. When You See These Words...
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-the-most-important-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        53. The Most Important Question
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="53. The Most Important Question">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-information-does-the-problem-require" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What information does the problem require?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-what-structure-does-the-input-provide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. What structure does the input provide?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-what-information-can-be-maintained" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. What information can be maintained?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-what-can-be-eliminated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. What can be eliminated?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-array-problem-solving-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        54. Array Problem-Solving Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-core-formulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        55. Core Formulas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="55. Core Formulas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#array-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Array access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inclusive-interval-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inclusive interval size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#half-open-interval-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Half-open interval size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-subarrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number of subarrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-subsets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number of subsets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefix-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefix sum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#range-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Range sum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binary-search-iterations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binary-search iterations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arithmetic-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arithmetic series
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometric-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometric series
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-final-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        56. Final Mental Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="56. Final Mental Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#level-1-mathematical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 — Mathematical
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-2-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 — Memory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-3-algorithmic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 — Algorithmic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-4-problem-solving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 — Problem Solving
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="arrays">Arrays</h1>
+<p>Arrays are one of the most fundamental data structures in computer science.</p>
+<p>They are simple enough to describe mathematically, but powerful enough to support a large fraction of competitive-programming and algorithmic techniques.</p>
+<p>This page develops arrays from:</p>
+<ol>
+<li>their mathematical model,</li>
+<li>their memory representation,</li>
+<li>their fundamental operations,</li>
+<li>their complexity,</li>
+<li>and the major patterns used in LeetCode and competitive programming.</li>
+</ol>
+<hr />
+<h2 id="1-what-is-an-array">1. What Is an Array?</h2>
+<p>An array is an ordered collection of elements stored under consecutive indices.
+Starting from [0,n-1]. N is the number of elements in an array.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+</code></pre></div>
+<p>The indices are:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>index:   0    1    2    3    4
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>         ↓    ↓    ↓    ↓    ↓
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>array:  [10] [20] [30] [40] [50]
+</code></pre></div>
+<p>The important property is:</p>
+<blockquote>
+<p>The position of an element is determined directly by its index.</p>
+</blockquote>
+<hr />
+<h2 id="2-the-mathematical-model">2. The Mathematical Model</h2>
+<p>An array can be modeled as a function.</p>
+<p>For an array of length <span class="arithmatex">\(n\)</span>:</p>
+<div class="arithmatex">\[
+A : \{0,1,\ldots,n-1\} \rightarrow S
+\]</div>
+<p>where <span class="arithmatex">\(S\)</span> is the set of values that the array can contain.</p>
+<p>For example:</p>
+<div class="arithmatex">\[
+A = [7,4,9,2]
+\]</div>
+<p>can be represented as:</p>
+<div class="arithmatex">\[
+A(0)=7
+\]</div>
+<div class="arithmatex">\[
+A(1)=4
+\]</div>
+<div class="arithmatex">\[
+A(2)=9
+\]</div>
+<div class="arithmatex">\[
+A(3)=2
+\]</div>
+<p>Thus:</p>
+<div class="arithmatex">\[
+A(i)
+\]</div>
+<p>means:</p>
+<blockquote>
+<p>Give me the value associated with index <span class="arithmatex">\(i\)</span>.</p>
+</blockquote>
+<p>This mathematical model is useful because it separates two concepts:</p>
+<ul>
+<li><strong>index</strong> — where the element is</li>
+<li><strong>value</strong> — what is stored there</li>
+</ul>
+<hr />
+<h2 id="3-array-as-a-sequence">3. Array as a Sequence</h2>
+<p>An array is also a finite sequence:</p>
+<div class="arithmatex">\[
+(a_0,a_1,\ldots,a_{n-1})
+\]</div>
+<p>The order matters.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+[1,2,3] \neq [3,2,1]
+\]</div>
+<p>even though they contain the same set of values.</p>
+<p>This distinction becomes important in problems involving:</p>
+<ul>
+<li>subsequences,</li>
+<li>permutations,</li>
+<li>sorting,</li>
+<li>two pointers,</li>
+<li>dynamic programming,</li>
+<li>monotonic structures.</li>
+</ul>
+<hr />
+<h2 id="4-why-is-array-access-o1">4. Why Is Array Access <span class="arithmatex">\(O(1)\)</span>?</h2>
+<p>The key property of an array is <strong>contiguous memory</strong>.</p>
+<p>Suppose:</p>
+<ul>
+<li>the first element is stored at address <span class="arithmatex">\(B\)</span>,</li>
+<li>each element occupies <span class="arithmatex">\(w\)</span> bytes.</li>
+</ul>
+<p>Then the address of <span class="arithmatex">\(A[i]\)</span> is:</p>
+<div class="arithmatex">\[
+\boxed{
+\operatorname{address}(A[i]) = B + iw
+}
+\]</div>
+<p>For example, suppose:</p>
+<div class="arithmatex">\[
+B=1000
+\]</div>
+<p>and every element occupies:</p>
+<div class="arithmatex">\[
+w=4\text{ bytes}
+\]</div>
+<p>Then:</p>
+<div class="arithmatex">\[
+A[0]\rightarrow1000
+\]</div>
+<div class="arithmatex">\[
+A[1]\rightarrow1004
+\]</div>
+<div class="arithmatex">\[
+A[2]\rightarrow1008
+\]</div>
+<div class="arithmatex">\[
+A[3]\rightarrow1012
+\]</div>
+<p>Therefore, to access <span class="arithmatex">\(A[i]\)</span>, the machine can calculate:</p>
+<div class="arithmatex">\[
+B+iw
+\]</div>
+<p>directly.</p>
+<p>It does <strong>not</strong> need to visit:</p>
+<div class="arithmatex">\[
+A[0],A[1],\ldots,A[i-1]
+\]</div>
+<p>first.</p>
+<p>Hence:</p>
+<div class="arithmatex">\[
+\boxed{T_{\text{access}}(n)=\Theta(1)}
+\]</div>
+<hr />
+<h2 id="5-what-does-o1-actually-mean">5. What Does <span class="arithmatex">\(O(1)\)</span> Actually Mean?</h2>
+<p><span class="arithmatex">\(O(1)\)</span> does <strong>not</strong> necessarily mean:</p>
+<blockquote>
+<p>exactly one CPU instruction.</p>
+</blockquote>
+<p>It means that the number of operations does not grow with <span class="arithmatex">\(n\)</span>.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</code></pre></div>
+<p>may involve:</p>
+<ol>
+<li>calculating an address,</li>
+<li>checking bounds,</li>
+<li>accessing cache,</li>
+<li>potentially accessing RAM.</li>
+</ol>
+<p>But the number of these operations does not depend on whether the array contains:</p>
+<div class="arithmatex">\[
+100
+\]</div>
+<p>or</p>
+<div class="arithmatex">\[
+10^9
+\]</div>
+<p>elements.</p>
+<p>Therefore the asymptotic complexity is:</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<hr />
+<h2 id="6-array-memory-layout">6. Array Memory Layout</h2>
+<p>Conceptually:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Memory
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>       B
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>       ↓
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>┌──────┬──────┬──────┬──────┬──────┐
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>│ A[0] │ A[1] │ A[2] │ A[3] │ A[4] │
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>└──────┴──────┴──────┴──────┴──────┘
+</code></pre></div>
+<p>The elements are adjacent.</p>
+<p>If each element has size <span class="arithmatex">\(w\)</span>:</p>
+<div class="arithmatex">\[
+A[i] = B + iw
+\]</div>
+<p>This is the fundamental reason random access is possible.</p>
+<hr />
+<h2 id="7-array-operations">7. Array Operations</h2>
+<p>Let:</p>
+<div class="arithmatex">\[
+n = |A|
+\]</div>
+<p>be the number of elements.</p>
+<h3 id="71-access">7.1 Access</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</code></pre></div>
+<p>Complexity:</p>
+<div class="arithmatex">\[
+\boxed{O(1)}
+\]</div>
+<hr />
+<h3 id="72-update">7.2 Update</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+</code></pre></div>
+<p>Complexity:</p>
+<div class="arithmatex">\[
+\boxed{O(1)}
+\]</div>
+<hr />
+<h3 id="73-traverse">7.3 Traverse</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">A</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">process</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p>Every element is visited once.</p>
+<div class="arithmatex">\[
+\boxed{O(n)}
+\]</div>
+<hr />
+<h3 id="74-linear-search">7.4 Linear Search</h3>
+<p>Find whether <span class="arithmatex">\(x\)</span> exists:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="k">return</span> <span class="n">i</span>
+</code></pre></div>
+<p>Worst case:</p>
+<div class="arithmatex">\[
+\boxed{O(n)}
+\]</div>
+<p>because we may need to inspect every element.</p>
+<hr />
+<h3 id="75-insert-at-the-end">7.5 Insert at the End</h3>
+<p>If there is free capacity:</p>
+<div class="arithmatex">\[
+\boxed{O(1)}
+\]</div>
+<p>For a dynamic array, this is:</p>
+<div class="arithmatex">\[
+\boxed{O(1)\text{ amortized}}
+\]</div>
+<p>but a resize can cost:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<hr />
+<h3 id="76-insert-at-the-beginning">7.6 Insert at the Beginning</h3>
+<p>Suppose:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[1,2,3,4]
+</code></pre></div>
+<p>and we insert <span class="arithmatex">\(0\)</span>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[0,1,2,3,4]
+</code></pre></div>
+<p>Every existing element must move.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{O(n)}
+\]</div>
+<hr />
+<h3 id="77-insert-in-the-middle">7.7 Insert in the Middle</h3>
+<p>For insertion at index <span class="arithmatex">\(i\)</span>, approximately:</p>
+<div class="arithmatex">\[
+n-i
+\]</div>
+<p>elements must be shifted.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{O(n)}
+\]</div>
+<p>worst case.</p>
+<hr />
+<h3 id="78-delete-from-the-end">7.8 Delete from the End</h3>
+<p>If the array supports removing the final element:</p>
+<div class="arithmatex">\[
+\boxed{O(1)}
+\]</div>
+<hr />
+<h3 id="79-delete-from-the-beginning">7.9 Delete from the Beginning</h3>
+<p>Removing the first element requires shifting the remaining elements.</p>
+<div class="arithmatex">\[
+\boxed{O(n)}
+\]</div>
+<hr />
+<h3 id="710-delete-from-the-middle">7.10 Delete from the Middle</h3>
+<p>Deleting <span class="arithmatex">\(A[i]\)</span> requires shifting:</p>
+<div class="arithmatex">\[
+A[i+1],A[i+2],\ldots,A[n-1]
+\]</div>
+<p>left.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{O(n)}
+\]</div>
+<hr />
+<h2 id="8-complete-array-complexity-table">8. Complete Array Complexity Table</h2>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th style="text-align: right;">Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Access</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td>Update</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td>Traverse</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td>Linear search</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td>Binary search</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(\log n)\)</span></td>
+</tr>
+<tr>
+<td>Append</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(1)\)</span> amortized</td>
+</tr>
+<tr>
+<td>Insert at beginning</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td>Insert at middle</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td>Delete at beginning</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td>Delete at middle</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td>Delete at end</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td>Reverse</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td>Sort</td>
+<td style="text-align: right;"><span class="arithmatex">\(O(n\log n)\)</span> typical comparison sort</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-important-array-patterns">9. Important Array Patterns</h2>
+<p>Most LeetCode and competitive-programming array problems are not solved by knowing more syntax.</p>
+<p>They are solved by recognizing <strong>structure</strong>.</p>
+<p>The major patterns are:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Arrays
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>├── Basic traversal
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>├── Frequency counting
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>├── Prefix/Suffix
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>├── Two pointers
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>├── Sliding window
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>├── Binary search
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>├── Sorting + scanning
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>├── Hashing
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>├── Kadane's algorithm
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>├── Difference arrays
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>├── Intervals
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>├── Monotonic stack
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>├── Monotonic deque
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>├── Greedy
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>├── Dynamic programming
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>├── Divide and conquer
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>├── Bit manipulation
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>├── Cyclic placement
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>├── Coordinate compression
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>├── Sweep line
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>└── Matrix techniques
+</code></pre></div>
+<hr />
+<h2 id="10-pattern-basic-traversal">10. Pattern: Basic Traversal</h2>
+<p>The simplest array pattern.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="o">...</span>
+</code></pre></div>
+<p>Use when:</p>
+<ul>
+<li>every element must be inspected,</li>
+<li>the answer can be maintained incrementally,</li>
+<li>no special ordering is required.</li>
+</ul>
+<p>Typical examples:</p>
+<ul>
+<li>maximum element,</li>
+<li>minimum element,</li>
+<li>sum,</li>
+<li>count,</li>
+<li>frequency,</li>
+<li>validation.</li>
+</ul>
+<hr />
+<h3 id="running-state">Running State</h3>
+<p>Instead of storing everything, maintain only what is necessary.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">maximum</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"-inf"</span><span class="p">)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">maximum</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p>Complexity:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>Time:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>Space:</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<hr />
+<h2 id="11-pattern-frequency-counting">11. Pattern: Frequency Counting</h2>
+<p>When values belong to a manageable domain, count occurrences.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">freq</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">freq</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div>
+<p>Useful for:</p>
+<ul>
+<li>duplicates,</li>
+<li>anagrams,</li>
+<li>frequency comparisons,</li>
+<li>majority elements,</li>
+<li>counting pairs.</li>
+</ul>
+<p>Complexity:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>average time with hashing.</p>
+<hr />
+<h3 id="frequency-array">Frequency Array</h3>
+<p>If:</p>
+<div class="arithmatex">\[
+0\le x &lt; k
+\]</div>
+<p>and <span class="arithmatex">\(k\)</span> is reasonably small:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">freq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="n">freq</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div>
+<p>This can be preferable to hashing.</p>
+<p>Complexity:</p>
+<div class="arithmatex">\[
+O(n+k)
+\]</div>
+<hr />
+<h2 id="12-pattern-prefix-sum">12. Pattern: Prefix Sum</h2>
+<p>Define:</p>
+<div class="arithmatex">\[
+P[i]=\sum_{j=0}^{i}A[j]
+\]</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>A = [3, 1, 4, 2]
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>P = [3, 4, 8, 10]
+</code></pre></div>
+<p>Range sum:</p>
+<div class="arithmatex">\[
+\sum_{i=l}^{r}A[i]
+=
+P[r]-P[l-1]
+\]</div>
+<p>for <span class="arithmatex">\(l&gt;0\)</span>.</p>
+<p>With a leading zero:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">prefix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="n">prefix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prefix</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p>Then:</p>
+<div class="arithmatex">\[
+\boxed{
+\operatorname{sum}(l,r)
+=
+P[r+1]-P[l]
+}
+\]</div>
+<p>This version avoids special-casing <span class="arithmatex">\(l=0\)</span>.</p>
+<hr />
+<h2 id="13-prefixsuffix-maximum">13. Prefix/Suffix Maximum</h2>
+<p>For:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>nums = [3, 1, 5, 2, 4]
+</code></pre></div>
+<p>prefix maximum:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>[3, 3, 5, 5, 5]
+</code></pre></div>
+<p>suffix maximum:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>[5, 5, 5, 4, 4]
+</code></pre></div>
+<p>Useful for:</p>
+<ul>
+<li>trapping rain water,</li>
+<li>left/right maximum problems,</li>
+<li>dominance relationships,</li>
+<li>range maximum reasoning.</li>
+</ul>
+<hr />
+<h2 id="14-pattern-difference-array">14. Pattern: Difference Array</h2>
+<p>For range updates:</p>
+<div class="arithmatex">\[
+[l,r]
+\]</div>
+<p>add <span class="arithmatex">\(x\)</span>.</p>
+<p>Instead of modifying every element:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">diff</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="k">if</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="n">diff</span><span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">x</span>
+</code></pre></div>
+<p>Then reconstruct using a prefix sum.</p>
+<p>This transforms:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>per update into:</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<p>per update.</p>
+<p>If there are <span class="arithmatex">\(q\)</span> updates:</p>
+<div class="arithmatex">\[
+O(q+n)
+\]</div>
+<p>instead of potentially:</p>
+<div class="arithmatex">\[
+O(qn).
+\]</div>
+<hr />
+<h2 id="15-pattern-two-pointers">15. Pattern: Two Pointers</h2>
+<hr />
+<h2 id="16-two-sum-on-a-sorted-array">16. Two Sum on a Sorted Array</h2>
+<hr />
+<h2 id="17-pattern-sliding-window">17. Pattern: Sliding Window</h2>
+<hr />
+<h2 id="18-fixed-size-sliding-window">18. Fixed-Size Sliding Window</h2>
+<hr />
+<h2 id="19-variable-size-sliding-window">19. Variable-Size Sliding Window</h2>
+<hr />
+<h2 id="20-sliding-window-warning">20. Sliding Window Warning</h2>
+<hr />
+<h2 id="21-pattern-binary-search">21. Pattern: Binary Search</h2>
+<hr />
+<h2 id="22-binary-search-on-the-answer">22. Binary search on the answer</h2>
+<hr />
+<h2 id="23-lower-bound">23. Lower Bound</h2>
+<hr />
+<h2 id="24-upper-bound">24. Upper Bound</h2>
+<hr />
+<h2 id="25-pattern-sorting-scanning">25. Pattern: Sorting + Scanning</h2>
+<p>Sometimes the original order does not matter.</p>
+<p>Sorting costs:</p>
+<div class="arithmatex">\[
+O(n\log n)
+\]</div>
+<p>but can expose structure that allows a simple linear scan.</p>
+<p>Common problems:</p>
+<ul>
+<li>3Sum,</li>
+<li>merging intervals,</li>
+<li>grouping values,</li>
+<li>duplicate detection,</li>
+<li>closest pairs,</li>
+<li>greedy scheduling.</li>
+</ul>
+<p>General strategy:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>unsorted array
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>      ↓
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    sort
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>      ↓
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>exploit ordering
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>      ↓
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>   linear scan
+</code></pre></div>
+<hr />
+<h2 id="26-3sum-pattern">26. 3Sum Pattern</h2>
+<p>Sort:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</code></pre></div>
+<p>Fix one element:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</code></pre></div>
+<p>Then solve the remaining two-sum problem with two pointers.</p>
+<p>Complexity:</p>
+<div class="arithmatex">\[
+O(n\log n)+O(n^2)
+\]</div>
+<p>therefore:</p>
+<div class="arithmatex">\[
+\boxed{O(n^2)}
+\]</div>
+<p>A crucial optimization is skipping duplicates:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    <span class="k">continue</span>
+</code></pre></div>
+<p>and similarly for the two pointers.</p>
+<hr />
+<h2 id="27-pattern-hashing">27. Pattern: Hashing</h2>
+<p>If we need fast membership:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</code></pre></div>
+<p>Average complexity:</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<p>per lookup.</p>
+<p>Typical pattern:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>    <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>        <span class="o">...</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>    <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p>Useful for:</p>
+<ul>
+<li>duplicates,</li>
+<li>Two Sum,</li>
+<li>longest consecutive sequence,</li>
+<li>complement lookup,</li>
+<li>frequency problems.</li>
+</ul>
+<p>Trade-off:</p>
+<div class="arithmatex">\[
+\text{Time} \downarrow
+\]</div>
+<p>at the cost of:</p>
+<div class="arithmatex">\[
+\text{Space} \uparrow
+\]</div>
+<hr />
+<h2 id="28-pattern-complement-lookup">28. Pattern: Complement Lookup</h2>
+<p>For Two Sum:</p>
+<div class="arithmatex">\[
+a+b=T
+\]</div>
+<p>Rearrange:</p>
+<div class="arithmatex">\[
+b=T-a
+\]</div>
+<p>Therefore, while processing <span class="arithmatex">\(a\)</span>, search for:</p>
+<div class="arithmatex">\[
+T-a.
+\]</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">seen</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>    <span class="n">complement</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">x</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>    <span class="k">if</span> <span class="n">complement</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">seen</span><span class="p">[</span><span class="n">complement</span><span class="p">],</span> <span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>    <span class="n">seen</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+</code></pre></div>
+<p>Average:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>time.</p>
+<p>Space:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<hr />
+<h2 id="29-pattern-kadanes-algorithm">29. Pattern: Kadane's Algorithm</h2>
+<p>Maximum subarray sum.</p>
+<p>Define:</p>
+<div class="arithmatex">\[
+bestEndingHere(i)
+\]</div>
+<p>as the maximum sum of a subarray ending at <span class="arithmatex">\(i\)</span>.</p>
+<p>Then:</p>
+<div class="arithmatex">\[
+dp[i]
+=
+\max
+\left(
+A[i],
+dp[i-1]+A[i]
+\right)
+\]</div>
+<p>The answer is:</p>
+<div class="arithmatex">\[
+\max_i dp[i].
+\]</div>
+<p>We only need the previous state:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">current</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">best</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>    <span class="n">current</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">current</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>    <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">current</span><span class="p">)</span>
+</code></pre></div>
+<p>Time:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>Space:</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<hr />
+<h2 id="30-pattern-monotonic-stack">30. Pattern: Monotonic Stack</h2>
+<p>Use when the problem asks for relationships with the:</p>
+<ul>
+<li>next greater element,</li>
+<li>next smaller element,</li>
+<li>previous greater element,</li>
+<li>previous smaller element.</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>A = [2,1,5,3]
+</code></pre></div>
+<p>For each element, we may want the first larger element to its right.</p>
+<p>A monotonic stack maintains elements in sorted order.</p>
+<p>Typical complexity:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>Why?</p>
+<p>Every element is:</p>
+<ul>
+<li>pushed at most once,</li>
+<li>popped at most once.</li>
+</ul>
+<p>Therefore total stack operations are:</p>
+<div class="arithmatex">\[
+O(n).
+\]</div>
+<hr />
+<h2 id="31-pattern-monotonic-deque">31. Pattern: Monotonic Deque</h2>
+<p>Useful when we need:</p>
+<blockquote>
+<p>maximum/minimum over a moving window.</p>
+</blockquote>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>[1,3,-1,-3,5,3,6,7]
+</code></pre></div>
+<p>with window size <span class="arithmatex">\(k\)</span>.</p>
+<p>A deque can maintain candidates in decreasing order.</p>
+<p>The front always contains the maximum candidate.</p>
+<p>Each element enters and leaves the deque at most once.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{O(n)}
+\]</div>
+<hr />
+<h2 id="32-pattern-intervals">32. Pattern: Intervals</h2>
+<p>An interval is:</p>
+<div class="arithmatex">\[
+[l,r]
+\]</div>
+<p>Typical problems:</p>
+<ul>
+<li>merge intervals,</li>
+<li>insert interval,</li>
+<li>overlapping intervals,</li>
+<li>meeting rooms,</li>
+<li>interval scheduling.</li>
+</ul>
+<p>Usually:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">intervals</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</code></pre></div>
+<p>Then scan from left to right.</p>
+<p>Sorting provides:</p>
+<div class="arithmatex">\[
+l_1\le l_2\le\cdots
+\]</div>
+<p>which makes overlap relationships easier to reason about.</p>
+<hr />
+<h2 id="33-interval-overlap">33. Interval Overlap</h2>
+<p>Two intervals:</p>
+<div class="arithmatex">\[
+[a,b]
+\]</div>
+<p>and:</p>
+<div class="arithmatex">\[
+[c,d]
+\]</div>
+<p>overlap if:</p>
+<div class="arithmatex">\[
+a\le d
+\]</div>
+<p>and:</p>
+<div class="arithmatex">\[
+c\le b.
+\]</div>
+<p>Equivalently:</p>
+<div class="arithmatex">\[
+\max(a,c)\le\min(b,d).
+\]</div>
+<p>This identity is worth remembering.</p>
+<hr />
+<h2 id="34-pattern-cyclic-sort-index-placement">34. Pattern: Cyclic Sort / Index Placement</h2>
+<p>Useful when:</p>
+<ul>
+<li>numbers are in a restricted range,</li>
+<li>values correspond to indices,</li>
+<li>we need <span class="arithmatex">\(O(1)\)</span> auxiliary space.</li>
+</ul>
+<p>For example:</p>
+<div class="arithmatex">\[
+1\le A[i]\le n.
+\]</div>
+<p>The desired position of value <span class="arithmatex">\(x\)</span> is often:</p>
+<div class="arithmatex">\[
+x-1.
+\]</div>
+<p>So:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="k">while</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>    <span class="o">...</span>
+</code></pre></div>
+<p>This pattern appears in:</p>
+<ul>
+<li>Missing Number,</li>
+<li>Find All Numbers Disappeared in an Array,</li>
+<li>First Missing Positive,</li>
+<li>Find the Duplicate Number.</li>
+</ul>
+<hr />
+<h2 id="35-pattern-in-place-marking">35. Pattern: In-Place Marking</h2>
+<p>If values are restricted to indices, use the array itself as memory.</p>
+<p>For example, if:</p>
+<div class="arithmatex">\[
+1\le x\le n
+\]</div>
+<p>we can mark index <span class="arithmatex">\(x-1\)</span>.</p>
+<p>A common trick:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">nums</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div>
+<p>The sign stores additional information.</p>
+<p>This can reduce:</p>
+<div class="arithmatex">\[
+O(n)\text{ auxiliary space}
+\]</div>
+<p>to:</p>
+<div class="arithmatex">\[
+O(1).
+\]</div>
+<p>Be careful when modifying the array because the original values may be needed later.</p>
+<hr />
+<h2 id="36-pattern-dutch-national-flag">36. Pattern: Dutch National Flag</h2>
+<p>For arrays containing three categories, for example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>0, 1, 2
+</code></pre></div>
+<p>maintain three regions:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>[0 ... low-1]
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>[low ... mid-1]
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>[mid ... high]
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>[high+1 ... n-1]
+</code></pre></div>
+<p>Maintain invariant:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>0-region | 1-region | unknown | 2-region
+</code></pre></div>
+<p>The algorithm runs in:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>time and:</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<p>space.</p>
+<hr />
+<h2 id="37-pattern-majority-element">37. Pattern: Majority Element</h2>
+<p>If an element appears more than:</p>
+<div class="arithmatex">\[
+\frac n2
+\]</div>
+<p>times, use Boyer-Moore Voting.</p>
+<p>Maintain:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">candidate</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="n">count</span>
+</code></pre></div>
+<p>When:</p>
+<div class="arithmatex">\[
+count=0
+\]</div>
+<p>choose a new candidate.</p>
+<p>Otherwise:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>same candidate → count + 1
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>different       → count - 1
+</code></pre></div>
+<p>The intuition is cancellation.</p>
+<p>Pairs of different elements cancel each other.</p>
+<p>A true majority cannot be completely cancelled.</p>
+<p>Complexity:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>time.</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<p>space.</p>
+<hr />
+<h2 id="38-pattern-prefix-hash-map">38. Pattern: Prefix + Hash Map</h2>
+<p>A powerful combination.</p>
+<p>Suppose:</p>
+<div class="arithmatex">\[
+prefix[i]=\sum_{j=0}^{i}A[j].
+\]</div>
+<p>For a subarray sum equal to <span class="arithmatex">\(k\)</span>:</p>
+<div class="arithmatex">\[
+prefix[r]-prefix[l]=k
+\]</div>
+<p>which means:</p>
+<div class="arithmatex">\[
+prefix[l]=prefix[r]-k.
+\]</div>
+<p>Therefore, while scanning the array, store frequencies of previous prefix sums.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">count</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="n">prefix</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a>    <span class="n">prefix</span> <span class="o">+=</span> <span class="n">x</span>
+<a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a>
+<a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a>    <span class="n">answer</span> <span class="o">+=</span> <span class="n">count</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prefix</span> <span class="o">-</span> <span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a>
+<a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a>    <span class="n">count</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div>
+<p>Average complexity:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>This technique is extremely important for subarray-sum problems, especially when negative numbers are present.</p>
+<hr />
+<h2 id="39-pattern-greedy-scanning">39. Pattern: Greedy Scanning</h2>
+<p>Sometimes a locally optimal decision can be proven to lead to a globally optimal result.</p>
+<p>Examples include:</p>
+<ul>
+<li>Jump Game,</li>
+<li>Gas Station,</li>
+<li>interval scheduling,</li>
+<li>maximum subarray variants.</li>
+</ul>
+<p>Do not use greedy merely because it "looks right".</p>
+<p>Ask:</p>
+<blockquote>
+<p>Why can the discarded alternatives never produce a better solution?</p>
+</blockquote>
+<p>A greedy solution should have a correctness argument.</p>
+<hr />
+<h2 id="40-pattern-dynamic-programming-on-arrays">40. Pattern: Dynamic Programming on Arrays</h2>
+<p>Many DP problems define a state based on an index.</p>
+<p>Typical form:</p>
+<div class="arithmatex">\[
+dp[i]
+=
+f(dp[i-1],dp[i-2],\ldots,A[i])
+\]</div>
+<p>Examples:</p>
+<ul>
+<li>House Robber,</li>
+<li>Maximum Subarray,</li>
+<li>Climbing Stairs,</li>
+<li>Decode Ways.</li>
+</ul>
+<p>The important questions are:</p>
+<ol>
+<li>What does <span class="arithmatex">\(dp[i]\)</span> mean?</li>
+<li>What previous states can produce <span class="arithmatex">\(dp[i]\)</span>?</li>
+<li>What is the recurrence?</li>
+<li>What are the base cases?</li>
+<li>Can the state be compressed?</li>
+</ol>
+<hr />
+<h2 id="41-pattern-divide-and-conquer">41. Pattern: Divide and Conquer</h2>
+<p>Split:</p>
+<div class="arithmatex">\[
+A
+\]</div>
+<p>into smaller portions.</p>
+<p>Typical structure:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>          A
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>        /   \
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>       L     R
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>      / \   / \
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>     ...   ...
+</code></pre></div>
+<p>Solve each part and combine.</p>
+<p>Examples:</p>
+<ul>
+<li>Merge Sort,</li>
+<li>inversion counting,</li>
+<li>maximum subarray,</li>
+<li>divide-and-conquer selection.</li>
+</ul>
+<p>The classic recurrence:</p>
+<div class="arithmatex">\[
+T(n)=2T(n/2)+O(n)
+\]</div>
+<p>gives:</p>
+<div class="arithmatex">\[
+\boxed{T(n)=O(n\log n)}
+\]</div>
+<hr />
+<h2 id="42-pattern-coordinate-compression">42. Pattern: Coordinate Compression</h2>
+<p>Suppose values are huge:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>[10^9, 500, 10^7, 500]
+</code></pre></div>
+<p>but only their relative ordering matters.</p>
+<p>Sort unique values:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>[500, 10^7, 10^9]
+</code></pre></div>
+<p>Map:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>500   → 0
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>10^7  → 1
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>10^9  → 2
+</code></pre></div>
+<p>Now large values become compact indices.</p>
+<p>Useful for:</p>
+<ul>
+<li>Fenwick trees,</li>
+<li>segment trees,</li>
+<li>frequency arrays,</li>
+<li>interval problems,</li>
+<li>sweep line algorithms.</li>
+</ul>
+<hr />
+<h2 id="43-pattern-sweep-line">43. Pattern: Sweep Line</h2>
+<p>Convert an interval problem into events.</p>
+<p>For interval:</p>
+<div class="arithmatex">\[
+[l,r]
+\]</div>
+<p>create:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>(l, +1)
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>(r, -1)
+</code></pre></div>
+<p>Sort events.</p>
+<p>Then scan from left to right while maintaining the active count.</p>
+<p>Useful for:</p>
+<ul>
+<li>maximum overlapping intervals,</li>
+<li>meeting rooms,</li>
+<li>range coverage,</li>
+<li>geometric problems.</li>
+</ul>
+<hr />
+<h2 id="44-pattern-matrix-2d-array">44. Pattern: Matrix / 2D Array</h2>
+<p>A matrix is simply a multidimensional array.</p>
+<p>For:</p>
+<div class="arithmatex">\[
+A\in\mathbb{R}^{m\times n}
+\]</div>
+<p>each element is:</p>
+<div class="arithmatex">\[
+A[i][j].
+\]</div>
+<p>Common patterns:</p>
+<ul>
+<li>row traversal,</li>
+<li>column traversal,</li>
+<li>diagonal traversal,</li>
+<li>spiral traversal,</li>
+<li>matrix rotation,</li>
+<li>transpose,</li>
+<li>flood fill,</li>
+<li>prefix sums,</li>
+<li>binary search.</li>
+</ul>
+<hr />
+<h2 id="45-2d-prefix-sum">45. 2D Prefix Sum</h2>
+<p>Define:</p>
+<div class="arithmatex">\[
+P[i][j]
+=
+\sum_{x\le i}\sum_{y\le j}A[x][y].
+\]</div>
+<p>Then a rectangle sum can be calculated using inclusion-exclusion.</p>
+<p>For rectangle:</p>
+<div class="arithmatex">\[
+(r_1,c_1)\rightarrow(r_2,c_2)
+\]</div>
+<p>the sum is:</p>
+<div class="arithmatex">\[
+P[r_2][c_2]
+-P[r_1-1][c_2]
+-P[r_2][c_1-1]
++P[r_1-1][c_1-1].
+\]</div>
+<p>The final addition is necessary because the top-left region was subtracted twice.</p>
+<hr />
+<h2 id="46-common-array-tricks">46. Common Array Tricks</h2>
+<h3 id="reverse-in-place">Reverse in-place</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">:</span>
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>    <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a>    <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>    <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+</code></pre></div>
+<p>Time:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>Space:</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<hr />
+<h3 id="swap-without-extra-array">Swap Without Extra Array</h3>
+<p>Python:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+</code></pre></div>
+<hr />
+<h3 id="rotate-array">Rotate Array</h3>
+<p>A rotation can be performed using reversals.</p>
+<p>For right rotation by <span class="arithmatex">\(k\)</span>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>reverse entire array
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>reverse first k
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>reverse remaining n-k
+</code></pre></div>
+<p>Always normalize:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="n">k</span> <span class="o">%=</span> <span class="n">n</span>
+</code></pre></div>
+<p>because:</p>
+<div class="arithmatex">\[
+k\equiv k\bmod n
+\]</div>
+<p>for rotations.</p>
+<hr />
+<h2 id="47-avoiding-off-by-one-errors">47. Avoiding Off-by-One Errors</h2>
+<p>Always explicitly define whether your interval is:</p>
+<div class="arithmatex">\[
+[l,r]
+\]</div>
+<p>or:</p>
+<div class="arithmatex">\[
+[l,r)
+\]</div>
+<p>For Python slicing:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">:</span><span class="n">r</span><span class="p">]</span>
+</code></pre></div>
+<p>means:</p>
+<div class="arithmatex">\[
+[l,r)
+\]</div>
+<p>because <span class="arithmatex">\(r\)</span> is excluded.</p>
+<p>A large number of binary-search and sliding-window bugs are boundary-definition bugs rather than algorithmic bugs.</p>
+<hr />
+<h2 id="48-useful-index-identities">48. Useful Index Identities</h2>
+<p>For an array of length <span class="arithmatex">\(n\)</span>:</p>
+<h4 id="last-index">Last index</h4>
+<div class="arithmatex">\[
+n-1
+\]</div>
+<h4 id="number-of-elements-in-inclusive-interval">Number of elements in inclusive interval</h4>
+<div class="arithmatex">\[
+[l,r]:
+\]</div>
+<div class="arithmatex">\[
+r-l+1
+\]</div>
+<h4 id="number-of-elements-in-half-open-interval">Number of elements in half-open interval</h4>
+<div class="arithmatex">\[
+[l,r):
+\]</div>
+<div class="arithmatex">\[
+r-l
+\]</div>
+<h4 id="middle">Middle</h4>
+<div class="arithmatex">\[
+mid=l+\left\lfloor\frac{r-l}{2}\right\rfloor
+\]</div>
+<p>This form avoids overflow in languages where integer overflow is possible.</p>
+<hr />
+<h2 id="49-common-complexity-traps">49. Common Complexity Traps</h2>
+<h3 id="nested-loops-do-not-automatically-mean-on2">Nested loops do not automatically mean <span class="arithmatex">\(O(n^2)\)</span></h3>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">l</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>    <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">:</span>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>        <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div>
+<p>Although there is a <code>for</code> and a <code>while</code>, <span class="arithmatex">\(l\)</span> increases at most <span class="arithmatex">\(n\)</span> times.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+O(n+n)=O(n).
+\]</div>
+<p>Always count <strong>total pointer movement</strong>, not merely nesting depth.</p>
+<hr />
+<h2 id="50-another-important-trap">50. Another Important Trap</h2>
+<p>This:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>        <span class="o">...</span>
+</code></pre></div>
+<p>does have:</p>
+<div class="arithmatex">\[
+n+(n-1)+(n-2)+\cdots+1
+\]</div>
+<p>iterations.</p>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\frac{n(n+1)}2
+\]</div>
+<p>and hence:</p>
+<div class="arithmatex">\[
+\boxed{O(n^2)}.
+\]</div>
+<hr />
+<h2 id="51-in-place-vs-auxiliary-space">51. In-Place vs Auxiliary Space</h2>
+<p>If an algorithm modifies the input array:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span>
+</code></pre></div>
+<p>that does not necessarily count as auxiliary space.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="n">reverse</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</code></pre></div>
+<p>can use:</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<p>auxiliary space.</p>
+<p>But creating:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div>
+<p>of size <span class="arithmatex">\(n\)</span> requires:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>space.</p>
+<p>Always distinguish:</p>
+<ul>
+<li>input space,</li>
+<li>output space,</li>
+<li>auxiliary space.</li>
+</ul>
+<hr />
+<h2 id="52-when-you-see-these-words">52. When You See These Words...</h2>
+<table>
+<thead>
+<tr>
+<th>Problem wording</th>
+<th>Consider</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"sorted"</td>
+<td>Binary search / two pointers</td>
+</tr>
+<tr>
+<td>"pair"</td>
+<td>Hashing / two pointers</td>
+</tr>
+<tr>
+<td>"subarray"</td>
+<td>Prefix sum / sliding window / Kadane</td>
+</tr>
+<tr>
+<td>"range sum"</td>
+<td>Prefix sum</td>
+</tr>
+<tr>
+<td>"range update"</td>
+<td>Difference array</td>
+</tr>
+<tr>
+<td>"next greater"</td>
+<td>Monotonic stack</td>
+</tr>
+<tr>
+<td>"window maximum"</td>
+<td>Monotonic deque</td>
+</tr>
+<tr>
+<td>"frequency"</td>
+<td>Hash map / frequency array</td>
+</tr>
+<tr>
+<td>"values from 1 to n"</td>
+<td>Index marking / cyclic sort</td>
+</tr>
+<tr>
+<td>"minimum possible"</td>
+<td>Binary search on answer</td>
+</tr>
+<tr>
+<td>"maximum possible"</td>
+<td>Binary search / greedy / DP</td>
+</tr>
+<tr>
+<td>"intervals"</td>
+<td>Sort + scan / sweep line</td>
+</tr>
+<tr>
+<td>"three values"</td>
+<td>Dutch National Flag</td>
+</tr>
+<tr>
+<td>"majority"</td>
+<td>Boyer-Moore</td>
+</tr>
+<tr>
+<td>"contiguous"</td>
+<td>Sliding window / prefix / DP</td>
+</tr>
+<tr>
+<td>"in-place"</td>
+<td>Two pointers / index marking</td>
+</tr>
+<tr>
+<td>"closest pair"</td>
+<td>Sorting + two pointers</td>
+</tr>
+<tr>
+<td>"all combinations"</td>
+<td>Backtracking</td>
+</tr>
+<tr>
+<td>"overlapping ranges"</td>
+<td>Sweep line</td>
+</tr>
+<tr>
+<td>"repeated range queries"</td>
+<td>Prefix/suffix preprocessing</td>
+</tr>
+</tbody>
+</table>
+<p>These are <strong>hints</strong>, not rules.</p>
+<hr />
+<h2 id="53-the-most-important-question">53. The Most Important Question</h2>
+<p>When solving an array problem, do not immediately ask:</p>
+<blockquote>
+<p>"Which LeetCode pattern is this?"</p>
+</blockquote>
+<p>Instead ask:</p>
+<h4 id="1-what-information-does-the-problem-require">1. What information does the problem require?</h4>
+<p>Is it asking about:</p>
+<ul>
+<li>individual elements?</li>
+<li>pairs?</li>
+<li>subarrays?</li>
+<li>prefixes?</li>
+<li>frequencies?</li>
+<li>ranges?</li>
+<li>ordering?</li>
+</ul>
+<h4 id="2-what-structure-does-the-input-provide">2. What structure does the input provide?</h4>
+<p>Is it:</p>
+<ul>
+<li>sorted?</li>
+<li>bounded?</li>
+<li>positive?</li>
+<li>distinct?</li>
+<li>duplicated?</li>
+<li>circular?</li>
+<li>partially ordered?</li>
+</ul>
+<h4 id="3-what-information-can-be-maintained">3. What information can be maintained?</h4>
+<p>Can I maintain:</p>
+<div class="arithmatex">\[
+sum
+\]</div>
+<div class="arithmatex">\[
+min
+\]</div>
+<div class="arithmatex">\[
+max
+\]</div>
+<div class="arithmatex">\[
+frequency
+\]</div>
+<div class="arithmatex">\[
+prefix
+\]</div>
+<div class="arithmatex">\[
+window
+\]</div>
+<div class="arithmatex">\[
+candidate
+\]</div>
+<div class="arithmatex">\[
+stack
+\]</div>
+<h4 id="4-what-can-be-eliminated">4. What can be eliminated?</h4>
+<p>A good algorithm usually wins by eliminating possibilities.</p>
+<p>Binary search eliminates half.</p>
+<p>Two pointers eliminate regions.</p>
+<p>Hashing eliminates repeated searches.</p>
+<p>Prefix sums eliminate repeated summation.</p>
+<p>Monotonic stacks eliminate dominated candidates.</p>
+<p>Dynamic programming eliminates repeated subproblems.</p>
+<hr />
+<h2 id="54-array-problem-solving-checklist">54. Array Problem-Solving Checklist</h2>
+<p>Before coding:</p>
+<ul>
+<li>[ ] What exactly is the input?</li>
+<li>[ ] Is it sorted?</li>
+<li>[ ] Are values bounded?</li>
+<li>[ ] Are duplicates allowed?</li>
+<li>[ ] Can values be negative?</li>
+<li>[ ] Is the answer about a contiguous range?</li>
+<li>[ ] Do I need pairs?</li>
+<li>[ ] Can I preprocess?</li>
+<li>[ ] Can I use a hash map?</li>
+<li>[ ] Can I use two pointers?</li>
+<li>[ ] Is there a monotonic predicate?</li>
+<li>[ ] Can I binary-search the answer?</li>
+<li>[ ] Can I maintain a running state?</li>
+<li>[ ] Can I solve it in-place?</li>
+<li>[ ] What invariant does my loop maintain?</li>
+<li>[ ] What is the time complexity?</li>
+<li>[ ] What is the auxiliary-space complexity?</li>
+<li>[ ] What happens at <span class="arithmatex">\(n=0\)</span>?</li>
+<li>[ ] What happens at <span class="arithmatex">\(n=1\)</span>?</li>
+<li>[ ] What happens with duplicates?</li>
+<li>[ ] What happens with negative values?</li>
+<li>[ ] What happens at the boundaries?</li>
+</ul>
+<hr />
+<h2 id="55-core-formulas">55. Core Formulas</h2>
+<h4 id="array-access">Array access</h4>
+<div class="arithmatex">\[
+\boxed{\operatorname{addr}(A[i])=B+iw}
+\]</div>
+<h4 id="inclusive-interval-size">Inclusive interval size</h4>
+<div class="arithmatex">\[
+\boxed{r-l+1}
+\]</div>
+<h4 id="half-open-interval-size">Half-open interval size</h4>
+<div class="arithmatex">\[
+\boxed{r-l}
+\]</div>
+<h4 id="number-of-subarrays">Number of subarrays</h4>
+<div class="arithmatex">\[
+\boxed{\frac{n(n+1)}2}
+\]</div>
+<h4 id="number-of-subsets">Number of subsets</h4>
+<div class="arithmatex">\[
+\boxed{2^n}
+\]</div>
+<h4 id="prefix-sum">Prefix sum</h4>
+<div class="arithmatex">\[
+\boxed{P[i]=\sum_{j=0}^{i}A[j]}
+\]</div>
+<h4 id="range-sum">Range sum</h4>
+<div class="arithmatex">\[
+\boxed{
+\sum_{j=l}^{r}A[j]
+=
+P[r]-P[l-1]
+}
+\]</div>
+<h4 id="binary-search-iterations">Binary-search iterations</h4>
+<div class="arithmatex">\[
+\boxed{k=\Theta(\log_2 n)}
+\]</div>
+<h4 id="arithmetic-series">Arithmetic series</h4>
+<div class="arithmatex">\[
+\boxed{
+1+2+\cdots+n=\frac{n(n+1)}2
+}
+\]</div>
+<h4 id="geometric-series">Geometric series</h4>
+<div class="arithmatex">\[
+\boxed{
+1+r+r^2+\cdots+r^k
+=
+\frac{r^{k+1}-1}{r-1}
+}
+\]</div>
+<hr />
+<h2 id="56-final-mental-model">56. Final Mental Model</h2>
+<p>Think of an array at four different levels.</p>
+<h3 id="level-1-mathematical">Level 1 — Mathematical</h3>
+<div class="arithmatex">\[
+A:\{0,\ldots,n-1\}\rightarrow S
+\]</div>
+<p>It is a finite sequence/function.</p>
+<h3 id="level-2-memory">Level 2 — Memory</h3>
+<div class="arithmatex">\[
+\operatorname{address}(A[i])=B+iw
+\]</div>
+<p>It is contiguous memory plus address arithmetic.</p>
+<h3 id="level-3-algorithmic">Level 3 — Algorithmic</h3>
+<p>Exploit properties such as:</p>
+<div class="arithmatex">\[
+\text{ordering}
+\]</div>
+<div class="arithmatex">\[
+\text{contiguity}
+\]</div>
+<div class="arithmatex">\[
+\text{monotonicity}
+\]</div>
+<div class="arithmatex">\[
+\text{frequency}
+\]</div>
+<div class="arithmatex">\[
+\text{prefix structure}
+\]</div>
+<div class="arithmatex">\[
+\text{locality}
+\]</div>
+<h3 id="level-4-problem-solving">Level 4 — Problem Solving</h3>
+<p>Transform the problem:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>Raw Array
+<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>    ↓
+<a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a>Identify structure
+<a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a>    ↓
+<a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a>Choose representation
+<a id="__codelineno-55-6" name="__codelineno-55-6" href="#__codelineno-55-6"></a>    ↓
+<a id="__codelineno-55-7" name="__codelineno-55-7" href="#__codelineno-55-7"></a>Maintain an invariant/state
+<a id="__codelineno-55-8" name="__codelineno-55-8" href="#__codelineno-55-8"></a>    ↓
+<a id="__codelineno-55-9" name="__codelineno-55-9" href="#__codelineno-55-9"></a>Eliminate unnecessary work
+<a id="__codelineno-55-10" name="__codelineno-55-10" href="#__codelineno-55-10"></a>    ↓
+<a id="__codelineno-55-11" name="__codelineno-55-11" href="#__codelineno-55-11"></a>Prove correctness
+<a id="__codelineno-55-12" name="__codelineno-55-12" href="#__codelineno-55-12"></a>    ↓
+<a id="__codelineno-55-13" name="__codelineno-55-13" href="#__codelineno-55-13"></a>Analyze complexity
+</code></pre></div>
+<p>The goal is not to memorize that:</p>
+<blockquote>
+<p>"This is a two-pointer problem."</p>
+</blockquote>
+<p>The goal is to understand <strong>why</strong> two pointers are valid.</p>
+<p>Likewise, do not memorize:</p>
+<blockquote>
+<p>"Prefix sum = O(1)."</p>
+</blockquote>
+<p>Understand that preprocessing changes:</p>
+<div class="arithmatex">\[
+\text{repeated computation}
+\]</div>
+<p>into:</p>
+<div class="arithmatex">\[
+\text{one-time computation}+\text{constant-time queries}.
+\]</div>
+<p>That way, when you encounter a problem you have never seen before, you can derive the technique instead of trying to recognize a memorized solution.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "toc.follow", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

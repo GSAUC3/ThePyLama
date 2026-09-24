@@ -1,0 +1,4794 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../arrays/arrays/">
+      
+      
+        <link rel="next" href="../../queue/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../imgs/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Hashing - The Py Lama Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hashing-the-7-core-patterns-in-dsa" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="The Py Lama Notes" class="md-header__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../../imgs/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Py Lama Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Hashing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../arrays/arrays/" class="md-tabs__link">
+          
+  
+  
+  Data Structures
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../algorithms/binarysearch/" class="md-tabs__link">
+          
+  
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="The Py Lama Notes" class="md-nav__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../../imgs/logo.png" alt="logo">
+
+    </a>
+    The Py Lama Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arrays/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hashing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hashing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-basic-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Basic Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Basic Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sets-maps-membership-and-frequency-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sets, maps, membership, and frequency counting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-membership-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Membership Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Membership Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach-1-linear-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach 1: Linear Search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approach-2-hash-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach 2: Hash Set
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-duplicate-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Duplicate Detection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Duplicate Detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hashing-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hashing solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-frequency-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Frequency Counting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Frequency Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-frequency-map-equality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Frequency Map Equality
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Frequency Map Equality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-basic-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary of Basic Hashing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-array-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Array Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Array Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complement-lookup-index-mapping-and-pair-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complement lookup, index mapping, and pair counting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-complement-lookup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Complement Lookup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Complement Lookup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brute-force-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brute-force approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hashing-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hashing approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dry-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dry run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-index-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Index Mapping
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Index Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-pair-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Pair Counting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Pair Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-prefix-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Prefix Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Prefix Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefix-sums-prefix-xor-and-subarray-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefix sums, prefix XOR, and subarray counting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31-understanding-prefix-sums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Understanding Prefix Sums
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-prefix-sum-hash-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Prefix Sum + Hash Map
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Prefix Sum + Hash Map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-subarray-sum-equals-k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem: Subarray Sum Equals K
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical derivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-initialize-freq-0-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why initialize freq = {0: 1}?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-longest-subarray-with-sum-k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Longest Subarray with Sum K
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Longest Subarray with Sum K">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-distinction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important distinction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-prefix-xor-hash-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Prefix XOR + Hash Map
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 Prefix XOR + Hash Map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-window-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Window Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Window Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sliding-windows-with-sets-and-frequency-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sliding windows with sets and frequency maps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#41-sliding-window-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Sliding Window + Set
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Sliding Window + Set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-longest-substring-without-repeating-characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem: Longest Substring Without Repeating Characters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-sliding-window-frequency-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Sliding Window + Frequency Map
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Sliding Window + Frequency Map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-find-all-anagrams-in-a-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem: Find All Anagrams in a String
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-window-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use window hashing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-string-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. String Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. String Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anagram-signatures-rolling-hash-and-rabinkarp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anagram signatures, rolling hash, and Rabin–Karp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51-anagram-signatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Anagram Signatures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Anagram Signatures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-group-anagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem: Group Anagrams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key observation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-use-a-tuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why use a tuple?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-rolling-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Rolling Hash
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Rolling Hash">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-is-this-useful" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why is this useful?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-rabinkarp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Rabin–Karp
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 Rabin–Karp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-string-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use string hashing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-mathematical-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Mathematical Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Mathematical Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remainders-bitmasks-and-state-representations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remainders, bitmasks, and state representations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#61-remainder-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Remainder Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Remainder Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-bitmask-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Bitmask Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Bitmask Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-unique-characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Unique Characters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-bitmask-hash-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Bitmask + Hash Map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-state-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 State Representation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 State Representation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-advanced-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Advanced Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Advanced Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-programming-graphs-geometry-and-data-structure-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dynamic programming, graphs, geometry, and data structure design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#71-hashing-dynamic-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Hashing + Dynamic Programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1 Hashing + Dynamic Programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-longest-arithmetic-subsequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Longest Arithmetic Subsequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dp-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DP state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-solution_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-hashing-graphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Hashing + Graphs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2 Hashing + Graphs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-clone-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Clone Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-hashing-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Hashing + Geometry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 Hashing + Geometry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-detect-squares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Detect Squares
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-hash-map-doubly-linked-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Hash Map + Doubly Linked List
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4 Hash Map + Doubly Linked List">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-lru-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: LRU Cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why it works
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-summary-the-7-hashing-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Summary: The 7 Hashing Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Final Summary: The 7 Hashing Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-recognize-which-pattern-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Recognize Which Pattern to Use
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arrays/sliding-window/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sliding Window
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arrays/two-pointers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Two Pointers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/binarysearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Binary Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/sorting/bubblesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bubble Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/sorting/mergesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merge Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/sorting/insertionsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Insertion Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/sorting/quicksort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-basic-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Basic Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Basic Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sets-maps-membership-and-frequency-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sets, maps, membership, and frequency counting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-membership-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Membership Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Membership Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach-1-linear-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach 1: Linear Search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approach-2-hash-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach 2: Hash Set
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-duplicate-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Duplicate Detection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Duplicate Detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hashing-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hashing solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-frequency-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Frequency Counting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Frequency Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-frequency-map-equality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Frequency Map Equality
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Frequency Map Equality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-basic-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary of Basic Hashing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-array-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Array Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Array Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complement-lookup-index-mapping-and-pair-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complement lookup, index mapping, and pair counting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-complement-lookup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Complement Lookup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Complement Lookup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brute-force-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brute-force approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hashing-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hashing approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dry-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dry run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-index-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Index Mapping
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Index Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-pair-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Pair Counting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Pair Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-prefix-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Prefix Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Prefix Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefix-sums-prefix-xor-and-subarray-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefix sums, prefix XOR, and subarray counting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31-understanding-prefix-sums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Understanding Prefix Sums
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-prefix-sum-hash-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Prefix Sum + Hash Map
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Prefix Sum + Hash Map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-subarray-sum-equals-k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem: Subarray Sum Equals K
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical derivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-initialize-freq-0-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why initialize freq = {0: 1}?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-longest-subarray-with-sum-k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Longest Subarray with Sum K
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Longest Subarray with Sum K">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-distinction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important distinction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-prefix-xor-hash-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Prefix XOR + Hash Map
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 Prefix XOR + Hash Map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-window-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Window Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Window Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sliding-windows-with-sets-and-frequency-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sliding windows with sets and frequency maps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#41-sliding-window-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Sliding Window + Set
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Sliding Window + Set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-longest-substring-without-repeating-characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem: Longest Substring Without Repeating Characters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-sliding-window-frequency-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Sliding Window + Frequency Map
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Sliding Window + Frequency Map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-find-all-anagrams-in-a-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem: Find All Anagrams in a String
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-window-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use window hashing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-string-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. String Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. String Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anagram-signatures-rolling-hash-and-rabinkarp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anagram signatures, rolling hash, and Rabin–Karp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51-anagram-signatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Anagram Signatures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Anagram Signatures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-group-anagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem: Group Anagrams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key observation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-use-a-tuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why use a tuple?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-rolling-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Rolling Hash
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Rolling Hash">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-is-this-useful" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why is this useful?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-rabinkarp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Rabin–Karp
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 Rabin–Karp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-string-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use string hashing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-mathematical-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Mathematical Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Mathematical Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remainders-bitmasks-and-state-representations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remainders, bitmasks, and state representations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#61-remainder-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Remainder Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Remainder Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-bitmask-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Bitmask Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Bitmask Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-unique-characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Unique Characters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-bitmask-hash-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Bitmask + Hash Map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-state-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 State Representation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 State Representation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-advanced-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Advanced Hashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Advanced Hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-programming-graphs-geometry-and-data-structure-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dynamic programming, graphs, geometry, and data structure design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#71-hashing-dynamic-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Hashing + Dynamic Programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1 Hashing + Dynamic Programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-longest-arithmetic-subsequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Longest Arithmetic Subsequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dp-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DP state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-solution_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-hashing-graphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Hashing + Graphs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2 Hashing + Graphs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-clone-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Clone Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-hashing-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Hashing + Geometry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 Hashing + Geometry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-detect-squares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Detect Squares
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-idea_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-it_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-hash-map-doubly-linked-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Hash Map + Doubly Linked List
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4 Hash Map + Doubly Linked List">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-lru-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: LRU Cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why it works
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-summary-the-7-hashing-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Summary: The 7 Hashing Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Final Summary: The 7 Hashing Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-recognize-which-pattern-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Recognize Which Pattern to Use
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hashing-the-7-core-patterns-in-dsa">Hashing: The 7 Core Patterns in DSA</h1>
+<p>Hashing is a technique that allows us to <strong>store information in a way that makes searching, counting, and retrieving data efficient</strong>.</p>
+<p>In Python, the two primary data structures used for hashing are:</p>
+<ul>
+<li><strong><code>set</code></strong>: Stores unique elements and supports fast membership testing.</li>
+<li><strong><code>dict</code></strong>: Stores key-value pairs and supports fast lookup by key.</li>
+</ul>
+<p>Both typically provide <strong><span class="arithmatex">\(O(1)\)</span> average-case lookup, insertion, and deletion</strong>, although worst-case performance can be <span class="arithmatex">\(O(n)\)</span>.</p>
+<p>Let's understand the seven patterns one by one, starting with the fundamentals and progressing toward advanced applications.</p>
+<hr />
+<h2 id="1-basic-hashing">1. Basic Hashing</h2>
+<h4 id="sets-maps-membership-and-frequency-counting">Sets, maps, membership, and frequency counting</h4>
+<p>Basic hashing is the foundation of almost every other hashing pattern.</p>
+<p>The central idea is:</p>
+<blockquote>
+<p>Instead of repeatedly searching through an entire collection, store information in a hash-based data structure so that you can retrieve it efficiently.</p>
+</blockquote>
+<h3 id="11-membership-testing">1.1 Membership Testing</h3>
+<p><strong>Problem:</strong> Determine whether an element exists in a collection.</p>
+<p>Suppose we have:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">target</span> <span class="o">=</span> <span class="mi">9</span>
+</code></pre></div>
+<h4 id="approach-1-linear-search">Approach 1: Linear Search</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="k">break</span>
+</code></pre></div>
+<p>In the worst case, we inspect every element.</p>
+<p>Time complexity:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<h4 id="approach-2-hash-set">Approach 2: Hash Set</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">found</span> <span class="o">=</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">seen</span>
+</code></pre></div>
+<p>Building the set takes <span class="arithmatex">\(O(n)\)</span> expected time, and the membership check takes <span class="arithmatex">\(O(1)\)</span> average time.</p>
+<p>If the set already exists, the lookup itself is expected <span class="arithmatex">\(O(1)\)</span>.</p>
+<h4 id="when-to-use-it">When to use it</h4>
+<p>Use a hash set when you need to answer questions like:</p>
+<ul>
+<li>Does this value exist?</li>
+<li>Have I seen this element before?</li>
+<li>Is this element a duplicate?</li>
+<li>Is a particular state already visited?</li>
+</ul>
+<hr />
+<h3 id="12-duplicate-detection">1.2 Duplicate Detection</h3>
+<p><strong>Problem:</strong> Determine whether an array contains duplicate elements.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+<h4 id="hashing-solution">Hashing solution</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">contains_duplicate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>            <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+<h4 id="how-it-works">How it works</h4>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Set before processing</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>{}</code></td>
+<td>Insert 1</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>{1}</code></td>
+<td>Insert 2</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>{1, 2}</code></td>
+<td>Insert 3</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>{1, 2, 3}</code></td>
+<td>Insert 4</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>{1, 2, 3, 4}</code></td>
+<td>Duplicate found</td>
+</tr>
+</tbody>
+</table>
+<p>Expected time complexity:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p>Auxiliary space complexity:</p>
+<div class="arithmatex">\[
+O(n)
+\]</div>
+<p><strong>Key insight:</strong> A set remembers which elements have already appeared.</p>
+<hr />
+<h3 id="13-frequency-counting">1.3 Frequency Counting</h3>
+<p><strong>Problem:</strong> Count how many times each element occurs.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+<p>Expected output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="mi">2</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="mi">3</span><span class="p">:</span> <span class="mi">3</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="solution">Solution</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">frequency_count</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">freq</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="n">freq</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="k">return</span> <span class="n">freq</span>
+</code></pre></div>
+<p>The expression:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p>returns the current count of <code>x</code>, or <code>0</code> if the key does not exist.</p>
+<h4 id="complexity">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span> expected.</li>
+<li>Space: <span class="arithmatex">\(O(k)\)</span>, where <span class="arithmatex">\(k\)</span> is the number of distinct elements.</li>
+</ul>
+<h4 id="when-to-use-it_1">When to use it</h4>
+<p>Frequency counting is useful for:</p>
+<ul>
+<li>Finding the most frequent element.</li>
+<li>Checking whether two strings are anagrams.</li>
+<li>Counting pairs with certain properties.</li>
+<li>Identifying elements that occur exactly once.</li>
+</ul>
+<hr />
+<h3 id="14-frequency-map-equality">1.4 Frequency Map Equality</h3>
+<p>Suppose we want to determine whether two strings are anagrams.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">"listen"</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">t</span> <span class="o">=</span> <span class="s2">"silent"</span>
+</code></pre></div>
+<p>Two strings are anagrams if they contain exactly the same characters with the same frequencies.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_anagram</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="n">Counter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</code></pre></div>
+<p>This is a direct application of frequency counting.</p>
+<h4 id="summary-of-basic-hashing">Summary of Basic Hashing</h4>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Data structure</th>
+<th>Main purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Membership testing</td>
+<td>Set</td>
+<td>Check existence</td>
+</tr>
+<tr>
+<td>Duplicate detection</td>
+<td>Set</td>
+<td>Detect repeated values</td>
+</tr>
+<tr>
+<td>Frequency counting</td>
+<td>Dictionary</td>
+<td>Count occurrences</td>
+</tr>
+<tr>
+<td>Frequency comparison</td>
+<td>Dictionary</td>
+<td>Compare distributions</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-array-hashing">2. Array Hashing</h2>
+<h4 id="complement-lookup-index-mapping-and-pair-counting">Complement lookup, index mapping, and pair counting</h4>
+<p>Array hashing uses a hash map or set to solve problems involving relationships between array elements.</p>
+<p>The most important idea is:</p>
+<p><strong>Instead of searching the array repeatedly, store information about previously processed elements.</strong></p>
+<hr />
+<h3 id="21-complement-lookup">2.1 Complement Lookup</h3>
+<p>This pattern is best illustrated by the classic Two Sum problem.</p>
+<h4 id="problem">Problem</h4>
+<p>Given an array and a target, find two elements whose sum equals the target.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">target</span> <span class="o">=</span> <span class="mi">9</span>
+</code></pre></div>
+<p>We need:</p>
+<div class="arithmatex">\[
+a+b=target
+\]</div>
+<p>Rearranging:</p>
+<div class="arithmatex">\[
+b=target-a
+\]</div>
+<p>This means that for every element <span class="arithmatex">\(a\)</span>, we can calculate the exact value of its required complement.</p>
+<h4 id="brute-force-approach">Brute-force approach</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>            <span class="k">return</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</code></pre></div>
+<p>Time complexity:</p>
+<div class="arithmatex">\[
+O(n^2)
+\]</div>
+<h4 id="hashing-approach">Hashing approach</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">two_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="n">seen</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>        <span class="n">complement</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">x</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="k">if</span> <span class="n">complement</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>            <span class="k">return</span> <span class="p">[</span><span class="n">seen</span><span class="p">[</span><span class="n">complement</span><span class="p">],</span> <span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>        <span class="n">seen</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>    <span class="k">return</span> <span class="p">[]</span>
+</code></pre></div>
+<h4 id="dry-run">Dry run</h4>
+<table>
+<thead>
+<tr>
+<th>Current element</th>
+<th>Complement</th>
+<th>Map before lookup</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>7</td>
+<td><code>{}</code></td>
+<td>Store 2</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2</td>
+<td><code>{2: 0}</code></td>
+<td>Found 2</td>
+</tr>
+</tbody>
+</table>
+<p>The answer is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<h4 id="complexity_1">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span> expected.</li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span>.</li>
+</ul>
+<h4 id="when-to-use-it_2">When to use it</h4>
+<p>Look for equations that can be rearranged into:</p>
+<div class="arithmatex">\[
+\text{Required value} = \text{Target} - \text{Current value}
+\]</div>
+<p>This pattern also applies to difference-based and product-based pair problems, although the exact lookup strategy may differ.</p>
+<hr />
+<h3 id="22-index-mapping">2.2 Index Mapping</h3>
+<p>Sometimes we need to know not only whether an element exists, but also where it occurs.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+</code></pre></div>
+<p>We can map each value to its most recent index.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">index_map</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="n">index_map</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+</code></pre></div>
+<p>Result:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="mi">10</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="mi">20</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="mi">30</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    <span class="mi">40</span><span class="p">:</span> <span class="mi">4</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Notice that the index of <code>20</code> is <code>3</code>, because the most recent occurrence overwrites the earlier one.</p>
+<h4 id="variations">Variations</h4>
+<p><strong>First occurrence:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">index_map</span><span class="p">:</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="n">index_map</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+</code></pre></div>
+<p><strong>Last occurrence:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">index_map</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+</code></pre></div>
+<p><strong>All occurrences:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">index_map</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="when-to-use-it_3">When to use it</h4>
+<p>Index mapping is useful for:</p>
+<ul>
+<li>Finding the distance between repeated elements.</li>
+<li>Locating previous occurrences.</li>
+<li>Finding the first or last occurrence.</li>
+<li>Solving problems involving pairs of indices.</li>
+</ul>
+<hr />
+<h3 id="23-pair-counting">2.3 Pair Counting</h3>
+<p>This pattern counts pairs satisfying a mathematical condition.</p>
+<p>Suppose:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">target</span> <span class="o">=</span> <span class="mi">6</span>
+</code></pre></div>
+<p>We want to count pairs whose sum equals 6.</p>
+<p>The key equation is:</p>
+<div class="arithmatex">\[
+a+b=target
+\]</div>
+<p>For each current element <span class="arithmatex">\(b\)</span>, we look for:</p>
+<div class="arithmatex">\[
+a=target-b
+\]</div>
+<p>Instead of storing just whether a value exists, we store how many times it has appeared.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_pairs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="n">freq</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>        <span class="n">complement</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">x</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>        <span class="n">count</span> <span class="o">+=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">complement</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>        <span class="n">freq</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>    <span class="k">return</span> <span class="n">count</span>
+</code></pre></div>
+<p>For this example, the answer is <code>3</code>.</p>
+<p>The pairs are:</p>
+<ul>
+<li><code>(1, 5)</code> using the first <code>5</code>.</li>
+<li><code>(1, 5)</code> using the second <code>5</code>.</li>
+<li><code>(7, -1)</code>.</li>
+</ul>
+<p>Each pair is counted once because the map contains only previously processed elements.</p>
+<h4 id="complexity_2">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span> expected.</li>
+<li>Space: <span class="arithmatex">\(O(k)\)</span>, where <span class="arithmatex">\(k\)</span> is the number of distinct elements.</li>
+</ul>
+<hr />
+<h2 id="3-prefix-hashing">3. Prefix Hashing</h2>
+<h4 id="prefix-sums-prefix-xor-and-subarray-counting">Prefix sums, prefix XOR, and subarray counting</h4>
+<p>This is one of the most powerful hashing patterns in DSA.</p>
+<p>It combines two ideas:</p>
+<ol>
+<li>Prefix computations.</li>
+<li>Hash maps that store previously encountered prefix states.</li>
+</ol>
+<p>The result is an efficient way to solve many subarray problems.</p>
+<hr />
+<h3 id="31-understanding-prefix-sums">3.1 Understanding Prefix Sums</h3>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+<p>Define the prefix sum:</p>
+<div class="arithmatex">\[
+P_i=\sum_{j=0}^{i}a_j
+\]</div>
+<p>The prefix sums are:</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Element</th>
+<th>Prefix sum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>7</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p>The prefix array is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+</code></pre></div>
+<p>The sum of a subarray from index <span class="arithmatex">\(l\)</span> to <span class="arithmatex">\(r\)</span> is:</p>
+<div class="arithmatex">\[
+S(l,r)=P_r-P_{l-1}
+\]</div>
+<p>If we define <span class="arithmatex">\(P_{-1}=0\)</span>, the formula works uniformly:</p>
+<div class="arithmatex">\[
+S(l,r)=P_r-P_{l-1}
+\]</div>
+<hr />
+<h3 id="32-prefix-sum-hash-map">3.2 Prefix Sum + Hash Map</h3>
+<h4 id="problem-subarray-sum-equals-k">Problem: Subarray Sum Equals K</h4>
+<p>Given an array, count the number of contiguous subarrays whose sum equals <span class="arithmatex">\(k\)</span>.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+</code></pre></div>
+<p>The valid subarrays are:</p>
+<ul>
+<li><code>[1, 2]</code></li>
+<li><code>[3]</code></li>
+</ul>
+<p>Answer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="mi">2</span>
+</code></pre></div>
+<h4 id="mathematical-derivation">Mathematical derivation</h4>
+<p>We want:</p>
+<div class="arithmatex">\[
+P_r-P_l=k
+\]</div>
+<p>Rearrange:</p>
+<div class="arithmatex">\[
+P_l=P_r-k
+\]</div>
+<p>At every position, we need to know how many earlier prefix sums equal:</p>
+<div class="arithmatex">\[
+P_r-k
+\]</div>
+<p>This is exactly what a hash map can provide.</p>
+<h4 id="solution_1">Solution</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">subarray_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>    <span class="n">freq</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>        <span class="n">prefix</span> <span class="o">+=</span> <span class="n">x</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>        <span class="n">count</span> <span class="o">+=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prefix</span> <span class="o">-</span> <span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>        <span class="n">freq</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>    <span class="k">return</span> <span class="n">count</span>
+</code></pre></div>
+<h4 id="why-initialize-freq-0-1">Why initialize <code>freq = {0: 1}</code>?</h4>
+<p>This represents the empty prefix before the array begins.</p>
+<p>It allows us to count subarrays that start at index <code>0</code>.</p>
+<p>For example, if the first element itself equals <code>k</code>, then:</p>
+<div class="arithmatex">\[
+P_r-k=0
+\]</div>
+<p>The initial frequency of zero ensures that this subarray is counted.</p>
+<h4 id="complexity_3">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span> expected.</li>
+<li>Space: <span class="arithmatex">\(O(n)\)</span>.</li>
+</ul>
+<hr />
+<h3 id="33-longest-subarray-with-sum-k">3.3 Longest Subarray with Sum K</h3>
+<p>The same mathematical relationship can solve a different problem.</p>
+<p>Instead of counting subarrays, we want the <strong>maximum length</strong> of a subarray whose sum equals <span class="arithmatex">\(k\)</span>.</p>
+<p>For each prefix sum <span class="arithmatex">\(P_r\)</span>, we need an earlier prefix:</p>
+<div class="arithmatex">\[
+P_l=P_r-k
+\]</div>
+<p>The subarray length is:</p>
+<div class="arithmatex">\[
+r-l
+\]</div>
+<p>To maximize this length, we store the <strong>earliest index</strong> at which each prefix sum occurs.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">longest_subarray_sum_k</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>    <span class="n">first</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>    <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>        <span class="n">prefix</span> <span class="o">+=</span> <span class="n">x</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>        <span class="n">target</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">-</span> <span class="n">k</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>        <span class="k">if</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">first</span><span class="p">:</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>            <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">first</span><span class="p">[</span><span class="n">target</span><span class="p">])</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>        <span class="k">if</span> <span class="n">prefix</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">first</span><span class="p">:</span>
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>            <span class="n">first</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>    <span class="k">return</span> <span class="n">best</span>
+</code></pre></div>
+<h4 id="important-distinction">Important distinction</h4>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>What to store</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Count valid subarrays</td>
+<td>Frequency of each prefix</td>
+</tr>
+<tr>
+<td>Find longest valid subarray</td>
+<td>Earliest index of each prefix</td>
+</tr>
+<tr>
+<td>Find shortest valid subarray</td>
+<td>Often latest suitable index, depending on constraints</td>
+</tr>
+</tbody>
+</table>
+<p>The underlying mathematical relationship remains the same.</p>
+<hr />
+<h3 id="34-prefix-xor-hash-map">3.4 Prefix XOR + Hash Map</h3>
+<p>Prefix hashing also works with XOR.</p>
+<p>Define:</p>
+<div class="arithmatex">\[
+X_i=a_0\oplus a_1\oplus\cdots\oplus a_i
+\]</div>
+<p>The XOR of a subarray is:</p>
+<div class="arithmatex">\[
+X_r\oplus X_l
+\]</div>
+<p>For a target XOR <span class="arithmatex">\(k\)</span>:</p>
+<div class="arithmatex">\[
+X_r\oplus X_l=k
+\]</div>
+<p>Rearranging:</p>
+<div class="arithmatex">\[
+X_l=X_r\oplus k
+\]</div>
+<p>Therefore, we can count subarrays with XOR <span class="arithmatex">\(k\)</span> using a frequency map.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_subarrays_xor</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>    <span class="n">freq</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>        <span class="n">prefix</span> <span class="o">^=</span> <span class="n">x</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>        <span class="n">count</span> <span class="o">+=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prefix</span> <span class="o">^</span> <span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a>
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a>        <span class="n">freq</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>
+<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a>    <span class="k">return</span> <span class="n">count</span>
+</code></pre></div>
+<h4 id="summary">Summary</h4>
+<p>Prefix hashing is especially useful when a problem asks for:</p>
+<ul>
+<li>The number of subarrays with a given sum.</li>
+<li>The longest subarray satisfying a sum condition.</li>
+<li>Subarrays with zero sum.</li>
+<li>Subarrays with a given XOR.</li>
+<li>Subarrays whose sum is divisible by a number.</li>
+</ul>
+<hr />
+<h2 id="4-window-hashing">4. Window Hashing</h2>
+<h4 id="sliding-windows-with-sets-and-frequency-maps">Sliding windows with sets and frequency maps</h4>
+<p>Window hashing combines a sliding window with a hash-based data structure.</p>
+<p>The sliding window determines which elements are currently relevant.</p>
+<p>The hash map or set maintains information about those elements.</p>
+<hr />
+<h3 id="41-sliding-window-set">4.1 Sliding Window + Set</h3>
+<h4 id="problem-longest-substring-without-repeating-characters">Problem: Longest Substring Without Repeating Characters</h4>
+<p>Given a string, find the length of the longest substring containing no repeated characters.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">"abcabcbb"</span>
+</code></pre></div>
+<p>Answer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="mi">3</span>
+</code></pre></div>
+<p>The longest valid substrings include <code>"abc"</code>, <code>"bca"</code>, and <code>"cab"</code>.</p>
+<h4 id="core-idea">Core idea</h4>
+<p>Maintain a window:</p>
+<div class="arithmatex">\[
+[l,r]
+\]</div>
+<p>such that every character inside the window is unique.</p>
+<p>When a duplicate appears, move the left boundary until the window becomes valid again.</p>
+<h4 id="solution_2">Solution</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">length_of_longest_substring</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>    <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>    <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>    <span class="k">for</span> <span class="n">right</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>        <span class="k">while</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>            <span class="n">seen</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">left</span><span class="p">])</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>
+<a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+<a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a>
+<a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a>        <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a>
+<a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a>    <span class="k">return</span> <span class="n">best</span>
+</code></pre></div>
+<h4 id="complexity_4">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span> expected.</li>
+<li>Space: <span class="arithmatex">\(O(k)\)</span>, where <span class="arithmatex">\(k\)</span> is the number of distinct characters in the active window.</li>
+</ul>
+<p>Each character enters and leaves the window at most once.</p>
+<hr />
+<h3 id="42-sliding-window-frequency-map">4.2 Sliding Window + Frequency Map</h3>
+<h4 id="problem-find-all-anagrams-in-a-string">Problem: Find All Anagrams in a String</h4>
+<p>Given two strings, find all starting indices where an anagram of the second string appears in the first.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">"cbaebabacd"</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="n">p</span> <span class="o">=</span> <span class="s2">"abc"</span>
+</code></pre></div>
+<p>Answer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</code></pre></div>
+<p>The substrings <code>"cba"</code> and <code>"bac"</code> are anagrams of <code>"abc"</code>.</p>
+<h4 id="core-idea_1">Core idea</h4>
+<p>An anagram is determined by character frequencies.</p>
+<p>We maintain:</p>
+<ul>
+<li>A frequency map for the target string.</li>
+<li>A frequency map for the current window.</li>
+</ul>
+<p>If the two frequency distributions match, the window is an anagram.</p>
+<h4 id="python-solution">Python solution</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">find_anagrams</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>        <span class="k">return</span> <span class="p">[]</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>    <span class="n">target</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>    <span class="n">window</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)])</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a>
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a>    <span class="k">if</span> <span class="n">window</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a>        <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a>
+<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a>    <span class="k">for</span> <span class="n">right</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+<a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a>        <span class="n">entering</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">right</span><span class="p">]</span>
+<a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a>        <span class="n">leaving</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">right</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)]</span>
+<a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a>
+<a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a>        <span class="n">window</span><span class="p">[</span><span class="n">entering</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a>        <span class="n">window</span><span class="p">[</span><span class="n">leaving</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+<a id="__codelineno-35-21" name="__codelineno-35-21" href="#__codelineno-35-21"></a>
+<a id="__codelineno-35-22" name="__codelineno-35-22" href="#__codelineno-35-22"></a>        <span class="k">if</span> <span class="n">window</span><span class="p">[</span><span class="n">leaving</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a>            <span class="k">del</span> <span class="n">window</span><span class="p">[</span><span class="n">leaving</span><span class="p">]</span>
+<a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a>
+<a id="__codelineno-35-25" name="__codelineno-35-25" href="#__codelineno-35-25"></a>        <span class="k">if</span> <span class="n">window</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+<a id="__codelineno-35-26" name="__codelineno-35-26" href="#__codelineno-35-26"></a>            <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-35-27" name="__codelineno-35-27" href="#__codelineno-35-27"></a>
+<a id="__codelineno-35-28" name="__codelineno-35-28" href="#__codelineno-35-28"></a>    <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div>
+<p>This is a straightforward implementation. Comparing entire frequency maps at every step may cost more than constant time when the alphabet is large.</p>
+<p>For a fixed, small alphabet, we can optimize by tracking how many character frequencies currently match.</p>
+<h4 id="when-to-use-window-hashing">When to use window hashing</h4>
+<p>Use this combination when:</p>
+<ul>
+<li>You need to track unique elements in a window.</li>
+<li>You need character frequencies in a substring.</li>
+<li>You need to find anagrams.</li>
+<li>You need to count distinct elements in a moving range.</li>
+<li>You need to maintain a frequency-based condition as the window changes.</li>
+</ul>
+<hr />
+<h2 id="5-string-hashing">5. String Hashing</h2>
+<h4 id="anagram-signatures-rolling-hash-and-rabinkarp">Anagram signatures, rolling hash, and Rabin–Karp</h4>
+<p>String hashing has two major branches:</p>
+<ol>
+<li><strong>Structural hashing:</strong> Represent a string using a property such as its character frequencies.</li>
+<li><strong>Rolling hashing:</strong> Represent a string or substring using a numerical hash value.</li>
+</ol>
+<p>These solve different types of problems.</p>
+<hr />
+<h3 id="51-anagram-signatures">5.1 Anagram Signatures</h3>
+<h4 id="problem-group-anagrams">Problem: Group Anagrams</h4>
+<p>Given:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">strs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"eat"</span><span class="p">,</span> <span class="s2">"tea"</span><span class="p">,</span> <span class="s2">"tan"</span><span class="p">,</span> <span class="s2">"ate"</span><span class="p">,</span> <span class="s2">"nat"</span><span class="p">,</span> <span class="s2">"bat"</span><span class="p">]</span>
+</code></pre></div>
+<p>We need to group strings that are anagrams of one another.</p>
+<h4 id="key-observation">Key observation</h4>
+<p>Anagrams contain the same characters with the same frequencies.</p>
+<p>Therefore, we can create a canonical representation of each string.</p>
+<p>For lowercase English letters, the signature can be a tuple of 26 character frequencies.</p>
+<h4 id="solution_3">Solution</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">group_anagrams</span><span class="p">(</span><span class="n">strs</span><span class="p">):</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>    <span class="n">groups</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">strs</span><span class="p">:</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>        <span class="n">freq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">26</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>
+<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>            <span class="n">freq</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>
+<a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a>        <span class="n">key</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span>
+<a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a>
+<a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a>        <span class="n">groups</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a>
+<a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a>    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</code></pre></div>
+<h4 id="why-use-a-tuple">Why use a tuple?</h4>
+<p>A tuple is immutable and hashable, so it can be used as a dictionary key.</p>
+<p>The frequency array itself is mutable and cannot be used directly as a dictionary key.</p>
+<h4 id="complexity_5">Complexity</h4>
+<p>For <span class="arithmatex">\(n\)</span> strings with an average length of <span class="arithmatex">\(m\)</span>:</p>
+<ul>
+<li>Time: <span class="arithmatex">\(O(nm)\)</span> for a fixed alphabet.</li>
+<li>Space: Depends on the number of distinct signatures and stored strings.</li>
+</ul>
+<hr />
+<h3 id="52-rolling-hash">5.2 Rolling Hash</h3>
+<p>Rolling hash is used to compute hash values for substrings efficiently.</p>
+<p>Suppose we have:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">"abcdef"</span>
+</code></pre></div>
+<p>We want to compare many substrings without repeatedly processing every character.</p>
+<p>A polynomial rolling hash can be defined as:</p>
+<div class="arithmatex">\[
+H(s)=\sum_{i=0}^{n-1}s_i p^i \pmod m
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(s_i\)</span> is a numerical representation of a character.</li>
+<li><span class="arithmatex">\(p\)</span> is a base.</li>
+<li><span class="arithmatex">\(m\)</span> is a modulus.</li>
+</ul>
+<p>With suitable prefix-hash and power arrays, we can compute a substring hash in <span class="arithmatex">\(O(1)\)</span> time after <span class="arithmatex">\(O(n)\)</span> preprocessing.</p>
+<h4 id="why-is-this-useful">Why is this useful?</h4>
+<p>Suppose we want to compare two substrings of length <span class="arithmatex">\(L\)</span>.</p>
+<p>Without hashing, comparing them directly may take:</p>
+<div class="arithmatex">\[
+O(L)
+\]</div>
+<p>With prefix hashes, comparing their hash values takes:</p>
+<div class="arithmatex">\[
+O(1)
+\]</div>
+<p>However, hash collisions are possible, so equal hashes do not guarantee equal strings.</p>
+<hr />
+<h3 id="53-rabinkarp">5.3 Rabin–Karp</h3>
+<p>Rabin–Karp is a string-searching algorithm that uses rolling hashes.</p>
+<h4 id="problem_1">Problem</h4>
+<p>Find occurrences of a pattern inside a text.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">text</span> <span class="o">=</span> <span class="s2">"ababcabc"</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="n">pattern</span> <span class="o">=</span> <span class="s2">"abc"</span>
+</code></pre></div>
+<p>We want to find the positions where <code>"abc"</code> occurs.</p>
+<h4 id="core-idea_2">Core idea</h4>
+<ol>
+<li>Compute the hash of the pattern.</li>
+<li>Compute the hash of the first text window of the same length.</li>
+<li>Compare the hashes.</li>
+<li>Slide the window and update its hash efficiently.</li>
+<li>If hashes match, verify the actual characters to guard against collisions.</li>
+</ol>
+<h4 id="complexity_6">Complexity</h4>
+<p>With a well-behaved hash and appropriate implementation:</p>
+<ul>
+<li>Expected time: <span class="arithmatex">\(O(n+m)\)</span> for a single pattern of length <span class="arithmatex">\(m\)</span> in text of length <span class="arithmatex">\(n\)</span>.</li>
+<li>Worst-case time can be higher due to collisions and verification.</li>
+</ul>
+<h4 id="when-to-use-string-hashing">When to use string hashing</h4>
+<p>Use it for:</p>
+<ul>
+<li>Finding repeated substrings.</li>
+<li>Detecting duplicate strings.</li>
+<li>Comparing substrings efficiently.</li>
+<li>Pattern matching.</li>
+<li>Longest duplicate substring problems.</li>
+</ul>
+<hr />
+<h2 id="6-mathematical-hashing">6. Mathematical Hashing</h2>
+<h4 id="remainders-bitmasks-and-state-representations">Remainders, bitmasks, and state representations</h4>
+<p>Mathematical hashing uses mathematical transformations to create compact keys that represent values, relationships, or states.</p>
+<p>The key idea is:</p>
+<p><strong>Transform a complicated property into a simpler representation that can be stored and retrieved using a hash map.</strong></p>
+<hr />
+<h3 id="61-remainder-hashing">6.1 Remainder Hashing</h3>
+<h4 id="problem_2">Problem</h4>
+<p>Count pairs whose sum is divisible by <span class="arithmatex">\(k\)</span>.</p>
+<p>For two integers <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>:</p>
+<div class="arithmatex">\[
+(a+b)\bmod k=0
+\]</div>
+<p>This is equivalent to:</p>
+<div class="arithmatex">\[
+(a\bmod k+b\bmod k)\bmod k=0
+\]</div>
+<p>Let:</p>
+<div class="arithmatex">\[
+r=a\bmod k
+\]</div>
+<p>Then the complementary remainder is:</p>
+<div class="arithmatex">\[
+(k-r)\bmod k
+\]</div>
+<h4 id="example">Example</h4>
+<p>Suppose:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
+</code></pre></div>
+<p>The remainders are:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>A remainder of <code>1</code> pairs with a remainder of <code>4</code>.</p>
+<p>A remainder of <code>2</code> pairs with a remainder of <code>3</code>.</p>
+<p>A remainder of <code>0</code> pairs with another remainder of <code>0</code>.</p>
+<h4 id="solution_4">Solution</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_pairs_divisible_by_k</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>    <span class="n">freq</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>
+<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+<a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a>        <span class="n">r</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="n">k</span>
+<a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a>        <span class="n">complement</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">r</span><span class="p">)</span> <span class="o">%</span> <span class="n">k</span>
+<a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a>
+<a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a>        <span class="n">count</span> <span class="o">+=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">complement</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a>
+<a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a>        <span class="n">freq</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a>
+<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a>    <span class="k">return</span> <span class="n">count</span>
+</code></pre></div>
+<p>This counts unordered pairs of distinct indices.</p>
+<h4 id="complexity_7">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span> expected.</li>
+<li>Space: <span class="arithmatex">\(O(k)\)</span> in the worst case, because there are at most <span class="arithmatex">\(k\)</span> possible remainders.</li>
+</ul>
+<hr />
+<h3 id="62-bitmask-hashing">6.2 Bitmask Hashing</h3>
+<p>A bitmask represents a collection of Boolean properties using bits.</p>
+<p>For example, if we want to represent which of the first four letters appear in a string:</p>
+<table>
+<thead>
+<tr>
+<th>Character</th>
+<th>Bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>b</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>c</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>d</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+<p>The string <code>"ac"</code> can be represented as:</p>
+<div class="arithmatex">\[
+0001 \;|\; 0100=0101
+\]</div>
+<p>This compact representation is useful for tracking character sets.</p>
+<h4 id="example-unique-characters">Example: Unique Characters</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">has_unique_chars</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>    <span class="n">mask</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>        <span class="n">bit</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">'a'</span><span class="p">))</span>
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>
+<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a>        <span class="k">if</span> <span class="n">mask</span> <span class="o">&amp;</span> <span class="n">bit</span><span class="p">:</span>
+<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a>            <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a>
+<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a>        <span class="n">mask</span> <span class="o">|=</span> <span class="n">bit</span>
+<a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a>
+<a id="__codelineno-43-12" name="__codelineno-43-12" href="#__codelineno-43-12"></a>    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+<p>This works for lowercase English letters.</p>
+<h4 id="complexity_8">Complexity</h4>
+<p>For a string of length <span class="arithmatex">\(n\)</span>:</p>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n)\)</span>.</li>
+<li>Auxiliary space: <span class="arithmatex">\(O(1)\)</span> when the alphabet size is fixed and the bitmask fits in a constant number of machine words.</li>
+</ul>
+<hr />
+<h3 id="63-bitmask-hash-map">6.3 Bitmask + Hash Map</h3>
+<p>Bitmasks can also represent the parity of character frequencies.</p>
+<p>Consider a string where we want to count substrings that contain at most one character with an odd frequency.</p>
+<p>For each character:</p>
+<ul>
+<li>Toggle its corresponding bit.</li>
+<li>Store the frequency of each previously encountered mask.</li>
+</ul>
+<p>If the current mask is <span class="arithmatex">\(M\)</span>, a substring has all-even character frequencies when the earlier mask is also <span class="arithmatex">\(M\)</span>.</p>
+<p>For at most one odd-frequency character, the earlier mask can be:</p>
+<div class="arithmatex">\[
+M
+\]</div>
+<p>or:</p>
+<div class="arithmatex">\[
+M\oplus 2^i
+\]</div>
+<p>for one bit position <span class="arithmatex">\(i\)</span>.</p>
+<p>This is the central idea behind problems such as <strong>Number of Wonderful Substrings</strong>.</p>
+<hr />
+<h3 id="64-state-representation">6.4 State Representation</h3>
+<p>Sometimes a problem involves a complex state that needs to be tracked.</p>
+<p>For example, in a lock puzzle, a state might be:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="s2">"1234"</span>
+</code></pre></div>
+<p>A set can store visited states:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="n">visited</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"1234"</span><span class="p">,</span> <span class="s2">"1235"</span><span class="p">,</span> <span class="s2">"1236"</span><span class="p">}</span>
+</code></pre></div>
+<p>Before exploring a new state, check whether it has already been visited.</p>
+<p>This is common in:</p>
+<ul>
+<li>BFS.</li>
+<li>DFS.</li>
+<li>State-space search.</li>
+<li>Puzzles.</li>
+<li>Graph traversal.</li>
+<li>Simulations.</li>
+</ul>
+<h4 id="summary_1">Summary</h4>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Transformation</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remainder hashing</td>
+<td>Number → remainder</td>
+<td>Divisibility and pair counting</td>
+</tr>
+<tr>
+<td>Bitmask hashing</td>
+<td>Set of properties → integer</td>
+<td>Character sets and parity</td>
+</tr>
+<tr>
+<td>State hashing</td>
+<td>Complex state → hashable representation</td>
+<td>BFS, DFS, and simulations</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-advanced-hashing">7. Advanced Hashing</h2>
+<h4 id="dynamic-programming-graphs-geometry-and-data-structure-design">Dynamic programming, graphs, geometry, and data structure design</h4>
+<p>Advanced hashing combines hash maps and sets with other algorithms or data structures.</p>
+<p>These patterns become especially useful when the problem requires storing more complex relationships.</p>
+<hr />
+<h3 id="71-hashing-dynamic-programming">7.1 Hashing + Dynamic Programming</h3>
+<p>Dynamic programming often involves repeatedly solving the same subproblem.</p>
+<p>A hash map can store previously computed results.</p>
+<h4 id="example-longest-arithmetic-subsequence">Example: Longest Arithmetic Subsequence</h4>
+<p>Given:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+</code></pre></div>
+<p>We want the longest subsequence in which the difference between consecutive elements is constant.</p>
+<p>The answer is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="mi">4</span>
+</code></pre></div>
+<p>The difference is:</p>
+<div class="arithmatex">\[
+d=3
+\]</div>
+<h4 id="dp-state">DP state</h4>
+<p>Let:</p>
+<div class="arithmatex">\[
+dp[i][d]
+\]</div>
+<p>represent the length of the longest arithmetic subsequence ending at index <span class="arithmatex">\(i\)</span> with common difference <span class="arithmatex">\(d\)</span>.</p>
+<p>For each pair of indices <span class="arithmatex">\(j&lt;i\)</span>:</p>
+<div class="arithmatex">\[
+d=nums[i]-nums[j]
+\]</div>
+<p>We extend the sequence ending at <span class="arithmatex">\(j\)</span> with difference <span class="arithmatex">\(d\)</span>.</p>
+<h4 id="python-solution_1">Python solution</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">longest_arith_seq_length</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>
+<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>    <span class="n">best</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a>
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a>            <span class="n">d</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a>
+<a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a>            <span class="n">length</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a>
+<a id="__codelineno-48-13" name="__codelineno-48-13" href="#__codelineno-48-13"></a>            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">length</span><span class="p">)</span>
+<a id="__codelineno-48-14" name="__codelineno-48-14" href="#__codelineno-48-14"></a>
+<a id="__codelineno-48-15" name="__codelineno-48-15" href="#__codelineno-48-15"></a>            <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+<a id="__codelineno-48-16" name="__codelineno-48-16" href="#__codelineno-48-16"></a>
+<a id="__codelineno-48-17" name="__codelineno-48-17" href="#__codelineno-48-17"></a>    <span class="k">return</span> <span class="n">best</span>
+</code></pre></div>
+<h4 id="complexity_9">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(n^2)\)</span> expected.</li>
+<li>Space: <span class="arithmatex">\(O(n^2)\)</span> in the worst case.</li>
+</ul>
+<p><strong>Key insight:</strong> A hash map allows each DP state to be indexed by a difference value without allocating a large array for every possible difference.</p>
+<hr />
+<h3 id="72-hashing-graphs">7.2 Hashing + Graphs</h3>
+<p>Hash maps and sets are widely used to represent graphs and track visited nodes.</p>
+<h4 id="example-clone-graph">Example: Clone Graph</h4>
+<p>Suppose we have a graph where each node has a value and a list of neighbors.</p>
+<p>We need to create a deep copy of the graph.</p>
+<p>The challenge is that multiple edges may point to the same node, and cycles may exist.</p>
+<h4 id="core-idea_3">Core idea</h4>
+<p>Use a map:</p>
+<div class="arithmatex">\[
+original\ node \rightarrow cloned\ node
+\]</div>
+<p>When visiting a node:</p>
+<ol>
+<li>Check whether its clone already exists.</li>
+<li>If it does, return the existing clone.</li>
+<li>Otherwise, create the clone.</li>
+<li>Recursively clone its neighbors.</li>
+</ol>
+<h4 id="python-implementation">Python implementation</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">clone_graph</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>        <span class="k">return</span> <span class="kc">None</span>
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>
+<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>    <span class="n">clones</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>
+<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">dfs</span><span class="p">(</span><span class="n">curr</span><span class="p">):</span>
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>        <span class="k">if</span> <span class="n">curr</span> <span class="ow">in</span> <span class="n">clones</span><span class="p">:</span>
+<a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>            <span class="k">return</span> <span class="n">clones</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span>
+<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>
+<a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a>        <span class="n">copy</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">curr</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+<a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a>        <span class="n">clones</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span>
+<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a>
+<a id="__codelineno-49-14" name="__codelineno-49-14" href="#__codelineno-49-14"></a>        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">curr</span><span class="o">.</span><span class="n">neighbors</span><span class="p">:</span>
+<a id="__codelineno-49-15" name="__codelineno-49-15" href="#__codelineno-49-15"></a>            <span class="n">copy</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">neighbor</span><span class="p">))</span>
+<a id="__codelineno-49-16" name="__codelineno-49-16" href="#__codelineno-49-16"></a>
+<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a>        <span class="k">return</span> <span class="n">copy</span>
+<a id="__codelineno-49-18" name="__codelineno-49-18" href="#__codelineno-49-18"></a>
+<a id="__codelineno-49-19" name="__codelineno-49-19" href="#__codelineno-49-19"></a>    <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="complexity_10">Complexity</h4>
+<ul>
+<li>Time: <span class="arithmatex">\(O(V+E)\)</span>.</li>
+<li>Space: <span class="arithmatex">\(O(V)\)</span> for the clone map, excluding the output graph and recursion stack.</li>
+</ul>
+<p><strong>Key insight:</strong> The hash map prevents duplicate cloning and handles cycles.</p>
+<hr />
+<h3 id="73-hashing-geometry">7.3 Hashing + Geometry</h3>
+<p>Hashing is useful when geometric relationships can be represented as keys.</p>
+<h4 id="example-detect-squares">Example: Detect Squares</h4>
+<p>Suppose we have a collection of points on a 2D plane.</p>
+<p>We want to count how many axis-aligned squares can be formed using a given point as one of the corners.</p>
+<h4 id="core-idea_4">Core idea</h4>
+<p>Store point frequencies:</p>
+<div class="arithmatex">\[
+(x,y)\rightarrow \text{frequency}
+\]</div>
+<p>For a given point:</p>
+<div class="arithmatex">\[
+(x_1,y_1)
+\]</div>
+<p>and another point:</p>
+<div class="arithmatex">\[
+(x_2,y_2)
+\]</div>
+<p>that lies on the same horizontal line, we can determine the possible vertical coordinates of the other two corners.</p>
+<p>The square's side length is:</p>
+<div class="arithmatex">\[
+d=|x_2-x_1|
+\]</div>
+<p>The remaining corners must lie at:</p>
+<div class="arithmatex">\[
+(x_1,y_1+d),\quad (x_2,y_2+d)
+\]</div>
+<p>or:</p>
+<div class="arithmatex">\[
+(x_1,y_1-d),\quad (x_2,y_2-d)
+\]</div>
+<p>A hash map lets us check whether these points exist and retrieve their frequencies.</p>
+<h4 id="when-to-use-it_4">When to use it</h4>
+<p>Use geometric hashing when:</p>
+<ul>
+<li>Points have integer coordinates.</li>
+<li>You need fast coordinate membership checks.</li>
+<li>You need to count geometric configurations.</li>
+<li>You need to group points by slopes or differences.</li>
+</ul>
+<hr />
+<h3 id="74-hash-map-doubly-linked-list">7.4 Hash Map + Doubly Linked List</h3>
+<p>This combination is used in data structure design problems.</p>
+<h4 id="example-lru-cache">Example: LRU Cache</h4>
+<p>An LRU cache removes the least recently used item when its capacity is exceeded.</p>
+<p>We need:</p>
+<ul>
+<li>Fast lookup by key.</li>
+<li>Fast removal of the least recently used item.</li>
+<li>Fast movement of an accessed item to the most-recently-used position.</li>
+</ul>
+<p>A hash map alone cannot efficiently maintain recency order.</p>
+<p>A doubly linked list alone cannot efficiently locate arbitrary keys.</p>
+<p>Combining them solves both problems.</p>
+<h4 id="data-structure">Data structure</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>Hash Map:
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>key → linked-list node
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>Doubly Linked List:
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>Least Recently Used ↔ Most Recently Used
+</code></pre></div>
+<h4 id="operations">Operations</h4>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Expected time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Get</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Put</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Remove least recently used</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="why-it-works">Why it works</h4>
+<p>The hash map gives direct access to a node.</p>
+<p>The doubly linked list allows that node to be removed and moved to the front in constant time.</p>
+<p>This is a classic example of <strong>combining data structures to satisfy multiple complexity requirements</strong>.</p>
+<hr />
+<h2 id="final-summary-the-7-hashing-patterns">Final Summary: The 7 Hashing Patterns</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Pattern</th>
+<th>Main idea</th>
+<th>Key application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Basic Hashing</td>
+<td>Store elements and their frequencies</td>
+<td>Membership and duplicate detection</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Array Hashing</td>
+<td>Store values, indices, and complements</td>
+<td>Two Sum and pair counting</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Prefix Hashing</td>
+<td>Store prefix states</td>
+<td>Subarray sum and XOR problems</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Window Hashing</td>
+<td>Maintain information about a moving window</td>
+<td>Anagrams and unique substrings</td>
+</tr>
+<tr>
+<td>5</td>
+<td>String Hashing</td>
+<td>Represent and compare strings efficiently</td>
+<td>Group Anagrams and Rabin–Karp</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Mathematical Hashing</td>
+<td>Transform values into compact mathematical states</td>
+<td>Remainders, bitmasks, and state search</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Advanced Hashing</td>
+<td>Combine hashing with other algorithms and data structures</td>
+<td>DP, graphs, geometry, and LRU Cache</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="how-to-recognize-which-pattern-to-use">How to Recognize Which Pattern to Use</h3>
+<p>When solving a new problem, ask these questions in order:</p>
+<ol>
+<li><strong>Do I need to check whether an element exists?</strong> → Basic hashing.</li>
+<li><strong>Do I need to find a pair or track indices?</strong> → Array hashing.</li>
+<li><strong>Am I dealing with contiguous subarrays and cumulative values?</strong> → Prefix hashing.</li>
+<li><strong>Am I maintaining a contiguous range that expands and shrinks?</strong> → Window hashing.</li>
+<li><strong>Am I comparing strings, substrings, or character distributions?</strong> → String hashing.</li>
+<li><strong>Can I transform the problem into remainders, bitmasks, or compact states?</strong> → Mathematical hashing.</li>
+<li><strong>Do I need to combine hashing with DP, graphs, geometry, or another data structure?</strong> → Advanced hashing.</li>
+</ol>
+<p><strong>The most important progression is: Basic Hashing → Array Hashing → Prefix Hashing → Window Hashing → String Hashing → Mathematical Hashing → Advanced Hashing.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "toc.follow", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

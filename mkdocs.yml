@@ -6,10 +6,11 @@ theme:
 
   palette:
     scheme: slate
-    primary: black
+    primary: custom
+    accent: deep purple
 
-  logo: imgs/logo.png
-  favicon: imgs/logo.png
+  logo: imgs/logo2.png
+  favicon: imgs/logo2.png
 
   features:
     - navigation.instant
@@ -25,20 +26,25 @@ theme:
 nav:
   - Home: index.md
 
+  - Python:
+    - Python Under 15 Mins: python/pythonunder15mins.md
+
   - Data Structures:
-      - Arrays: data structures/arrays/arrays.md
-      - Hashing: data structures/hashing/hashing.md
-      - Queue: data structures/queue.md
-      - Stack: data structures/stack.md
-      - Sliding Window: data structures/arrays/sliding-window.md
-      - Two Pointers: data structures/arrays/two-pointers.md
+    - Arrays: data structures/arrays/arrays.md
+    - Hashing: data structures/hashing/hashing.md
+    - Queue: data structures/queue.md
+    - Stack: data structures/stack.md
+    - Sliding Window: data structures/arrays/sliding-window.md
+    - Two Pointers: data structures/arrays/two-pointers.md
 
   - Algorithms:
-      - Binary Search: algorithms/binarysearch.md
-      - Bubble Sort: algorithms/sorting/bubblesort.md
-      - Merge Sort: algorithms/sorting/mergesort.md
-      - Insertion Sort: algorithms/sorting/insertionsort.md
-      - Quick Sort: algorithms/sorting/quicksort.md
+    - Binary Search: algorithms/binarysearch.md
+    - Bubble Sort: algorithms/sorting/bubblesort.md
+    - Merge Sort: algorithms/sorting/mergesort.md
+    - Insertion Sort: algorithms/sorting/insertionsort.md
+    - Quick Sort: algorithms/sorting/quicksort.md
+    - Recursion: algorithms/recursion.md
+    - Recursion Example Usage: algorithms/recursionexample.md
 
 
 plugins:

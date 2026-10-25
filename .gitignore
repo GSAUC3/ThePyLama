@@ -7,3 +7,6 @@ baal.html
 temp.html
 *.mp4
 notebooks/*
+experiment.py
+scripts/    
+docs/python/pythonunder15mins.md

@@ -4,6 +4,31 @@
    Do NOT affect normal documentation pages
    ========================================================= */
 
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #171326;
+  --md-primary-fg-color--light: #A78BFA;
+  --md-primary-fg-color--dark: #6D28D9;
+
+  --md-accent-fg-color: #A78BFA;
+}
+
+/* Navbar background */
+.md-header {
+  background-color: #171326;
+}
+
+/* Selected navigation item */
+.md-tabs__link--active,
+.md-nav__link--active {
+  color: #C084FC !important;
+}
+
+/* Hover colour */
+.md-nav__link:hover {
+  color: #A78BFA !important;
+}
+
 body:has(.landing-page) .md-main__inner {
   margin: 0 !important;
   max-width: none !important;

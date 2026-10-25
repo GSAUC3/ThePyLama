@@ -51,9 +51,10 @@ target = 40
 classic_B_search(nums, target) 
 `# Answer:  6`
 
+Mathematically, the maximum number of comparisons for an array of size $N$ is calculated using the ceiling function: $\lceil \log_2(N) \rceil$. For 1,000, that rounds up to 10.
 
 
-Absolutely. Forget the interval notation for a moment.
+---
 
 Take:
 

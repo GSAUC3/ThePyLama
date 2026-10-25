@@ -27,7 +27,7 @@ nav:
   - Home: index.md
 
   - Python:
-    - Python Under 15 Mins: python/pythonunder15mins.md
+    - Python Revision: python/python.md
 
   - Data Structures:
     - Arrays: data structures/arrays/arrays.md

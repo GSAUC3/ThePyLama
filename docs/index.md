@@ -29,7 +29,7 @@ hide:
 <section id="explore" class="section-block">
   <div class="section-heading"><span class="section-icon">📚</span><div><h2>What's inside?</h2><p>Learn concepts, break things, understand why they work.</p></div></div>
   <div class="topic-grid">
-    <a class="topic-card" href="python/pythonunder15mins/"><div class="card-icon python-icon">🐍</div><div class="card-content"><h3>Python</h3><p>Core Python concepts, language features and the interesting details hiding underneath.</p><span class="card-link">Explore Python →</span></div></a>
+    <a class="topic-card" href="python/python/"><div class="card-icon python-icon">🐍</div><div class="card-content"><h3>Python</h3><p>Core Python concepts, language features and the interesting details hiding underneath.</p><span class="card-link">Explore Python →</span></div></a>
     <a class="topic-card" href="data%20structures/arrays/arrays/"><div class="card-icon dsa-icon">🧱</div><div class="card-content"><h3>Data Structures</h3><p>Arrays, linked lists, stacks, hashing and the foundations behind efficient algorithms.</p><span class="card-link">Explore DSA →</span></div></a>
     <a class="topic-card" href="pytorch/tensor/"><div class="card-icon torch-icon">🔥</div><div class="card-content"><h3>PyTorch</h3><p>Tensors, automatic differentiation and the building blocks of modern deep learning.</p><span class="card-link">Explore PyTorch →</span></div></a>
     <a class="topic-card" href="ML/intro/"><div class="card-icon ml-icon">🧠</div><div class="card-content"><h3>Machine Learning</h3><p>Intuition, mathematics and implementation behind algorithms that learn from data.</p><span class="card-link">Explore ML →</span></div></a>

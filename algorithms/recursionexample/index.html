@@ -1,0 +1,2013 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../recursion/">
+      
+      
+        <link rel="next" href="../../data%20structures/arrays/sliding-window/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../imgs/logo2.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Recursion Example Usage - The Py Lama Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#merge-two-sorted-linked-lists-recursive-thinking" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="The Py Lama Notes" class="md-header__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../imgs/logo2.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The Py Lama Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Recursion Example Usage
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../python/python/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../data%20structures/arrays/arrays/" class="md-tabs__link">
+          
+  
+  
+  Data Structures
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../binarysearch/" class="md-tabs__link">
+          
+  
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="The Py Lama Notes" class="md-nav__button md-logo" aria-label="The Py Lama Notes" data-md-component="logo">
+      
+  <img src="../../imgs/logo2.png" alt="logo">
+
+    </a>
+    The Py Lama Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Revision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data%20structures/arrays/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data%20structures/hashing/hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hash Tables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data%20structures/queue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data%20structures/stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data%20structures/linked_list/sll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Singly Linked List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data%20structures/linked_list/dll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doubly Linked List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binarysearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Binary Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting/bubblesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bubble Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting/mergesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merge Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting/insertionsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Insertion Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting/quicksort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Sort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursion Example Usage
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursion Example Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Problem Statement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-core-recursive-intuition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Core Recursive Intuition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-questions-to-ask-before-writing-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Questions to Ask Before Writing Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Questions to Ask Before Writing Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-what-is-my-function-supposed-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1. What is my function supposed to do?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-what-is-the-smallest-problem-i-can-solve-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2. What is the smallest problem I can solve directly?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-what-can-i-decide-at-the-current-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q3. What can I decide at the current level?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-what-smaller-problem-remains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q4. What smaller problem remains?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5-what-should-i-assume-about-the-recursive-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q5. What should I assume about the recursive call?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q6-how-do-i-use-the-returned-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q6. How do I use the returned result?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q7-what-should-my-function-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q7. What should my function return?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q8-why-will-recursion-terminate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q8. Why will recursion terminate?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-complete-recursive-solution-with-thought-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Complete Recursive Solution With Thought Process
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-dry-run-understanding-the-recursive-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Dry Run — Understanding the Recursive Calls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Dry Run — Understanding the Recursive Calls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#going-down-delegating-smaller-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Going Down — Delegating Smaller Problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coming-back-connecting-returned-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coming Back — Connecting Returned Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-mistakes-i-made-while-developing-the-intuition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Mistakes I Made While Developing the Intuition
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Mistakes I Made While Developing the Intuition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mistake-1-incorrect-base-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 1: Incorrect Base Case
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-2-trying-to-connect-nodes-before-solving-the-smaller-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 2: Trying to Connect Nodes Before Solving the Smaller Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-3-not-returning-the-selected-head" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 3: Not Returning the Selected Head
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-complexity-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Complexity Analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-reusable-recursion-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Reusable Recursion Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-final-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Final Mental Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data%20structures/arrays/sliding-window/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sliding Window
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data%20structures/arrays/two-pointers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Two Pointers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Problem Statement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-core-recursive-intuition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Core Recursive Intuition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-questions-to-ask-before-writing-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Questions to Ask Before Writing Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Questions to Ask Before Writing Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-what-is-my-function-supposed-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1. What is my function supposed to do?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-what-is-the-smallest-problem-i-can-solve-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2. What is the smallest problem I can solve directly?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-what-can-i-decide-at-the-current-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q3. What can I decide at the current level?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-what-smaller-problem-remains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q4. What smaller problem remains?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5-what-should-i-assume-about-the-recursive-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q5. What should I assume about the recursive call?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q6-how-do-i-use-the-returned-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q6. How do I use the returned result?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q7-what-should-my-function-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q7. What should my function return?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q8-why-will-recursion-terminate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q8. Why will recursion terminate?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-complete-recursive-solution-with-thought-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Complete Recursive Solution With Thought Process
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-dry-run-understanding-the-recursive-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Dry Run — Understanding the Recursive Calls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Dry Run — Understanding the Recursive Calls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#going-down-delegating-smaller-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Going Down — Delegating Smaller Problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coming-back-connecting-returned-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coming Back — Connecting Returned Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-mistakes-i-made-while-developing-the-intuition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Mistakes I Made While Developing the Intuition
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Mistakes I Made While Developing the Intuition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mistake-1-incorrect-base-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 1: Incorrect Base Case
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-2-trying-to-connect-nodes-before-solving-the-smaller-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 2: Trying to Connect Nodes Before Solving the Smaller Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-3-not-returning-the-selected-head" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 3: Not Returning the Selected Head
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-complexity-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Complexity Analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-reusable-recursion-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Reusable Recursion Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-final-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Final Mental Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="merge-two-sorted-linked-lists-recursive-thinking">Merge Two Sorted Linked Lists — Recursive Thinking</h1>
+<p><strong>Topic:</strong> Recursion<br />
+<strong>Difficulty:</strong> Easy<br />
+<strong>Pattern:</strong> Linear Recursion<br />
+<strong>Problem:</strong> <a href="https://leetcode.com/problems/merge-two-sorted-lists/">LeetCode 21 — Merge Two Sorted Lists</a></p>
+<hr />
+<h2 id="1-problem-statement">1. Problem Statement</h2>
+<p>Given the heads of two sorted linked lists, <code>list1</code> and <code>list2</code>, merge them into one sorted linked list.</p>
+<p>Return the <strong>head of the merged sorted list</strong>.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Input:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>list1 = 1 → 2 → 4 → None
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>list2 = 1 → 3 → 4 → None
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Output:
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>1 → 1 → 2 → 3 → 4 → 4 → None
+</code></pre></div>
+<h2 id="2-the-core-recursive-intuition">2. The Core Recursive Intuition</h2>
+<div class="admonition important">
+<p class="admonition-title">The Most Important Mental Shift</p>
+<p>Do not think: "How do I merge all the nodes myself?"</p>
+<p>Instead, think:</p>
+<p><strong>"If recursion gives me the correctly merged remainder, how do I connect it to the node I've chosen?"</strong></p>
+</div>
+<p>Recursion allows us to solve a problem by:</p>
+<ol>
+<li>Solving a small part of the current problem.</li>
+<li>Delegating the remaining problem to a recursive call.</li>
+<li>Trusting the recursive call to return the correct result.</li>
+<li>Combining that result with our current decision.</li>
+</ol>
+<hr />
+<h2 id="3-questions-to-ask-before-writing-code">3. Questions to Ask Before Writing Code</h2>
+<h3 id="q1-what-is-my-function-supposed-to-do">Q1. What is my function supposed to do?</h3>
+<p><strong>Function contract:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">mergeTwoLists</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">)</span>
+</code></pre></div>
+<p>Given two sorted linked lists, return the <strong>head of one fully merged, sorted linked list</strong> containing all their nodes.</p>
+<div class="admonition note">
+<p class="admonition-title">Why the Function Contract Matters</p>
+<p>Every recursive call must satisfy the same contract.</p>
+<p>Whether the input lists contain 100 nodes or just one node, the function always promises the same thing: <strong>return the head of the correctly merged list.</strong></p>
+</div>
+<h3 id="q2-what-is-the-smallest-problem-i-can-solve-directly">Q2. What is the smallest problem I can solve directly?</h3>
+<p>If either list is empty, there is nothing left to merge.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">if</span> <span class="n">list1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">return</span> <span class="n">list2</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">if</span> <span class="n">list2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">return</span> <span class="n">list1</span>
+</code></pre></div>
+<p><strong>Reasoning:</strong></p>
+<ul>
+<li>If <code>list1</code> is empty, <code>list2</code> is already sorted.</li>
+<li>If <code>list2</code> is empty, <code>list1</code> is already sorted.</li>
+<li>If both are empty, returning <code>None</code> is correct.</li>
+</ul>
+<p>These are our <strong>base cases</strong>.</p>
+<h3 id="q3-what-can-i-decide-at-the-current-level">Q3. What can I decide at the current level?</h3>
+<p>Compare the two head nodes.</p>
+<p>Because both lists are sorted, the smaller head must be the first node of the merged list.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">if</span> <span class="n">list1</span><span class="o">.</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">list2</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># list2 must come first</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="c1"># list1 must come first</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Think Locally</p>
+<p>We do not need to determine the complete sorted order.</p>
+<p>We only need to determine <strong>which node comes first</strong>.</p>
+<p>Recursion will take care of the remaining nodes.</p>
+</div>
+<h3 id="q4-what-smaller-problem-remains">Q4. What smaller problem remains?</h3>
+<p>Suppose:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>list1 = 2 → 4 → None
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>list2 = 1 → 3 → None
+</code></pre></div>
+<p>We compare <code>2</code> and <code>1</code>.</p>
+<p>Since <code>1</code> is smaller, we select it as the head.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Selected node:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>1
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Remaining problem:
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>list1 = 2 → 4 → None
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>list2 = 3 → None
+</code></pre></div>
+<p>The smaller problem is now:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="bp">self</span><span class="o">.</span><span class="n">mergeTwoLists</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+</code></pre></div>
+<p>Notice that we have removed <strong>one node from the remaining problem</strong>.</p>
+<p>We are not manually merging the remaining nodes.</p>
+<p>We are delegating that work to recursion.</p>
+<h3 id="q5-what-should-i-assume-about-the-recursive-call">Q5. What should I assume about the recursive call?</h3>
+<p>This is the most important question.</p>
+<p><strong>Recursive assumption:</strong></p>
+<blockquote>
+<p>Assume <code>mergeTwoLists(list1, list2.next)</code> correctly merges the remaining two sorted lists and returns the head of the merged result.</p>
+</blockquote>
+<p>We do not need to trace every recursive call to construct the solution.</p>
+<p>We trust the function's contract for the smaller input.</p>
+<div class="admonition important">
+<p class="admonition-title">The Recursive Leap of Faith</p>
+<p>Assume the recursive call works correctly on a smaller valid input.</p>
+<p>Your responsibility is to prove that:</p>
+<ul>
+<li>The smaller input is valid.</li>
+<li>The problem gets smaller.</li>
+<li>You correctly use the returned result.</li>
+<li>A base case eventually stops recursion.</li>
+</ul>
+</div>
+<h3 id="q6-how-do-i-use-the-returned-result">Q6. How do I use the returned result?</h3>
+<p>We have already selected <code>list2</code> as the first node.</p>
+<p>The recursive call returns the head of the correctly merged remainder.</p>
+<p>We attach that result to <code>list2.next</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">list2</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mergeTwoLists</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+</code></pre></div>
+<p>Conceptually:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Current selected node:
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>1
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>Recursive call returns:
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>2 → 3 → 4 → None
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>Connect:
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>1 → 2 → 3 → 4 → None
+</code></pre></div>
+<h3 id="q7-what-should-my-function-return">Q7. What should my function return?</h3>
+<p>Return the node we selected as the head.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">return</span> <span class="n">list2</span>
+</code></pre></div>
+<p>Why?</p>
+<p>Because:</p>
+<ul>
+<li><code>list2</code> is the smallest available node.</li>
+<li><code>list2.next</code> points to the correctly merged remainder.</li>
+<li>Therefore, <code>list2</code> is the head of the complete merged list.</li>
+</ul>
+<h3 id="q8-why-will-recursion-terminate">Q8. Why will recursion terminate?</h3>
+<p>Every recursive call advances one of the two head pointers.</p>
+<p>This reduces the total number of unprocessed nodes by one.</p>
+<p>Eventually, at least one list becomes empty.</p>
+<p>At that point, the base case returns the remaining list.</p>
+<hr />
+<h2 id="4-complete-recursive-solution-with-thought-process">4. Complete Recursive Solution With Thought Process</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">mergeTwoLists</span><span class="p">(</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        <span class="bp">self</span><span class="p">,</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        <span class="n">list1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">],</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        <span class="n">list2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        <span class="c1"># ==============================================</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        <span class="c1"># Q1. WHAT DOES MY FUNCTION PROMISE?</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>        <span class="c1"># ==============================================</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>        <span class="c1">#</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>        <span class="c1"># Given two sorted linked lists, return the</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>        <span class="c1"># head of their correctly merged sorted list.</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>        <span class="c1">#</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>        <span class="c1"># ASSUMPTIONS:</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>        <span class="c1"># - Both input lists are already sorted.</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>        <span class="c1"># - We can reuse existing nodes.</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="c1"># - A recursive call on smaller valid inputs</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>        <span class="c1">#   returns the correctly merged list's head.</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>        <span class="c1"># ==============================================</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>        <span class="c1"># Q2. WHAT IS MY BASE CASE?</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>        <span class="c1"># ==============================================</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>        <span class="c1">#</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>        <span class="c1"># If either list is empty, the other list</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>        <span class="c1"># is already sorted and can be returned.</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>        <span class="k">if</span> <span class="n">list1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>            <span class="k">return</span> <span class="n">list2</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>        <span class="k">if</span> <span class="n">list2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>            <span class="k">return</span> <span class="n">list1</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>        <span class="c1"># ==============================================</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>        <span class="c1"># Q3. WHICH NODE SHOULD COME FIRST?</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>        <span class="c1"># ==============================================</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>        <span class="c1">#</span>
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>        <span class="c1"># Compare the current heads.</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>        <span class="c1"># Select the smaller node.</span>
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>        <span class="k">if</span> <span class="n">list1</span><span class="o">.</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">list2</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>            <span class="c1"># list2 is the smaller node.</span>
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>            <span class="c1"># It must be the head of our merged list.</span>
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>            <span class="c1"># ==========================================</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>            <span class="c1"># Q4. WHAT SMALLER PROBLEM REMAINS?</span>
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>            <span class="c1"># ==========================================</span>
+<a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>            <span class="c1">#</span>
+<a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>            <span class="c1"># Merge:</span>
+<a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>            <span class="c1"># - Entire list1</span>
+<a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>            <span class="c1"># - Remaining nodes after list2</span>
+<a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>            <span class="c1">#</span>
+<a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>            <span class="c1"># Q5. WHAT DO I ASSUME?</span>
+<a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a>            <span class="c1">#</span>
+<a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a>            <span class="c1"># Recursion returns the head of the</span>
+<a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a>            <span class="c1"># correctly merged remaining nodes.</span>
+<a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a>            <span class="c1">#</span>
+<a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a>            <span class="c1"># Q6. HOW DO I CONNECT THE RESULT?</span>
+<a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a>            <span class="c1">#</span>
+<a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a>            <span class="c1"># Attach the recursive result to list2.next.</span>
+<a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a>
+<a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a>            <span class="n">list2</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mergeTwoLists</span><span class="p">(</span>
+<a id="__codelineno-10-64" name="__codelineno-10-64" href="#__codelineno-10-64"></a>                <span class="n">list1</span><span class="p">,</span>
+<a id="__codelineno-10-65" name="__codelineno-10-65" href="#__codelineno-10-65"></a>                <span class="n">list2</span><span class="o">.</span><span class="n">next</span>
+<a id="__codelineno-10-66" name="__codelineno-10-66" href="#__codelineno-10-66"></a>            <span class="p">)</span>
+<a id="__codelineno-10-67" name="__codelineno-10-67" href="#__codelineno-10-67"></a>
+<a id="__codelineno-10-68" name="__codelineno-10-68" href="#__codelineno-10-68"></a>            <span class="c1"># ==========================================</span>
+<a id="__codelineno-10-69" name="__codelineno-10-69" href="#__codelineno-10-69"></a>            <span class="c1"># Q7. WHAT DO I RETURN?</span>
+<a id="__codelineno-10-70" name="__codelineno-10-70" href="#__codelineno-10-70"></a>            <span class="c1"># ==========================================</span>
+<a id="__codelineno-10-71" name="__codelineno-10-71" href="#__codelineno-10-71"></a>            <span class="c1">#</span>
+<a id="__codelineno-10-72" name="__codelineno-10-72" href="#__codelineno-10-72"></a>            <span class="c1"># list2 is the smallest node.</span>
+<a id="__codelineno-10-73" name="__codelineno-10-73" href="#__codelineno-10-73"></a>            <span class="c1"># Its next points to the merged remainder.</span>
+<a id="__codelineno-10-74" name="__codelineno-10-74" href="#__codelineno-10-74"></a>            <span class="c1"># Return list2 as the merged list's head.</span>
+<a id="__codelineno-10-75" name="__codelineno-10-75" href="#__codelineno-10-75"></a>
+<a id="__codelineno-10-76" name="__codelineno-10-76" href="#__codelineno-10-76"></a>            <span class="k">return</span> <span class="n">list2</span>
+<a id="__codelineno-10-77" name="__codelineno-10-77" href="#__codelineno-10-77"></a>
+<a id="__codelineno-10-78" name="__codelineno-10-78" href="#__codelineno-10-78"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-10-79" name="__codelineno-10-79" href="#__codelineno-10-79"></a>
+<a id="__codelineno-10-80" name="__codelineno-10-80" href="#__codelineno-10-80"></a>            <span class="c1"># list1 is smaller or equal.</span>
+<a id="__codelineno-10-81" name="__codelineno-10-81" href="#__codelineno-10-81"></a>            <span class="c1"># It must be the head of our merged list.</span>
+<a id="__codelineno-10-82" name="__codelineno-10-82" href="#__codelineno-10-82"></a>
+<a id="__codelineno-10-83" name="__codelineno-10-83" href="#__codelineno-10-83"></a>            <span class="c1"># SMALLER PROBLEM:</span>
+<a id="__codelineno-10-84" name="__codelineno-10-84" href="#__codelineno-10-84"></a>            <span class="c1"># - Remaining nodes after list1</span>
+<a id="__codelineno-10-85" name="__codelineno-10-85" href="#__codelineno-10-85"></a>            <span class="c1"># - Entire list2</span>
+<a id="__codelineno-10-86" name="__codelineno-10-86" href="#__codelineno-10-86"></a>            <span class="c1">#</span>
+<a id="__codelineno-10-87" name="__codelineno-10-87" href="#__codelineno-10-87"></a>            <span class="c1"># RECURSIVE ASSUMPTION:</span>
+<a id="__codelineno-10-88" name="__codelineno-10-88" href="#__codelineno-10-88"></a>            <span class="c1"># The call correctly merges these lists.</span>
+<a id="__codelineno-10-89" name="__codelineno-10-89" href="#__codelineno-10-89"></a>            <span class="c1">#</span>
+<a id="__codelineno-10-90" name="__codelineno-10-90" href="#__codelineno-10-90"></a>            <span class="c1"># CONNECTION:</span>
+<a id="__codelineno-10-91" name="__codelineno-10-91" href="#__codelineno-10-91"></a>            <span class="c1"># Attach its returned head to list1.next.</span>
+<a id="__codelineno-10-92" name="__codelineno-10-92" href="#__codelineno-10-92"></a>
+<a id="__codelineno-10-93" name="__codelineno-10-93" href="#__codelineno-10-93"></a>            <span class="n">list1</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mergeTwoLists</span><span class="p">(</span>
+<a id="__codelineno-10-94" name="__codelineno-10-94" href="#__codelineno-10-94"></a>                <span class="n">list1</span><span class="o">.</span><span class="n">next</span><span class="p">,</span>
+<a id="__codelineno-10-95" name="__codelineno-10-95" href="#__codelineno-10-95"></a>                <span class="n">list2</span>
+<a id="__codelineno-10-96" name="__codelineno-10-96" href="#__codelineno-10-96"></a>            <span class="p">)</span>
+<a id="__codelineno-10-97" name="__codelineno-10-97" href="#__codelineno-10-97"></a>
+<a id="__codelineno-10-98" name="__codelineno-10-98" href="#__codelineno-10-98"></a>            <span class="c1"># Return our selected head.</span>
+<a id="__codelineno-10-99" name="__codelineno-10-99" href="#__codelineno-10-99"></a>            <span class="k">return</span> <span class="n">list1</span>
+</code></pre></div>
+<hr />
+<h2 id="5-dry-run-understanding-the-recursive-calls">5. Dry Run — Understanding the Recursive Calls</h2>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>list1 = 1 → 3 → None
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>list2 = 2 → 4 → None
+</code></pre></div>
+<h3 id="going-down-delegating-smaller-problems">Going Down — Delegating Smaller Problems</h3>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Current heads</th>
+<th>Selected node</th>
+<th>Smaller problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1, 2</td>
+<td>1</td>
+<td>Merge (3, 2)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3, 2</td>
+<td>2</td>
+<td>Merge (3, 4)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3, 4</td>
+<td>3</td>
+<td>Merge (None, 4)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>None, 4</td>
+<td>Base case</td>
+<td>Return 4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coming-back-connecting-returned-results">Coming Back — Connecting Returned Results</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Base case:
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    return 4
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>Call 3:
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    3.next = 4
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    return 3 → 4
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>Call 2:
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    2.next = 3 → 4
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    return 2 → 3 → 4
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>Call 1:
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    1.next = 2 → 3 → 4
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    return 1 → 2 → 3 → 4
+</code></pre></div>
+<p><strong>Final result:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>1 → 2 → 3 → 4 → None
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Important Observation</p>
+<p>On the way down, each call selects the smallest available node and delegates the rest.</p>
+<p>On the way back, each call receives the head of the merged remainder, connects it, and returns its own selected node.</p>
+<p>This is why recursion works without manually tracking every node.</p>
+</div>
+<hr />
+<h2 id="6-mistakes-i-made-while-developing-the-intuition">6. Mistakes I Made While Developing the Intuition</h2>
+<h3 id="mistake-1-incorrect-base-case">Mistake 1: Incorrect Base Case</h3>
+<p><strong>Initial thought:</strong></p>
+<blockquote>
+<p>Stop when both lists have only one node.</p>
+</blockquote>
+<p><strong>Why this was incorrect:</strong></p>
+<p>The lists may have different lengths. One list can become empty while the other still contains multiple nodes.</p>
+<p><strong>Correct intuition:</strong></p>
+<blockquote>
+<p>If either list is empty, return the other list because it is already sorted.</p>
+</blockquote>
+<h3 id="mistake-2-trying-to-connect-nodes-before-solving-the-smaller-problem">Mistake 2: Trying to Connect Nodes Before Solving the Smaller Problem</h3>
+<p><strong>Initial approach:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">list2</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">list2</span>
+</code></pre></div>
+<p><strong>Why this was incorrect:</strong></p>
+<p>This makes a node point to itself, creating a cycle.</p>
+<p>I was trying to manually establish connections without thinking about what recursion should return.</p>
+<p><strong>Correct intuition:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">list2</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mergeTwoLists</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+</code></pre></div>
+<p>The recursive call returns the merged remainder, which I attach to my selected node.</p>
+<h3 id="mistake-3-not-returning-the-selected-head">Mistake 3: Not Returning the Selected Head</h3>
+<p><strong>Incorrect mental model:</strong></p>
+<blockquote>
+<p>The recursive call should return the answer for my entire current problem.</p>
+</blockquote>
+<p><strong>Correct mental model:</strong></p>
+<blockquote>
+<p>The recursive call returns the answer for the smaller problem. I use that answer to complete my current problem, then return my current problem's head.</p>
+</blockquote>
+<hr />
+<h2 id="7-complexity-analysis">7. Complexity Analysis</h2>
+<p>Let:</p>
+<ul>
+<li><code>m</code> = number of nodes in <code>list1</code></li>
+<li><code>n</code> = number of nodes in <code>list2</code></li>
+</ul>
+<p><strong>Time Complexity: O(m + n)</strong></p>
+<p>Each recursive call processes one node. In the worst case, we examine all nodes across both lists.</p>
+<p><strong>Auxiliary Space Complexity: O(m + n)</strong></p>
+<p>We reuse the existing linked-list nodes, but recursive calls consume stack space.</p>
+<p>The maximum recursion depth is proportional to the combined number of nodes.</p>
+<hr />
+<h2 id="8-reusable-recursion-checklist">8. Reusable Recursion Checklist</h2>
+<p>Before solving any recursive problem, answer these questions:</p>
+<ul>
+<li>[ ] <strong>Function contract:</strong> What exactly must my function return or accomplish?</li>
+<li>[ ] <strong>Base case:</strong> What is the smallest problem I can solve directly?</li>
+<li>[ ] <strong>Current decision:</strong> What part can I solve at the current level?</li>
+<li>[ ] <strong>Smaller problem:</strong> What remains after my current decision?</li>
+<li>[ ] <strong>Recursive assumption:</strong> What do I trust the recursive call to return or accomplish?</li>
+<li>[ ] <strong>Combination:</strong> How do I use the recursive result?</li>
+<li>[ ] <strong>Return:</strong> What should I return to my caller?</li>
+<li>[ ] <strong>Termination:</strong> Why does every recursive call move toward the base case?</li>
+</ul>
+<hr />
+<h2 id="9-final-mental-model">9. Final Mental Model</h2>
+<p>For merging two sorted linked lists:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>1. Compare the current heads.
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>2. Select the smaller node.
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>3. Ask recursion to merge the remaining nodes.
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>4. Assume recursion returns the correctly merged remainder.
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>5. Attach that result to the selected node.
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>6. Return the selected node.
+</code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">The Key Insight</p>
+<p><strong>I am responsible for choosing the first node. Recursion is responsible for merging the rest.</strong></p>
+<p>Once recursion returns the merged remainder, I connect it to my chosen node and return that node as the head.</p>
+</div>
+<p><strong>What to remember:</strong> Recursion is not about mentally executing every function call. It is about defining a reliable function contract, reducing the problem, and correctly using the answer to the smaller problem.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "toc.follow", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

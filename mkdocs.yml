@@ -31,11 +31,11 @@ nav:
 
   - Data Structures:
     - Arrays: data structures/arrays/arrays.md
-    - Hashing: data structures/hashing/hashing.md
+    - Hash Tables: data structures/hashing/hashing.md
     - Queue: data structures/queue.md
     - Stack: data structures/stack.md
-    - Sliding Window: data structures/arrays/sliding-window.md
-    - Two Pointers: data structures/arrays/two-pointers.md
+    - Singly Linked List: data structures/linked_list/sll.md
+    - Doubly Linked List: data structures/linked_list/dll.md
 
   - Algorithms:
     - Binary Search: algorithms/binarysearch.md
@@ -45,6 +45,8 @@ nav:
     - Quick Sort: algorithms/sorting/quicksort.md
     - Recursion: algorithms/recursion.md
     - Recursion Example Usage: algorithms/recursionexample.md
+    - Sliding Window: data structures/arrays/sliding-window.md
+    - Two Pointers: data structures/arrays/two-pointers.md
 
 
 plugins:
